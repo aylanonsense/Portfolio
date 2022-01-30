@@ -1,0 +1,10 @@
+{
+  "name": "aylanonsense-portfolio",
+  "version": "0.0.1",
+  "description": "ayla~nonsense's personal portfolio site",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bridgs/Portfolio.git"
+  },
+  "author": "ayla~nonsense"
+}
