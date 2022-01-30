@@ -2,8 +2,14 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import { client } from '../helpers/prismicPosts'
+import Game from '../components/Game'
 
-const Home: NextPage = () => {
+type HomeProps = {
+  games: any
+}
+
+const Home: NextPage<HomeProps> = ({ games }) => {
   return (
     <div className={styles.container}>
       <Head>
@@ -51,6 +57,18 @@ const Home: NextPage = () => {
             </p>
           </a>
         </div>
+
+        <p>Start</p>
+        <div className="games">
+          {games !== undefined &&
+            games.map((p: any) => {
+              let title = p.title[0].text
+              let role = p.role
+              let key = title
+              return <Game key={key} title={title} role={role} />
+            })}
+        </div>
+        <p>End</p>
       </main>
 
       <footer className={styles.footer}>
@@ -69,4 +87,18 @@ const Home: NextPage = () => {
   )
 }
 
-export default Home
+export default Home;
+
+export async function getStaticProps() {
+  const res = await client.query('')
+
+  const games = res.results.map((p) => {
+    return p.data
+  })
+
+  return {
+    props: {
+      games
+    }
+  }
+}
