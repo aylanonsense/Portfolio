@@ -1,64 +1,41 @@
 import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
 import styles from 'styles/Home.module.css'
-import { client } from 'helpers/prismicPosts'
-import { fetchEntry, fetchEntries } from 'helpers/contentfulContent'
-import Game from 'components/Game'
-import { Console } from 'console'
+import { getGame, getAllGames } from 'helpers/contentApi'
 
-type GameProps = {
+type GamePageParams = {
+  params: {
+    slug: string
+  }
+}
+
+type GamePageProps = {
   title: string,
-  slug: string,
   role: string
 }
 
-const GamePage: NextPage<GameProps> = ({ title, slug, role }) => (
+const GamePage: NextPage<GamePageProps> = ({ title, role }) => (
   <div className={styles.container}>
     <h1>{title}</h1>
-    <p>BOOFAH</p>
-    <p>{slug}</p>
     <p>{role}</p>
-    <p>OOFAH</p>
   </div>
 )
 
 export default GamePage;
 
 export async function getStaticPaths() {
-  const res = await fetchEntries()
-
-  const games = res.map((p: any) => {
-    return {
-      params: p.fields
-    }
+  const games = await getAllGames()
+  const gamePageParams: GamePageParams[] = games.map(game => {
+    return { params: { slug: game.slug } } as GamePageParams
   })
-
   return {
-    paths: games,
+    paths: gamePageParams,
     fallback: false
   }
 }
 
-export async function getStaticProps({ params: { slug} }: any) {
-  const entry = await fetchEntry(slug)
+export async function getStaticProps({ params: { slug } }: GamePageParams) {
+  const game = await getGame(slug)
   return {
-    props: entry[0].fields
+    props: game as GamePageProps
   }
 }
-
-//export async function getStaticProps() {
-//  const res = await fetchEntries()
-
-//  const games = res.map((p) => {
-//    return p.fields
-//  })
-
-//  console.log(games);
-
-//  return {
-//    props: {
-//      games,
-//    },
-//  }
-//}

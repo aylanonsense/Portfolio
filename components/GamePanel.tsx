@@ -1,12 +1,16 @@
-function Game({ title, role }) {
+type GamePanelProps = {
+  title: string,
+  role: string
+}
+
+function GamePanel({ title, role }: GamePanelProps) {
   return (
     <div className="game">
       <div className="text">
         <h2>{title}</h2>
         <p>{role}</p>
-        <p>YAY</p>
       </div>
     </div>
   )
 }
-export default Game
+export default GamePanel

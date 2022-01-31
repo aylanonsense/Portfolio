@@ -2,15 +2,14 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from 'styles/Home.module.css'
-import { client } from 'helpers/prismicPosts'
-import { fetchEntries } from 'helpers/contentfulContent'
-import Game from 'components/Game'
+import { getAllGames } from 'helpers/contentApi'
+import GamePanel from 'components/GamePanel'
 
-type HomeProps = {
-  games: any
+type HomePageProps = {
+  games: Game[]
 }
 
-const Home: NextPage<HomeProps> = ({ games }) => {
+const HomePage: NextPage<HomePageProps> = ({ games }) => {
   return (
     <div className={styles.container}>
       <Head>
@@ -61,13 +60,9 @@ const Home: NextPage<HomeProps> = ({ games }) => {
 
         <p>Start</p>
         <div className="games">
-          {games !== undefined &&
-            games.map((p: any) => {
-              let title = p.title
-              let role = p.role
-              let key = title
-              return <Game key={key} title={title} role={role} />
-            })}
+          {games.map(game =>
+            <GamePanel key={game.slug} title={game.title} role={game.role} />
+          )}
         </div>
         <p>End</p>
       </main>
@@ -88,29 +83,11 @@ const Home: NextPage<HomeProps> = ({ games }) => {
   )
 }
 
-export default Home;
+export default HomePage;
 
 export async function getStaticProps() {
-  const res = await fetchEntries()
-
-  const games = res.map((p: any) => {
-    return p.fields
-  })
-
+  const games = await getAllGames()
   return {
-    props: {
-      games,
-    },
+    props: { games } as HomePageProps
   }
-  //const res = await client.query('[at(document.type, "game")]')
-
-  //const games = res.results.map((p) => {
-  //  return p.data
-  //})
-
-  //return {
-  //  props: {
-  //    games
-  //  }
-  //}
 }
