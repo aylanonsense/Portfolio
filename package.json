@@ -14,6 +14,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "contentful": "^9.1.6",
     "next": "12.0.9",
     "prismic-javascript": "^3.0.2",
     "react": "17.0.2",
