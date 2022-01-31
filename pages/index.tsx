@@ -1,9 +1,9 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
-import styles from '../styles/Home.module.css'
-import { client } from '../helpers/prismicPosts'
-import Game from '../components/Game'
+import styles from 'styles/Home.module.css'
+import { client } from 'helpers/prismicPosts'
+import Game from 'components/Game'
 
 type HomeProps = {
   games: any
@@ -90,7 +90,7 @@ const Home: NextPage<HomeProps> = ({ games }) => {
 export default Home;
 
 export async function getStaticProps() {
-  const res = await client.query('')
+  const res = await client.query('[at(document.type, "game")]')
 
   const games = res.results.map((p) => {
     return p.data
