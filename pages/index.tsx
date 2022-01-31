@@ -2,7 +2,7 @@ import type { NextPage, GetStaticProps } from 'next'
 import { getSiteData, getAllGameData } from 'helpers/contentApi'
 import Layout from 'components/Layout'
 import GamePanel from 'components/GamePanel'
-import styles from 'styles/Home.module.css'
+import styles from 'styles/HomePage.module.scss'
 
 type HomePageProps = {
   host: string,

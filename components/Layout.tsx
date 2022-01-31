@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import ExternalLinks from 'components/ExternalLinks'
+import styles from 'styles/layout.module.scss'
 
 type LayoutProps = {
   host: string,
@@ -38,11 +39,14 @@ const Layout = ({ host, title, subtitle, description, author, thumbnail, twitter
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link href="https://fonts.googleapis.com/css?family=Raleway:700&display=swap" rel="stylesheet" />
       </Head>
-      <header>
+      <header className={styles.header}>
         <h1><Link href="/">{title}</Link></h1>
-        <p>Indie game dev</p>
-        <ExternalLinks person={author} />
+        <p className={styles.subtitle}>Indie game dev</p>
+        <div className={styles.icons}>
+          <ExternalLinks person={author} />
+        </div>
       </header>
       {children}
       <footer>
