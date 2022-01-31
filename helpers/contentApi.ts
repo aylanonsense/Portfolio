@@ -1,4 +1,5 @@
-import { ContentfulClientApi, createClient } from 'contentful'
+import type { ContentfulClientApi } from 'contentful'
+import { createClient } from 'contentful'
 
 let client: ContentfulClientApi
 
@@ -18,17 +19,27 @@ function getOrCreateClient() {
   return client
 }
 
-export async function getGame(slug: string): Promise<Game> {
+export async function getSiteData(): Promise<SiteData> {
+  const entries = await getOrCreateClient().getEntries({
+    content_type: 'site'
+  })
+  return {
+    ...(entries.items[0].fields as object),
+    author: (entries.items[0].fields as any).author.fields
+  } as SiteData
+}
+
+export async function getGameData(slug: string): Promise<GameData> {
   const entries = await getOrCreateClient().getEntries({
     content_type: 'game',
     'fields.slug': slug
   })
-  return entries.items[0].fields as Game
+  return entries.items[0].fields as GameData
 }
 
-export async function getAllGames(): Promise<Game[]> {
+export async function getAllGameData(): Promise<GameData[]> {
   const entries = await getOrCreateClient().getEntries({
     content_type: 'game'
   })
-  return entries.items.map(x => x.fields as Game)
+  return entries.items.map(x => x.fields as GameData)
 }
