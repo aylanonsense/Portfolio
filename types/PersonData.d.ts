@@ -1,4 +1,7 @@
 type PersonData = {
   name: string,
-  twitterUrl: string | undefined
+  twitterUrl: URL | undefined,
+  instagramUrl: URL | undefined,
+  itchUrl: URL | undefined,
+  gitHubUrl: URL | undefined
 }

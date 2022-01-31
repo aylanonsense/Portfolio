@@ -1,18 +1,22 @@
 import Head from 'next/head'
+import Link from 'next/link'
+import ExternalLinks from 'components/ExternalLinks'
 
 type LayoutProps = {
+  host: string,
   title: string,
   subtitle?: string,
   description: string,
+  author: PersonData,
   thumbnail: string,
-  twitterUrl?: string,
+  twitterUrl?: URL,
   children: JSX.Element
 }
 
-const Layout = ({ title, subtitle, description, thumbnail, twitterUrl, children }: LayoutProps) => {
+const Layout = ({ host, title, subtitle, description, author, thumbnail, twitterUrl, children }: LayoutProps) => {
   let twitterHandle
   if (twitterUrl != undefined) {
-    let matches = /.+\/(.+$)$/g.exec(twitterUrl)
+    let matches = /.+\/(.+$)$/g.exec(twitterUrl.toString())
     if (matches != null && matches.length > 1) {
       twitterHandle = matches[1];
     }
@@ -36,11 +40,15 @@ const Layout = ({ title, subtitle, description, thumbnail, twitterUrl, children 
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
       </Head>
       <header>
-        <h1>{title}</h1>
+        <h1><Link href="/">{title}</Link></h1>
+        <p>Indie game dev</p>
+        <ExternalLinks person={author} />
       </header>
       {children}
       <footer>
-        <p>Footer</p>
+        <ExternalLinks person={author} />
+        <p>There is no user tracking on this site&mdash;consider this the cookie and privacy policy.</p>
+        <p>Site made by yours truly~</p>
       </footer>
     </>
   )
