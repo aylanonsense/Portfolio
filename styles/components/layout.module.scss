@@ -1,0 +1,24 @@
+@import "styles/variables.scss";
+
+.title {
+  font-family: Raleway, sans-serif;
+}
+
+.subtitle {
+  color: $rose;
+}
+
+.header .icons {
+  svg {
+    fill: $grape
+  }
+  svg:hover {
+    fill: $rose;
+  }
+}
+
+.footer .icons {
+  svg {
+    fill: $white;
+  }
+}

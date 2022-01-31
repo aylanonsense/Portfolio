@@ -1,7 +1,7 @@
 import type { NextPage, GetStaticPaths, GetStaticProps } from 'next'
 import { getSiteData, getGameData, getAllGameData } from 'helpers/contentApi'
 import Layout from 'components/Layout'
-import styles from 'styles/Home.module.scss'
+import styles from 'styles/pages/home.module.scss'
 
 type GamePageParams = {
   params: {

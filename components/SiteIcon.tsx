@@ -1,25 +1,25 @@
-import Image from 'next/image'
 import { ExternalSite } from 'helpers/enums'
-import twitterIcon from 'public/icons/twitter.svg'
-import instagramIcon from 'public/icons/instagram.svg'
-import itchIcon from 'public/icons/itchio.svg'
-import gitHubIcon from 'public/icons/github.svg'
-
-const externalSiteLookup: Record<ExternalSite, { icon: any, name: string }> = {
-  [ExternalSite.Twitter]: { icon: twitterIcon, name: "Twitter" },
-  [ExternalSite.Instagram]: { icon: instagramIcon, name: "Instagram" },
-  [ExternalSite.Itch]: { icon: itchIcon, name: "itch.io" },
-  [ExternalSite.GitHub]: { icon: gitHubIcon, name: "GitHub" }
-}
+import TwitterIcon from '../icons/twitter.svg'
+import InstagramIcon from '../icons/instagram.svg'
+import ItchIcon from '../icons/itchio.svg'
+import GitHubIcon from '../icons/github.svg'
 
 type ExternalSiteIconProps = {
-  site: ExternalSite
+  site: ExternalSite,
+  size: number
 }
 
-const ExternalSiteIcon = ({ site }: ExternalSiteIconProps) => (
-  <Image
-    src={externalSiteLookup[site].icon}
-    alt={externalSiteLookup[site].name}/>
-)
+const ExternalSiteIcon = ({ site, size }: ExternalSiteIconProps) => {
+  switch (site) {
+    case ExternalSite.Twitter:
+      return <TwitterIcon width={size} height={size} alt="Twitter" />
+    case ExternalSite.Instagram:
+      return <InstagramIcon width={size} height={size} alt="Instagram" />
+    case ExternalSite.Itch:
+      return <ItchIcon width={size} height={size} alt="itch.io" />
+    case ExternalSite.GitHub:
+      return <GitHubIcon width={size} height={size} alt="GitHub" />
+  }
+}
 
 export default ExternalSiteIcon

@@ -1,5 +1,6 @@
 type SiteData = {
   title: string,
   description: string,
-  author: PersonData
+  author: PersonData,
+  shortBio: any
 }
