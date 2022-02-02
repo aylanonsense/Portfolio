@@ -2,8 +2,8 @@ import type { NextPage, GetStaticProps } from 'next'
 import { getSiteData, getAllGameData } from 'helpers/contentApi'
 import renderRichText from 'helpers/renderRichText'
 import Layout from 'components/Layout'
-import GamePanel from 'components/GamePanel'
-import styles from 'styles/pages/home.module.scss'
+import GameGrid from 'components/GameGrid'
+import styles from 'styles/pages/index.module.scss'
 
 type HomePageProps = {
   site: SiteData,
@@ -15,9 +15,7 @@ const HomePage: NextPage<HomePageProps> = ({ site, games }) => (
     <main className={styles.main}>
       <section>
         {renderRichText(site.bigProjects)}
-        {games.map(game =>
-          <GamePanel key={game.slug} title={game.title} role={game.role} />
-        )}
+        <GameGrid games={games} />
       </section>
       <section className={styles.bio}>
         {renderRichText(site.shortBio)}

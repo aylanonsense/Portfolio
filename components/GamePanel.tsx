@@ -1,14 +1,21 @@
+import Link from 'next/link'
+import Image from 'next/image'
+
 type GamePanelProps = {
+  slug: string,
   title: string,
-  role: string
+  image: ImageAssetData
 }
 
-const GamePanel = ({ title, role }: GamePanelProps) => (
-  <div className="game">
-    <div className="text">
-      <h2>{title}</h2>
-      <p>{role}</p>
-    </div>
+const GamePanel = ({ slug, title, image }: GamePanelProps) => (
+  <div style={{ imageRendering: 'pixelated' }}>
+    <Link href={`/games/${slug}`}>
+      <Image
+        src={image.url}
+        alt={title}
+        width={image.width}
+        height={image.height} />
+    </Link>
   </div>
 )
 

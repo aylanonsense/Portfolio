@@ -1,5 +1,6 @@
 type GameData = {
   title: string,
   slug: string,
-  role: string
+  role: string,
+  image: ImageAssetData
 }

@@ -1,6 +1,6 @@
 import { ExternalSite } from 'helpers/enums'
 import SiteIcon from "components/SiteIcon"
-import styles from 'styles/components/externallinks.module.scss'
+import styles from 'styles/components/ExternalLinks.module.scss'
 
 type ExternalLinkItemProps = {
   site: ExternalSite,

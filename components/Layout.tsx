@@ -2,12 +2,12 @@ import Head from 'next/head'
 import Link from 'next/link'
 import renderRichText from 'helpers/renderRichText'
 import ExternalLinks from 'components/ExternalLinks'
-import styles from 'styles/components/layout.module.scss'
+import styles from 'styles/components/Layout.module.scss'
 
 type LayoutProps = {
   site: SiteData,
   title?: string,
-  children: JSX.Element
+  children: JSX.Element | JSX.Element[]
 }
 
 const Layout = ({ site, title, children }: LayoutProps) => {

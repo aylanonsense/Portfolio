@@ -1,7 +1,6 @@
 import type { NextPage, GetStaticPaths, GetStaticProps } from 'next'
 import { getSiteData, getGameData, getAllGameData } from 'helpers/contentApi'
 import Layout from 'components/Layout'
-import styles from 'styles/pages/home.module.scss'
 
 type GamePageParams = {
   params: {
@@ -16,10 +15,8 @@ type GamePageProps = {
 
 const GamePage: NextPage<GamePageProps> = ({ site, game }) => (
   <Layout site={site} title={game.title}>
-    <div className={styles.container}>
-      <h1>{game.title}</h1>
-      <p>{game.role}</p>
-    </div>
+    <h1>{game.title}</h1>
+    <p>{game.role}</p>
   </Layout>
 )
 
