@@ -2,8 +2,10 @@
 
 .links {
   display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 0;
   margin: 0;
   list-style-type: none;
-  gap: 5px;
+  gap: 6px;
 }

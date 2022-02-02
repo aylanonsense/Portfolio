@@ -1,24 +1,63 @@
 @import "styles/variables.scss";
 
+.header {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 400px;
+  border: 1px solid yellow;
+
+  > div {
+    max-width: 1000px;
+    border: 1px solid orange;
+
+    .icons {
+      svg {
+        fill: $grape
+      }
+      svg:hover {
+        fill: $rose;
+      }
+    }
+  }
+}
+
 .title {
+  margin: 1rem 0 0.2rem 0;
   font-family: Raleway, sans-serif;
+  font-size: 400%;
 }
 
 .subtitle {
+  margin: 0.2rem 0 0.85rem 0;
+  font-size: 140%;
   color: $rose;
+  text-transform: lowercase;
 }
 
-.header .icons {
-  svg {
-    fill: $grape
-  }
-  svg:hover {
-    fill: $rose;
-  }
-}
+.footer {
+  color: $violet;
+  border: 1px solid yellow;
+  text-align: center;
+  padding: 15px;
 
-.footer .icons {
-  svg {
-    fill: $white;
+  > div {
+    max-width: 1000px;
+    margin: 0 auto 0 auto;
+    border: 1px solid orange;
+
+    p {
+      margin: 0.6rem 0 0.6rem 0;
+      line-height: 0.8;
+    }
+  
+    .icons {
+      svg {
+        fill: $violet;
+      }
+    }
   }
 }

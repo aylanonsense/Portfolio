@@ -1,3 +1,21 @@
 .gameGrid {
   display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
+  > div {
+    flex-basis: 25%; // 4 columns
+
+    > span {
+      display: block !important;
+      position: relative !important;
+      margin: 5px !important; // 10px gutters
+
+      img {
+        width: 100% !important;
+      }
+    }
+  }
 }

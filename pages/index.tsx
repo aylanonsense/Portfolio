@@ -14,20 +14,30 @@ const HomePage: NextPage<HomePageProps> = ({ site, games }) => (
   <Layout site={site}>
     <main className={styles.main}>
       <section>
-        {renderRichText(site.bigProjects)}
-        <GameGrid games={games} />
+        <div>
+          {renderRichText(site.bigProjects)}
+          <GameGrid games={games} />
+        </div>
       </section>
       <section className={styles.bio}>
-        {renderRichText(site.shortBio)}
+        <div>
+          {renderRichText(site.shortBio)}
+        </div>
       </section>
       <section>
-        {renderRichText(site.smallProjects)}
+        <div>
+          {renderRichText(site.smallProjects)}
+        </div>
       </section>
       <section className={styles.talks}>
-        {renderRichText(site.speakingExperience)}
+        <div>
+          {renderRichText(site.speakingExperience)}
+        </div>
       </section>
       <section className={styles.contact}>
-        {renderRichText(site.contactInformation)}
+        <div>
+          {renderRichText(site.contactInformation)}
+        </div>
       </section>
     </main>
   </Layout>

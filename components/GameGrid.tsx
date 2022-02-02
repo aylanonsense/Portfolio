@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import GamePanel from 'components/GamePanel'
 import styles from 'styles/components/GameGrid.module.scss'
 
 type GameGridProps = {
@@ -10,12 +9,30 @@ type GameGridProps = {
 const GameGrid = ({ games }: GameGridProps) => (
   <div className={styles.gameGrid}>
     {games.map(game =>
-      <GamePanel
+      <GameGridCell
         key={game.slug}
         slug={game.slug}
         title={game.title}
         image={game.image} />
     )}
+  </div>
+)
+
+type GameGridCellProps = {
+  slug: string,
+  title: string,
+  image: ImageAssetData
+}
+
+const GameGridCell = ({ slug, title, image }: GameGridCellProps) => (
+  <div style={{ imageRendering: 'pixelated' }}>
+    <Link href={`/games/${slug}`}>
+      <Image
+        src={image.url}
+        alt={title}
+        width={image.width}
+        height={image.height} />
+    </Link>
   </div>
 )
 

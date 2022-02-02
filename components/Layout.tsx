@@ -38,14 +38,18 @@ const Layout = ({ site, title, children }: LayoutProps) => {
         <link href="https://fonts.googleapis.com/css?family=Raleway:700&display=swap" rel="stylesheet" />
       </Head>
       <header className={styles.header}>
-        <h1 className={styles.title}><Link href="/">{site.title}</Link></h1>
-        <p className={styles.subtitle}>{site.subtitle}</p>
-        <ExternalLinks className={styles.icons} person={site.author} size={28} />
+        <div>
+          <h1 className={styles.title}><Link href="/">{site.title}</Link></h1>
+          <p className={styles.subtitle}>{site.subtitle}</p>
+          <ExternalLinks className={styles.icons} person={site.author} size={28} />
+        </div>
       </header>
       {children}
       <footer className={styles.footer}>
-        <ExternalLinks className={styles.icons} person={site.author} size={22} />
-        {site.disclaimer != undefined && renderRichText(site.disclaimer)}
+        <div>
+          {site.disclaimer != undefined && renderRichText(site.disclaimer)}
+          <ExternalLinks className={styles.icons} person={site.author} size={22} />
+        </div>
       </footer>
     </>
   )

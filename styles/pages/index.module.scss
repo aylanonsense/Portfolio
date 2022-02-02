@@ -1,13 +1,16 @@
 @import "styles/variables.scss";
 
 .main {
-  //min-height: 100vh;
-  //padding: 4rem 0;
-  //flex: 1;
-  //display: flex;
-  //flex-direction: column;
-  //justify-content: center;
-  //align-items: center;
+  section {
+    display: block;
+    padding: 5px;
+    border: 1px solid yellow;
+  }
+  section > div {
+    max-width: 1000px;
+    margin: 0 auto 0 auto;
+    border: 1px solid orange;
+  }
 }
 
 .whateva {
