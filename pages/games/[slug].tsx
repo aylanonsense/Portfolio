@@ -10,14 +10,12 @@ type GamePageParams = {
 }
 
 type GamePageProps = {
-  host: string,
   site: SiteData,
-  thumbnail: string,
   game: GameData
 }
 
-const GamePage: NextPage<GamePageProps> = ({ host, site, thumbnail, game }) => (
-  <Layout host={host} title={site.title} subtitle={game.title} description={site.description} author={site.author} thumbnail={thumbnail} twitterUrl={site.author.twitterUrl}>
+const GamePage: NextPage<GamePageProps> = ({ site, game }) => (
+  <Layout site={site} title={game.title}>
     <div className={styles.container}>
       <h1>{game.title}</h1>
       <p>{game.role}</p>
@@ -39,19 +37,13 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps<GamePageProps> = async ({ params: { slug } }: any) => {
-  if (process.env.HOST_NAME == undefined) {
-    throw 'Environment variable HOST_NAME is not defined!'
-  }
   const siteRequest = getSiteData()
   const gameRequest = getGameData(slug)
-  const host = process.env.HOST_NAME
   const site = await siteRequest
   const game = await gameRequest
   return {
     props: {
-      host,
       site,
-      thumbnail: 'TODO.png',
       game
     }
   }

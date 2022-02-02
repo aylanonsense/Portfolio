@@ -19,6 +19,8 @@ const ExternalSiteIcon = ({ site, size }: ExternalSiteIconProps) => {
       return <ItchIcon width={size} height={size} alt="itch.io" />
     case ExternalSite.GitHub:
       return <GitHubIcon width={size} height={size} alt="GitHub" />
+    default:
+      return <div>[icon missing for {site}]</div>
   }
 }
 

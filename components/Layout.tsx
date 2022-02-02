@@ -1,23 +1,19 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import renderRichText from 'helpers/renderRichText'
 import ExternalLinks from 'components/ExternalLinks'
 import styles from 'styles/components/layout.module.scss'
 
 type LayoutProps = {
-  host: string,
-  title: string,
-  subtitle?: string,
-  description: string,
-  author: PersonData,
-  thumbnail: string,
-  twitterUrl?: URL,
+  site: SiteData,
+  title?: string,
   children: JSX.Element
 }
 
-const Layout = ({ host, title, subtitle, description, author, thumbnail, twitterUrl, children }: LayoutProps) => {
+const Layout = ({ site, title, children }: LayoutProps) => {
   let twitterHandle
-  if (twitterUrl != undefined) {
-    let matches = /.+\/(.+$)$/g.exec(twitterUrl.toString())
+  if (site.author.twitterUrl != undefined) {
+    let matches = /.+\/(.+$)$/g.exec(site.author.twitterUrl.toString())
     if (matches != null && matches.length > 1) {
       twitterHandle = matches[1];
     }
@@ -25,11 +21,11 @@ const Layout = ({ host, title, subtitle, description, author, thumbnail, twitter
   return (
     <>
       <Head>
-        <title>{(subtitle == undefined ? title : `${title} | ${subtitle}`)}</title>
-        <meta name="description" content={description} />
+        <title>{(title == undefined ? site.title : `${title} | ${site.title}`)}</title>
+        <meta name="description" content={site.description} />
         <meta name="og:title" content={title} />
-        <meta name="og:description" content={description} />
-        <meta name="og:image" content={thumbnail} />
+        <meta name="og:description" content={site.description} />
+        {/*<meta name="og:image" content="todo.png" />*/}
         <meta name="og:type" content="website" />
         {twitterHandle != undefined && <meta name="twitter:creator" content={`@${twitterHandle}`} />}
         <meta name="twitter:card" content="summary" />
@@ -42,15 +38,14 @@ const Layout = ({ host, title, subtitle, description, author, thumbnail, twitter
         <link href="https://fonts.googleapis.com/css?family=Raleway:700&display=swap" rel="stylesheet" />
       </Head>
       <header className={styles.header}>
-        <h1 className={styles.title}><Link href="/">{title}</Link></h1>
-        <p className={styles.subtitle}>Indie game dev</p>
-        <ExternalLinks className={styles.icons} person={author} size={28} />
+        <h1 className={styles.title}><Link href="/">{site.title}</Link></h1>
+        <p className={styles.subtitle}>{site.subtitle}</p>
+        <ExternalLinks className={styles.icons} person={site.author} size={28} />
       </header>
       {children}
       <footer className={styles.footer}>
-        <ExternalLinks className={styles.icons} person={author} size={22} />
-        <p>There is no user tracking on this site&mdash;consider this the cookie and privacy policy.</p>
-        <p>Site made by yours truly~</p>
+        <ExternalLinks className={styles.icons} person={site.author} size={22} />
+        {site.disclaimer != undefined && renderRichText(site.disclaimer)}
       </footer>
     </>
   )
