@@ -7,11 +7,11 @@ import styles from 'styles/components/Layout.module.scss'
 type LayoutProps = {
   site: SiteData,
   title?: string,
-  fullHeader: boolean
+  compact: boolean
   children?: React.ReactNode;
 }
 
-const Layout = ({ site, title, fullHeader, children }: LayoutProps) => {
+const Layout = ({ site, title, compact, children }: LayoutProps) => {
   let twitterHandle
   if (site.author.twitterUrl) {
     let matches = /.+\/(.+$)$/g.exec(site.author.twitterUrl.toString())
@@ -40,17 +40,13 @@ const Layout = ({ site, title, fullHeader, children }: LayoutProps) => {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         <link href="https://fonts.googleapis.com/css2?family=Gelasio&family=Montserrat:wght@400&family=Noto+Sans:wght@400;700&family=Raleway:wght@400;700&family=Source+Serif+Pro&family=Nanum+Myeongjo&display=swap" rel="stylesheet" />
       </Head>
-      {fullHeader ?
-        <header className={styles.header}>
-          <div>
-            <h1 className={styles.title}><Link href="/">{site.title}</Link></h1>
-            {site.subtitle && <p className={styles.subtitle}>{site.subtitle}</p>}
-            <ExternalLinks className={styles.icons} person={site.author} size={28} />
-          </div>
-        </header>
-      :
-        <p>Mini header</p>
-      }
+      <header className={`${styles.header} ${compact ? styles.compact : styles.full}`}>
+        <div>
+          <h1 className={styles.title}><Link href="/">{site.title}</Link></h1>
+          {!compact && site.subtitle && <p className={styles.subtitle}>{site.subtitle}</p>}
+          <ExternalLinks className={styles.icons} person={site.author} size={styles.compact ? 22 : 28} />
+        </div>
+      </header>
       {children}
       <footer className={styles.footer}>
         <div>

@@ -32,7 +32,7 @@ const GamePage: NextPage<GamePageProps> = ({ site, game }) => {
     details = game.role
   }
   return (
-    <Layout site={site} title={game.title} fullHeader={false}>
+    <Layout site={site} title={game.title} compact={true}>
       <main className={styles.main}>
         <div className={styles.mainImage}>
           <Image

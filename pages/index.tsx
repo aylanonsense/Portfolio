@@ -12,7 +12,7 @@ type HomePageProps = {
 }
 
 const HomePage: NextPage<HomePageProps> = ({ site, games }) => (
-  <Layout site={site} fullHeader={true}>
+  <Layout site={site} compact={false}>
     <main className={styles.main}>
       {site.bigProjects || games.length > 0 ?
         <section id="games" className={styles.games}>
