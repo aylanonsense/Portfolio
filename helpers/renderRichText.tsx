@@ -1,13 +1,13 @@
 import Link from 'next/link'
-import { BLOCKS, INLINES } from '@contentful/rich-text-types';
+import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types';
 import type { Options } from '@contentful/rich-text-react-renderer';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
+let host
+
 const baseOptions: Options = {
   renderNode: {
-    //[BLOCKS.PARAGRAPH]: (node: any, children: any): JSX.Element => (
-    //  <p className={styles.whateva}>{children}</p>
-    //),
+    [INLINES.ASSET_HYPERLINK]: (node, children) => <a href={`https:${node.data.target.fields.file.url}`} target="_blank">{children}</a>,
     [INLINES.ENTRY_HYPERLINK]: (node, children) => {
       switch (node.data.target.sys.contentType.sys.id) {
         case "game":
