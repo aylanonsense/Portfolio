@@ -5,11 +5,11 @@ import { ISiteFields, IGameFields } from 'types/generated/contentful'
 let client: ContentfulClientApi
 
 function getOrCreateClient() {
-  if (client == undefined) {
-    if (process.env.CONTENTFUL_SPACE_ID == undefined) {
+  if (!client) {
+    if (!process.env.CONTENTFUL_SPACE_ID) {
       throw 'Environment variable CONTENTFUL_SPACE_ID is not defined!'
     }
-    if (process.env.CONTENTFUL_DELIVERY_API_ACCESS_TOKEN == undefined) {
+    if (!process.env.CONTENTFUL_DELIVERY_API_ACCESS_TOKEN) {
       throw 'Environment variable CONTENTFUL_DELIVERY_API_ACCESS_TOKEN is not defined!'
     }
     client = createClient({

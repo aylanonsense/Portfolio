@@ -1,0 +1,84 @@
+@import "styles/variables.scss";
+
+.main {
+  max-width: 500px;
+  margin: 0 auto 0 auto;
+  font-family: 'Nanum Myeongjo', serif;
+
+  .mainImage {
+    image-rendering: pixelated;
+
+    > span {
+      display: block !important;
+      position: relative !important;
+      cursor: pointer;
+
+      img {
+        width: 100% !important;
+      }
+    }
+  }
+
+  .basicInfo {
+    margin: 2rem 0 2rem;
+  }
+
+  .links {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0;
+    list-style-type: none;
+    text-transform: lowercase;
+    font-size: 90%;
+    color: #bec5ac;
+
+    li:nth-child(3n+1) {
+      a:hover {
+        color: $rose;
+      }
+    }
+
+    li:nth-child(3n+2) {
+      a:hover {
+        color: $wintergreen;
+      }
+    }
+
+    li:nth-child(3n) {
+      a:hover {
+        color: $topaz;
+      }
+    }
+  }
+
+  .overview,
+  .credits,
+  .development,
+  .reception {
+    font-size: 115%;
+    line-height: 145%;
+  }
+
+  h1 {
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+    font-size: 300%;
+    margin: 0.25rem 0 0.25rem 0;
+  }
+
+  .details {
+    font-size: 150%;
+    font-family: 'Raleway', sans-serif;
+    text-align: center;
+    margin: 0.25rem 0 0.25rem 0;
+  }
+
+  h2 {
+    font-family: 'Raleway', sans-serif;
+    font-size: 180%;
+    font-weight: 400;
+    margin: 2.75rem 0 -0.25rem 0;
+    text-transform: uppercase;
+  }
+}

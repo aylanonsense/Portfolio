@@ -2,13 +2,13 @@ require('dotenv').config()
 const contentfulManagement = require('contentful-management')
 
 module.exports = function() {
-  if (process.env.CONTENTFUL_MANAGEMENT_API_ACCESS_TOKEN == undefined) {
+  if (!process.env.CONTENTFUL_MANAGEMENT_API_ACCESS_TOKEN) {
     throw 'Environment variable CONTENTFUL_MANAGEMENT_API_ACCESS_TOKEN is not defined!'
   }
-  if (process.env.CONTENTFUL_SPACE_ID == undefined) {
+  if (!process.env.CONTENTFUL_SPACE_ID) {
     throw 'Environment variable CONTENTFUL_SPACE_ID is not defined!'
   }
-  if (process.env.CONTENTFUL_ENVIRONMENT == undefined) {
+  if (!process.env.CONTENTFUL_ENVIRONMENT) {
     throw 'Environment variable CONTENTFUL_ENVIRONMENT is not defined!'
   }
 

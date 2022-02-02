@@ -12,20 +12,20 @@ type HomePageProps = {
 }
 
 const HomePage: NextPage<HomePageProps> = ({ site, games }) => (
-  <Layout site={site}>
+  <Layout site={site} fullHeader={true}>
     <main className={styles.main}>
-      {site.bigProjects != undefined || games.length > 0 ?
+      {site.bigProjects || games.length > 0 ?
         <section id="games" className={styles.games}>
           <h2>Games</h2>
           <div>
-            {site.bigProjects != undefined && renderRichText(site.bigProjects)}
+            {site.bigProjects && renderRichText(site.bigProjects)}
             {games.length > 0 && <GameGrid games={games} />}
           </div>
         </section>
       :
         undefined
       }
-      { site.shortBio != undefined &&
+      { site.shortBio &&
         <section id="bio" className={styles.bio}>
           <h2>About Me</h2>
           <div>
@@ -38,7 +38,7 @@ const HomePage: NextPage<HomePageProps> = ({ site, games }) => (
           </div>
         </section>
       }
-      { site.smallProjects != undefined &&
+      { site.smallProjects &&
         <section id="lil-things">
           <h2>lil things</h2>
           <div>
@@ -46,7 +46,7 @@ const HomePage: NextPage<HomePageProps> = ({ site, games }) => (
           </div>
         </section>
       }
-      { site.speakingExperience != undefined &&
+      { site.speakingExperience &&
         <section id="talks" className={styles.talks}>
           <h2>Talks</h2>
           <div>
@@ -54,7 +54,7 @@ const HomePage: NextPage<HomePageProps> = ({ site, games }) => (
           </div>
         </section>
       }
-      { site.contactInformation != undefined && 
+      { site.contactInformation && 
         <section id="contact" className={styles.contact}>
           <div>
             <div>

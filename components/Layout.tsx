@@ -7,12 +7,13 @@ import styles from 'styles/components/Layout.module.scss'
 type LayoutProps = {
   site: SiteData,
   title?: string,
-  children: JSX.Element | JSX.Element[]
+  fullHeader: boolean
+  children?: React.ReactNode;
 }
 
-const Layout = ({ site, title, children }: LayoutProps) => {
+const Layout = ({ site, title, fullHeader, children }: LayoutProps) => {
   let twitterHandle
-  if (site.author.twitterUrl != undefined) {
+  if (site.author.twitterUrl) {
     let matches = /.+\/(.+$)$/g.exec(site.author.twitterUrl.toString())
     if (matches != null && matches.length > 1) {
       twitterHandle = matches[1];
@@ -21,13 +22,13 @@ const Layout = ({ site, title, children }: LayoutProps) => {
   return (
     <>
       <Head>
-        <title>{(title == undefined ? site.title : `${title} | ${site.title}`)}</title>
+        <title>{(title ? `${title} | ${site.title}` : site.title)}</title>
         <meta name="description" content={site.description} />
         <meta name="og:title" content={title} />
         <meta name="og:description" content={site.description} />
         {/*<meta name="og:image" content="todo.png" />*/}
         <meta name="og:type" content="website" />
-        {twitterHandle != undefined && <meta name="twitter:creator" content={`@${twitterHandle}`} />}
+        {twitterHandle && <meta name="twitter:creator" content={`@${twitterHandle}`} />}
         <meta name="twitter:card" content="summary" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="robots" content="index, follow" />
@@ -37,19 +38,23 @@ const Layout = ({ site, title, children }: LayoutProps) => {
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&family=Raleway:wght@700&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Gelasio&family=Montserrat:wght@400&family=Noto+Sans:wght@400;700&family=Raleway:wght@400;700&family=Source+Serif+Pro&family=Nanum+Myeongjo&display=swap" rel="stylesheet" />
       </Head>
-      <header className={styles.header}>
-        <div>
-          <h1 className={styles.title}><Link href="/">{site.title}</Link></h1>
-          {site.subtitle != undefined && <p className={styles.subtitle}>{site.subtitle}</p>}
-          <ExternalLinks className={styles.icons} person={site.author} size={28} />
-        </div>
-      </header>
+      {fullHeader ?
+        <header className={styles.header}>
+          <div>
+            <h1 className={styles.title}><Link href="/">{site.title}</Link></h1>
+            {site.subtitle && <p className={styles.subtitle}>{site.subtitle}</p>}
+            <ExternalLinks className={styles.icons} person={site.author} size={28} />
+          </div>
+        </header>
+      :
+        <p>Mini header</p>
+      }
       {children}
       <footer className={styles.footer}>
         <div>
-          {site.disclaimer != undefined && renderRichText(site.disclaimer)}
+          {site.disclaimer && renderRichText(site.disclaimer)}
           <ExternalLinks className={styles.icons} person={site.author} size={22} />
         </div>
       </footer>

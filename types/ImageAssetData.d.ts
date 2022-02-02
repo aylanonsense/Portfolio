@@ -1,5 +1,5 @@
 type ImageAssetData = {
   url: string,
-  width?: number,
-  height?: number
+  width?: number | undefined,
+  height?: number | undefined
 }

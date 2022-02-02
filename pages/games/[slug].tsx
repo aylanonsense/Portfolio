@@ -1,6 +1,9 @@
 import type { NextPage, GetStaticPaths, GetStaticProps } from 'next'
+import Image from 'next/image'
 import { getSiteData, getGameData, getAllGameData } from 'helpers/contentApi'
+import renderRichText from 'helpers/renderRichText'
 import Layout from 'components/Layout'
+import styles from 'styles/pages/game.module.scss'
 
 type GamePageParams = {
   params: {
@@ -13,12 +16,70 @@ type GamePageProps = {
   game: GameData
 }
 
-const GamePage: NextPage<GamePageProps> = ({ site, game }) => (
-  <Layout site={site} title={game.title}>
-    <h1>{game.title}</h1>
-    <p>{game.role}</p>
-  </Layout>
-)
+const GamePage: NextPage<GamePageProps> = ({ site, game }) => {
+  let releaseDate
+  if (game.releaseDate) {
+    releaseDate = new Date(game.releaseDate).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
+  }
+  let details: string | undefined = undefined
+  if (releaseDate && game.role) {
+    details = `${game.role} / ${releaseDate}`
+  }
+  else if (releaseDate) {
+    details = releaseDate
+  }
+  else if (game.role) {
+    details = game.role
+  }
+  return (
+    <Layout site={site} title={game.title} fullHeader={false}>
+      <main className={styles.main}>
+        <div className={styles.mainImage}>
+          <Image
+            src={game.image.url}
+            //alt={'TODO'}
+            width={game.image.width}
+            height={game.image.height} />
+        </div>
+        <div className={styles.basicInfo}>
+          <h1>{game.title}</h1>
+          {details && <p className={styles.details}>{details}</p>}
+          <ul className={styles.links}>
+            {game.itchUrl && <li><a href={game.itchUrl} target="_blank">itch.io</a></li>}
+            {game.lexaloffleUrl && <li><a href={game.lexaloffleUrl} target="_blank">Lexaloffle</a></li>}
+            {game.newgroundsUrl && <li><a href={game.newgroundsUrl} target="_blank">Newgrounds</a></li>}
+            {game.gameJoltUrl && <li><a href={game.gameJoltUrl} target="_blank">Game Jolt</a></li>}
+            {game.gitHubUrl && <li><a href={game.gitHubUrl} target="_blank">GitHub</a></li>}
+          </ul>
+        </div>
+        {game.overview &&
+          <section id="overview" className={styles.overview}>
+            <h2>Overview</h2>
+            {renderRichText(game.overview)}
+          </section>
+        }
+        {game.credits &&
+          <section id="credits" className={styles.credits}>
+            <h2>Credits</h2>
+            {renderRichText(game.credits)}
+          </section>
+        }
+        {game.development &&
+          <section id="development" className={styles.development}>
+            <h2>Development</h2>
+            {renderRichText(game.development)}
+          </section>
+        }
+        {game.reception &&
+          <section id="reception" className={styles.reception}>
+            <h2>Reception</h2>
+            {renderRichText(game.reception)}
+          </section>
+        }
+      </main>
+    </Layout>
+  )
+}
 
 export default GamePage;
 

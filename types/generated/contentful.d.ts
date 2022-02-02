@@ -10,14 +10,44 @@ export interface IGameFields {
   /** Slug */
   slug: string;
 
+  /** Image */
+  image: Asset;
+
+  /** Order */
+  order: number;
+
   /** Role */
   role?: string | undefined;
+
+  /** Release Date */
+  releaseDate?: string | undefined;
 
   /** itch URL */
   itchUrl?: string | undefined;
 
-  /** Image */
-  image: Asset;
+  /** Lexaloffle URL */
+  lexaloffleUrl?: string | undefined;
+
+  /** Newgrounds URL */
+  newgroundsUrl?: string | undefined;
+
+  /** Game Jolt URL */
+  gameJoltUrl?: string | undefined;
+
+  /** GitHub URL */
+  gitHubUrl?: string | undefined;
+
+  /** Overview */
+  overview?: Document | undefined;
+
+  /** Development */
+  development?: Document | undefined;
+
+  /** Reception */
+  reception?: Document | undefined;
+
+  /** Credits */
+  credits?: Document | undefined;
 }
 
 export interface IGame extends Entry<IGameFields> {
