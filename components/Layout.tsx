@@ -35,12 +35,14 @@ const Layout = ({ site, title, children }: LayoutProps) => {
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-        <link href="https://fonts.googleapis.com/css?family=Raleway:700&display=swap" rel="stylesheet" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&family=Raleway:wght@700&display=swap" rel="stylesheet" />
       </Head>
       <header className={styles.header}>
         <div>
           <h1 className={styles.title}><Link href="/">{site.title}</Link></h1>
-          <p className={styles.subtitle}>{site.subtitle}</p>
+          {site.subtitle != undefined && <p className={styles.subtitle}>{site.subtitle}</p>}
           <ExternalLinks className={styles.icons} person={site.author} size={28} />
         </div>
       </header>

@@ -6,12 +6,13 @@
   width: 100%;
 
   > div {
-    flex-basis: 25%; // 4 columns
+    flex-basis: 33.333%; // 3 columns
 
     > span {
       display: block !important;
       position: relative !important;
       margin: 5px !important; // 10px gutters
+      cursor: pointer;
 
       img {
         width: 100% !important;

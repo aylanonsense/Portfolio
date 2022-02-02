@@ -61,5 +61,5 @@ export async function getAllGameData(): Promise<GameData[]> {
   const entries = await getOrCreateClient().getEntries<IGameFields>({
     content_type: 'game'
   })
-  return entries.items.map(x => parseGameData(x.fields))
+  return entries.items.map(x => parseGameData(x.fields)).sort((a, b) => b.order - a.order)
 }
