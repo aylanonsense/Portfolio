@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types';
+import { INLINES, Document } from '@contentful/rich-text-types';
 import type { Options } from '@contentful/rich-text-react-renderer';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
@@ -20,6 +20,6 @@ const baseOptions: Options = {
   }
 }
 
-export default function renderRichText(richText: any, options?: Options): JSX.Element {
+export default function renderRichText(richText: Document, options?: Options): JSX.Element {
   return documentToReactComponents(richText, { ...baseOptions, ...options }) as JSX.Element
 }
