@@ -1,6 +1,7 @@
 import type { Asset, ContentfulClientApi } from 'contentful'
 import { createClient } from 'contentful'
 import { ISiteFields, IGameFields } from 'types/generated/contentful'
+import type { SiteData, GameData, ImageAssetData } from 'types/contentData'
 
 let client: ContentfulClientApi
 
@@ -49,11 +50,17 @@ export async function getSiteData(): Promise<SiteData> {
       description: '[placeholder description]',
       author: {
         name: '[placeholder name]',
-        twitterUrl: '[placeholder url]',
-        instagramUrl: '[placeholder url]',
-        itchUrl: '[placeholder url]',
-        gitHubUrl: '[placeholder url]'
-      }
+        twitterUrl: '#',
+        instagramUrl: '#',
+        itchUrl: '#',
+        gitHubUrl: '#'
+      },
+      shortBio: '[placeholder bio]',
+      bigProjects: '[placeholder big projects]',
+      smallProjects: '[placeholder small projects]',
+      speakingExperience: '[placeholder speaking experience]',
+      contactInformation: '[placeholder contact information]',
+      disclaimer: '[placeholder disclaimer]'
     }
   }
   else {
@@ -68,13 +75,24 @@ export async function getGameData(slug: string): Promise<GameData> {
   if (process.env.MOCK_CONTENT == 'true') {
     return {
       title: '[placeholder title]',
-      slug: '[placeholder slug]',
+      slug: slug,
       image: {
         url: '/images/placeholder.png',
         width: 128,
         height: 128
       },
-      order: 0
+      order: 0,
+      role: '[placeholder role]',
+      releaseDate: '2020-01-01',
+      itchUrl: '[placeholder itch.io URL]',
+      lexaloffleUrl: '#',
+      newgroundsUrl: '#',
+      gameJoltUrl: '#',
+      gitHubUrl: '#',
+      overview: '[placeholder overview]',
+      development: '[placeholder development]',
+      reception: '[placeholder reception]',
+      credits: '[placeholder credits]'
     }
   }
   else {
@@ -88,16 +106,20 @@ export async function getGameData(slug: string): Promise<GameData> {
 
 export async function getAllGameData(): Promise<GameData[]> {
   if (process.env.MOCK_CONTENT == 'true') {
-    return [{
-      title: '[placeholder title]',
-      slug: '[placeholder slug]',
-      image: {
-        url: '/images/placeholder.png',
-        width: 128,
-        height: 128
-      },
-      order: 0
-    }]
+    return [
+      await getGameData('placeholder-slug-1'),
+      await getGameData('placeholder-slug-2'),
+      await getGameData('placeholder-slug-3'),
+      await getGameData('placeholder-slug-4'),
+      await getGameData('placeholder-slug-5'),
+      await getGameData('placeholder-slug-6'),
+      await getGameData('placeholder-slug-7'),
+      await getGameData('placeholder-slug-8'),
+      await getGameData('placeholder-slug-9'),
+      await getGameData('placeholder-slug-10'),
+      await getGameData('placeholder-slug-11'),
+      await getGameData('placeholder-slug-12')
+    ]
   }
   else {
     const entries = await getOrCreateClient().getEntries<IGameFields>({

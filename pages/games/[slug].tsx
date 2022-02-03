@@ -1,5 +1,6 @@
 import type { NextPage, GetStaticPaths, GetStaticProps } from 'next'
 import Image from 'next/image'
+import type { SiteData, GameData } from 'types/contentData'
 import { getSiteData, getGameData, getAllGameData } from 'helpers/contentApi'
 import renderRichText from 'helpers/renderRichText'
 import Layout from 'components/Layout'
@@ -19,7 +20,7 @@ type GamePageProps = {
 const GamePage: NextPage<GamePageProps> = ({ site, game }) => {
   let releaseDate
   if (game.releaseDate) {
-    releaseDate = new Date(game.releaseDate).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
+    releaseDate = new Date(game.releaseDate).toLocaleDateString('en-US', { timeZone: 'UTC', month: 'short', year: 'numeric' })
   }
   let details: string | undefined = undefined
   if (releaseDate && game.role) {
@@ -45,11 +46,11 @@ const GamePage: NextPage<GamePageProps> = ({ site, game }) => {
           <h1>{game.title}</h1>
           {details && <p className={styles.details}>{details}</p>}
           <ul className={styles.links}>
-            {game.itchUrl && <li><a href={game.itchUrl} target="_blank">itch.io</a></li>}
-            {game.lexaloffleUrl && <li><a href={game.lexaloffleUrl} target="_blank">Lexaloffle</a></li>}
-            {game.newgroundsUrl && <li><a href={game.newgroundsUrl} target="_blank">Newgrounds</a></li>}
-            {game.gameJoltUrl && <li><a href={game.gameJoltUrl} target="_blank">Game Jolt</a></li>}
-            {game.gitHubUrl && <li><a href={game.gitHubUrl} target="_blank">GitHub</a></li>}
+            {game.itchUrl && <li><a href={game.itchUrl} target="_blank" rel="noreferrer">itch.io</a></li>}
+            {game.lexaloffleUrl && <li><a href={game.lexaloffleUrl} target="_blank" rel="noreferrer">Lexaloffle</a></li>}
+            {game.newgroundsUrl && <li><a href={game.newgroundsUrl} target="_blank" rel="noreferrer">Newgrounds</a></li>}
+            {game.gameJoltUrl && <li><a href={game.gameJoltUrl} target="_blank" rel="noreferrer">Game Jolt</a></li>}
+            {game.gitHubUrl && <li><a href={game.gitHubUrl} target="_blank" rel="noreferrer">GitHub</a></li>}
           </ul>
         </div>
         {game.overview &&

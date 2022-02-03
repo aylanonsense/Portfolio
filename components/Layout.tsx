@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import type { SiteData } from 'types/contentData'
 import renderRichText from 'helpers/renderRichText'
 import ExternalLinks from 'components/ExternalLinks'
 import styles from 'styles/components/Layout.module.scss'
@@ -14,7 +15,7 @@ type LayoutProps = {
 const Layout = ({ site, title, compact, children }: LayoutProps) => {
   let twitterHandle
   if (site.author.twitterUrl) {
-    let matches = /.+\/(.+$)$/g.exec(site.author.twitterUrl.toString())
+    let matches = /.+\/(.+$)$/g.exec(site.author.twitterUrl)
     if (matches != null && matches.length > 1) {
       twitterHandle = matches[1];
     }
@@ -30,15 +31,6 @@ const Layout = ({ site, title, compact, children }: LayoutProps) => {
         <meta name="og:type" content="website" />
         {twitterHandle && <meta name="twitter:creator" content={`@${twitterHandle}`} />}
         <meta name="twitter:card" content="summary" />
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <meta name="robots" content="index, follow" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
-        <link href="https://fonts.googleapis.com/css2?family=Gelasio&family=Montserrat:wght@400&family=Noto+Sans:wght@400;700&family=Raleway:wght@400;700&family=Source+Serif+Pro&family=Nanum+Myeongjo&display=swap" rel="stylesheet" />
       </Head>
       <header className={`${styles.header} ${compact ? styles.compact : styles.full}`}>
         <div>

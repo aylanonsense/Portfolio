@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import type { GameData, ImageAssetData } from 'types/contentData'
 import styles from 'styles/components/GameGrid.module.scss'
 
 type GameGridProps = {
@@ -26,7 +27,7 @@ type GameGridCellProps = {
 
 const GameGridCell = ({ slug, title, image }: GameGridCellProps) => (
   <div style={{ imageRendering: 'pixelated' }}>
-    <Link href={`/games/${slug}`}>
+    <Link href={`/games/${slug}`} passHref>
       <Image
         src={image.url}
         alt={title}

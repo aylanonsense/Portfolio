@@ -1,16 +1,17 @@
 import { ExternalSite } from 'helpers/enums'
 import SiteIcon from "components/SiteIcon"
+import type { PersonData } from 'types/contentData'
 import styles from 'styles/components/ExternalLinks.module.scss'
 
 type ExternalLinkItemProps = {
   site: ExternalSite,
-  url: URL,
+  url: string,
   size: number
 }
 
 const ExternalLinkItem = ({ site, url, size }: ExternalLinkItemProps) => (
   <li>
-    <a href={url.toString()} target="_blank">
+    <a href={url} target="_blank" rel="noreferrer">
       <SiteIcon site={site} size={size} />
     </a>
   </li>

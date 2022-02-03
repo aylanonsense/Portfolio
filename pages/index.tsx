@@ -1,5 +1,6 @@
 import type { NextPage, GetStaticProps } from 'next'
 import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types';
+import type { SiteData, GameData } from 'types/contentData'
 import { getSiteData, getAllGameData } from 'helpers/contentApi'
 import renderRichText from 'helpers/renderRichText'
 import Layout from 'components/Layout'
