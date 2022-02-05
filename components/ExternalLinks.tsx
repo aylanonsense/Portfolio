@@ -11,7 +11,7 @@ type ExternalLinkItemProps = {
 
 const ExternalLinkItem = ({ site, url, size }: ExternalLinkItemProps) => (
   <li>
-    <a href={url} target="_blank" rel="noreferrer">
+    <a href={url} target="_blank" rel="noopener noreferrer">
       <SiteIcon site={site} size={size} />
     </a>
   </li>

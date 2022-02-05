@@ -150,7 +150,32 @@ export interface ISite extends Entry<ISiteFields> {
   };
 }
 
-export type CONTENT_TYPE = "game" | "person" | "site";
+export interface ITweetFields {
+  /** Title */
+  title?: string | undefined;
+
+  /** URL */
+  url: string;
+}
+
+export interface ITweet extends Entry<ITweetFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: "tweet";
+        linkType: "ContentType";
+        type: "Link";
+      };
+    };
+  };
+}
+
+export type CONTENT_TYPE = "game" | "person" | "site" | "tweet";
 
 export type LOCALE_CODE = "en-US";
 

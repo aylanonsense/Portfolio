@@ -1,0 +1,10 @@
+@import "styles/variables.scss";
+
+.tweetPlaceholder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid $navy;
+  color: $navy;
+  height: 200px;
+}

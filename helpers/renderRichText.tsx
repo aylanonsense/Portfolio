@@ -1,16 +1,30 @@
 import Link from 'next/link'
-import { INLINES, Document } from '@contentful/rich-text-types';
-import type { Options } from '@contentful/rich-text-react-renderer';
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import type { GameData } from 'types/contentData'
+import { BLOCKS, INLINES, Document } from '@contentful/rich-text-types';
+import { documentToReactComponents, Options } from '@contentful/rich-text-react-renderer';
+import { TwitterTweetEmbed } from 'react-twitter-embed';
+import { parseGameData, parseTweetData } from 'helpers/contentApi'
+import styles from 'styles/helpers/renderRichText.module.scss'
 
 const baseOptions: Options = {
   renderNode: {
-    [INLINES.ASSET_HYPERLINK]: (node, children) => <a href={`https:${node.data.target.fields.file.url}`} target="_blank" rel="noreferrer">{children}</a>,
-    [INLINES.ENTRY_HYPERLINK]: (node, children) => {
-      switch (node.data.target.sys.contentType.sys.id) {
+    [BLOCKS.EMBEDDED_ENTRY]: ({ data }, children) => {
+      switch (data.target.sys.contentType.sys.id) {
+        case "tweet":
+          const tweet = parseTweetData(data.target.fields)
+          return <TwitterTweetEmbed
+            tweetId={tweet.id}
+            placeholder={<div className={styles.tweetPlaceholder}><p>Loading...</p></div>}
+            options={{ conversation: 'none', align: 'center', dnt: true, theme: 'dark' }} />
+        default:
+          return <div>blah</div>
+      }
+    },
+    [INLINES.HYPERLINK]: ({ data }, children) => <a href={data.uri} target="_blank" rel="noopener noreferrer">{children}</a>,
+    [INLINES.ASSET_HYPERLINK]: ({ data }, children) => <a href={`https:${data.target.fields.file.url}`} target="_blank" rel="noopener noreferrer">{children}</a>,
+    [INLINES.ENTRY_HYPERLINK]: ({ data }, children) => {
+      switch (data.target.sys.contentType.sys.id) {
         case "game":
-          const game = node.data.target.fields as GameData
+          const game = parseGameData(data.target.fields)
           return <Link href={`/games/${game.slug}`}>{(children as any)[0]}</Link>;
         default:
           return <span>[invalid link]</span>

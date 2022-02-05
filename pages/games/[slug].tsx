@@ -35,10 +35,10 @@ const GamePage: NextPage<GamePageProps> = ({ site, game }) => {
   return (
     <Layout site={site} title={game.title} compact={true}>
       <main className={styles.main}>
-        <div className={styles.mainImage}>
+        <div className={styles.mainImage} style={{ imageRendering: game.image.isPixelArt ?'pixelated' : undefined }}>
           <Image
             src={game.image.url}
-            //alt={'TODO'}
+            alt={game.image.description}
             width={game.image.width}
             height={game.image.height} />
         </div>
@@ -46,11 +46,11 @@ const GamePage: NextPage<GamePageProps> = ({ site, game }) => {
           <h1>{game.title}</h1>
           {details && <p className={styles.details}>{details}</p>}
           <ul className={styles.links}>
-            {game.itchUrl && <li><a href={game.itchUrl} target="_blank" rel="noreferrer">itch.io</a></li>}
-            {game.lexaloffleUrl && <li><a href={game.lexaloffleUrl} target="_blank" rel="noreferrer">Lexaloffle</a></li>}
-            {game.newgroundsUrl && <li><a href={game.newgroundsUrl} target="_blank" rel="noreferrer">Newgrounds</a></li>}
-            {game.gameJoltUrl && <li><a href={game.gameJoltUrl} target="_blank" rel="noreferrer">Game Jolt</a></li>}
-            {game.gitHubUrl && <li><a href={game.gitHubUrl} target="_blank" rel="noreferrer">GitHub</a></li>}
+            {game.itchUrl && <li><a href={game.itchUrl} target="_blank" rel="noopener noreferrer">itch.io</a></li>}
+            {game.lexaloffleUrl && <li><a href={game.lexaloffleUrl} target="_blank" rel="noopener noreferrer">Lexaloffle</a></li>}
+            {game.newgroundsUrl && <li><a href={game.newgroundsUrl} target="_blank" rel="noopener noreferrer">Newgrounds</a></li>}
+            {game.gameJoltUrl && <li><a href={game.gameJoltUrl} target="_blank" rel="noopener noreferrer">Game Jolt</a></li>}
+            {game.gitHubUrl && <li><a href={game.gitHubUrl} target="_blank" rel="noopener noreferrer">GitHub</a></li>}
           </ul>
         </div>
         {game.overview &&

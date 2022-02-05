@@ -6,8 +6,6 @@
   font-family: 'Nanum Myeongjo', serif;
 
   .mainImage {
-    image-rendering: pixelated;
-
     > span {
       display: block !important;
       position: relative !important;
@@ -58,6 +56,14 @@
   .reception {
     font-size: 115%;
     line-height: 145%;
+
+    a {
+      color: $rose;
+
+      &:hover {
+        color: $sherbet;
+      }
+    }
   }
 
   h1 {

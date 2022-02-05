@@ -3,7 +3,7 @@ import { Document } from '@contentful/rich-text-types';
 export type SiteData = {
   title: string,
   subtitle?: string | undefined,
-  description: string,
+  description?: string | undefined,
   author: PersonData,
   shortBio?: Document | string | undefined,
   bigProjects?: Document | string | undefined,
@@ -31,10 +31,17 @@ export type GameData = {
   credits?: Document | string | undefined
 }
 
+export type TweetData = {
+  id: string,
+  url: string
+}
+
 export type ImageAssetData = {
   url: string,
   width?: number | undefined,
-  height?: number | undefined
+  height?: number | undefined,
+  description?: string | undefined,
+  isPixelArt: boolean
 }
 
 export type PersonData = {

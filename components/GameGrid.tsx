@@ -26,7 +26,7 @@ type GameGridCellProps = {
 }
 
 const GameGridCell = ({ slug, title, image }: GameGridCellProps) => (
-  <div style={{ imageRendering: 'pixelated' }}>
+  <div style={{ imageRendering: image.isPixelArt ?'pixelated' : undefined }}>
     <Link href={`/games/${slug}`} passHref>
       <Image
         src={image.url}
