@@ -13,6 +13,9 @@ export interface IGameFields {
   /** Image */
   image: Asset;
 
+  /** Images */
+  images?: Asset[] | undefined;
+
   /** Order */
   order: number;
 

@@ -1,7 +1,7 @@
 import Link from 'next/link'
-import { BLOCKS, INLINES, Document } from '@contentful/rich-text-types';
-import { documentToReactComponents, Options } from '@contentful/rich-text-react-renderer';
-import { TwitterTweetEmbed } from 'react-twitter-embed';
+import { BLOCKS, INLINES, Document } from '@contentful/rich-text-types'
+import { documentToReactComponents, Options } from '@contentful/rich-text-react-renderer'
+import { TwitterTweetEmbed } from 'react-twitter-embed'
 import { parseGameData, parseTweetData } from 'helpers/contentApi'
 import styles from 'styles/helpers/renderRichText.module.scss'
 
@@ -25,7 +25,7 @@ const baseOptions: Options = {
       switch (data.target.sys.contentType.sys.id) {
         case "game":
           const game = parseGameData(data.target.fields)
-          return <Link href={`/games/${game.slug}`}>{(children as any)[0]}</Link>;
+          return <Link href={`/games/${game.slug}`}>{(children as any)[0]}</Link>
         default:
           return <span>[invalid link]</span>
       }

@@ -30,7 +30,8 @@ export function parseSiteData(fields: ISiteFields): SiteData {
 export function parseGameData(entry: Entry<IGameFields>): GameData {
   return {
     ...entry.fields,
-    image: parseImageData(entry.fields.image)
+    image: parseImageData(entry.fields.image),
+    images: entry.fields.images?.map(x => parseImageData(x)) || []
   }
 }
 
@@ -49,7 +50,7 @@ export function parseTweetData(fields: ITweetFields): TweetData {
   let id
   let matches = /.+\/(.+$)$/g.exec(fields.url)
   if (matches != null && matches.length > 1) {
-    id = matches[1];
+    id = matches[1]
   }
   if (id == undefined) {
     throw `Could not parse Tweet ID from url \"${fields.url}\"`

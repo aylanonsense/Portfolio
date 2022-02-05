@@ -8,8 +8,8 @@ import styles from 'styles/components/Layout.module.scss'
 type LayoutProps = {
   site: SiteData,
   title?: string,
-  compact: boolean
-  children?: React.ReactNode;
+  compact: boolean,
+  children?: React.ReactNode
 }
 
 const Layout = ({ site, title, compact, children }: LayoutProps) => {
@@ -17,7 +17,7 @@ const Layout = ({ site, title, compact, children }: LayoutProps) => {
   if (site.author.twitterUrl) {
     let matches = /.+\/(.+$)$/g.exec(site.author.twitterUrl)
     if (matches != null && matches.length > 1) {
-      twitterHandle = matches[1];
+      twitterHandle = matches[1]
     }
   }
   return (

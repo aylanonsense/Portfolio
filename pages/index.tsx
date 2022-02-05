@@ -1,5 +1,5 @@
 import type { NextPage, GetStaticProps } from 'next'
-import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types';
+import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types'
 import type { SiteData, GameData } from 'types/contentData'
 import { getSiteData, getAllGameData } from 'helpers/contentApi'
 import renderRichText from 'helpers/renderRichText'
@@ -71,7 +71,7 @@ const HomePage: NextPage<HomePageProps> = ({ site, games }) => (
   </Layout>
 )
 
-export default HomePage;
+export default HomePage
 
 export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
   const siteRequest = getSiteData()

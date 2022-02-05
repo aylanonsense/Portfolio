@@ -1,4 +1,4 @@
-import { Document } from '@contentful/rich-text-types';
+import { Document } from '@contentful/rich-text-types'
 
 export type SiteData = {
   title: string,
@@ -17,6 +17,7 @@ export type GameData = {
   title: string,
   slug: string,
   image: ImageAssetData,
+  images: ImageAssetData[],
   order: number,
   role?: string | undefined,
   releaseDate?: string | undefined,
