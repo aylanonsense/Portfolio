@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import type { NextPage, GetStaticPaths, GetStaticProps } from 'next'
-import Image from 'next/image'
 import type { SiteData, GameData, ImageAssetData } from 'types/contentData'
 import { getSiteData, getGameData, getAllGameData } from 'helpers/contentApi'
 import renderRichText from 'helpers/renderRichText'
+import Image from 'components/Image'
 import Layout from 'components/Layout'
 import styles from 'styles/pages/game.module.scss'
 
@@ -45,24 +45,12 @@ const GamePage: NextPage<GamePageProps> = ({ site, game }) => {
     <Layout site={site} title={game.title} compact={true}>
       {fullScreenImage &&
         <aside className={styles.fullImageModal} onClick={() => setFullScreenImage(undefined)}>
-          <div style={{ imageRendering: fullScreenImage.isPixelArt ?'pixelated' : undefined }}>
-            <Image
-              src={fullScreenImage.url}
-              alt={fullScreenImage.description}
-              width={fullScreenImage.width}
-              height={fullScreenImage.height} />
-            </div>
+          <Image image={fullScreenImage} />
         </aside>
       }
       <main className={styles.main}>
         <div>
-          <div className={styles.mainImage} style={{ imageRendering: game.image.isPixelArt ?'pixelated' : undefined }}>
-            <Image
-              src={game.image.url}
-              alt={game.image.description}
-              width={game.image.width}
-              height={game.image.height} />
-          </div>
+          <Image className={styles.mainImage} image={game.image} />
           <div className={styles.basicInfo}>
             <h1>{game.title}</h1>
             {details && <p className={styles.details}>{details}</p>}
@@ -84,12 +72,7 @@ const GamePage: NextPage<GamePageProps> = ({ site, game }) => {
             <section id="images" className={styles.images}>
               {game.images.map(image =>
                 <div style={{ imageRendering: image.isPixelArt ?'pixelated' : undefined }}>
-                  <Image
-                    src={image.url}
-                    alt={image.description}
-                    width={image.width}
-                    height={image.height}
-                    onClick={() => setFullScreenImage(image)} />
+                  <Image image={image} onClick={() => setFullScreenImage(image)} />
                 </div>
               )}
             </section>

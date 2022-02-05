@@ -25,15 +25,6 @@
   .mainImage {
     grid-area: image;
     width: 100%;
-    > span {
-      display: block !important;
-      position: relative !important;
-      cursor: pointer;
-
-      img {
-        width: 100% !important;
-      }
-    }
   }
 
   .basicInfo {
@@ -87,24 +78,17 @@
     }
   }
 
+  section:first-of-type h2 {
+    margin-top: 0;
+  }
+
   .overview {
     grid-area: overview;
-    margin-top: 0;
   }
 
   .images {
     grid-area: images;
     width: 100%;
-
-    > div > span {
-      display: block !important;
-      position: relative !important;
-      cursor: pointer;
-
-      img {
-        width: 100% !important;
-      }
-    }
   }
 
   .credits {
@@ -162,15 +146,5 @@
 
   > div {
     width: 512px;
-
-    > span {
-      display: block !important;
-      position: relative !important;
-      cursor: pointer;
-
-      img {
-        width: 100% !important;
-      }
-    }
   }
 }
