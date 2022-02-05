@@ -1,134 +1,90 @@
 @import "styles/variables.scss";
 
+$minContentWidth: 550px;
+$maxContentWidth: 650px;
+$columnGap: 30px;
+$imagesWidth: 150px;
+
 .main {
-  max-width: 700px;
-  position: relative;
-  left: 50px;
-  margin: 0 auto 0 auto;
   font-family: 'Nanum Myeongjo', serif;
+}
 
-  > div {
-    display: grid;
-    grid-template-columns: 500px 10px 190px;
-    grid-template-rows: auto;
-    grid-template-areas: 
-      "image . ."
-      "info . ."
-      "overview . images"
-      "credits . images"
-      "development . images"
-      "reception . images";
-    justify-items: center;
-    align-items: flex-start;
-  }
-
+.main  > div {
   .mainImage {
     grid-area: image;
-    width: 100%;
   }
-
   .basicInfo {
     grid-area: info;
-    margin: 2rem 0 2rem;
   }
-
-  .links {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    padding: 0;
-    list-style-type: none;
-    text-transform: lowercase;
-    font-size: 90%;
-    color: #bec5ac;
-
-    li:nth-child(3n+1) {
-      a:hover {
-        color: $rose;
-      }
-    }
-
-    li:nth-child(3n+2) {
-      a:hover {
-        color: $wintergreen;
-      }
-    }
-
-    li:nth-child(3n) {
-      a:hover {
-        color: $topaz;
-      }
-    }
-  }
-
-  .overview,
-  .images,
-  .credits,
-  .development,
-  .reception {
-    font-size: 115%;
-    line-height: 145%;
-
-    a {
-      color: $rose;
-
-      &:hover {
-        color: $sherbet;
-      }
-    }
-  }
-
-  section:first-of-type h2 {
-    margin-top: 0;
-  }
-
   .overview {
     grid-area: overview;
   }
-
   .images {
     grid-area: images;
-    width: 100%;
   }
-
   .credits {
     grid-area: credits;
   }
-
   .development {
     grid-area: development;
   }
-
   .reception {
     grid-area: reception;
   }
+}
+
+.mainImage {
+  width: 100%;
+  max-width: 512px;
+  margin: 0 auto 0 auto;
+}
+
+.basicInfo {
+  margin: 2rem 0 2rem;
 
   h1 {
     text-align: center;
     font-family: 'Raleway', sans-serif;
-    font-size: 300%;
     margin: 0.25rem 0 0.25rem 0;
   }
 
-  .images {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
   .details {
-    font-size: 150%;
     font-family: 'Raleway', sans-serif;
     text-align: center;
     margin: 0.25rem 0 0.25rem 0;
   }
 
+  .links {
+    text-transform: lowercase;
+
+    a {
+      color: #bec5ac;
+    }
+    a:hover {
+      color: $rose;
+    }
+  }
+}
+
+.overview,
+.credits,
+.development,
+.reception {
   h2 {
     font-family: 'Raleway', sans-serif;
-    font-size: 180%;
     font-weight: 400;
-    margin: 2.75rem 0 -0.25rem 0;
+    margin: 2.25rem 0 -0.25rem 0;
     text-transform: uppercase;
+  }
+  &:first-of-type h2 {
+    margin-top: 0;
+  }
+
+  a {
+    color: $rose;
+  }
+  a:hover {
+    color: $sherbet;
   }
 }
 
@@ -143,8 +99,155 @@
   width: 100%;
   z-index: 100;
   background-color: rgba($black, 0.7);
+  cursor: pointer;
 
   > div {
-    width: 512px;
+    width: 80%;
+    height: 80%;
+    min-width: 256px;
+    max-width: 512px;
+  }
+}
+
+@media (max-width: 359.9px) {
+  .basicInfo {
+    h1 {
+      font-size: 200%;
+    }
+    .details {
+      font-size: 110%;
+    }
+    .links {
+      font-size: 100%;
+    }
+  }
+
+  .overview,
+  .credits,
+  .development,
+  .reception {
+    font-size: 100%;
+    line-height: 145%;
+
+    h2 {
+      font-size: 130%;
+    }
+  }
+}
+@media (min-width: 360px) {
+  .basicInfo {
+    h1 {
+      font-size: 300%;
+    }
+    .details {
+      font-size: 150%;
+    }
+    .links {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0;
+      list-style-type: none;
+      font-size: 90%;
+    }
+  }
+
+  .overview,
+  .credits,
+  .development,
+  .reception {
+    font-size: 115%;
+    line-height: 145%;
+
+    h2 {
+      font-size: 180%;
+    }
+  }
+}
+
+@media (max-width: 359.9px) {
+  .main > div {
+    margin: 1rem 1rem 1rem 1rem;
+  }
+
+  .images {
+    width: 80%;
+    margin: 0 auto 0 auto;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 10px;
+
+    > div {
+      width: 100%;
+    }
+  }
+}
+@media (min-width: 360px) and (max-width: 599.9px) {
+  .main > div {
+    margin: 1rem 1rem 1rem 1rem;
+  }
+
+  .images {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 5px;
+    justify-content: center;
+
+    > div {
+      flex-grow: 1;
+    }
+  }
+}
+@media (min-width: 600px) and (max-width: 999.9px) {
+  .main > div {
+    min-width: $minContentWidth;
+    max-width: $maxContentWidth;
+    width: 70%;
+    margin: 0 auto 0 auto;
+  }
+
+  .images {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 20px;
+    justify-content: center;
+
+    > div {
+      flex-grow: 1;
+    }
+  }
+}
+@media (min-width: 1000px) {
+  .main > div {
+    position: relative;
+    left: calc(($columnGap + $imagesWidth) / 2);
+    width: 70%;
+    min-width: $minContentWidth + $columnGap + $imagesWidth;
+    max-width: $maxContentWidth + $columnGap + $imagesWidth;
+    margin: 0 auto 0 auto;
+    display: grid;
+    grid-template-columns: 1fr $columnGap $imagesWidth;
+    grid-template-rows: auto;
+    grid-template-areas: 
+      "image . ."
+      "info . ."
+      "overview . images"
+      "credits . images"
+      "development . images"
+      "reception . images";
+    justify-items: center;
+    align-items: flex-start;
+  }
+
+  .images {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
   }
 }

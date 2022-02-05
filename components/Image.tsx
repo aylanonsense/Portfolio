@@ -1,15 +1,17 @@
+import { CSSProperties } from 'react'
 import NextImage from 'next/image'
 import type { ImageAssetData } from 'types/contentData'
 import styles from 'styles/components/Image.module.scss'
 
 type ImageProps = {
-  className?: string | undefined,
   image: ImageAssetData,
+  className?: string | undefined,
+  style?: CSSProperties | undefined,
   onClick?: (() => void) | undefined
 }
 
-const Image = ({ className, image, onClick }: ImageProps) => (
-  <div className={`${styles.image} ${image.isPixelArt ? styles.pixelArt : ''} ${className}`} onClick={onClick}>
+const Image = ({ image, className, style, onClick }: ImageProps) => (
+  <div className={`${styles.image} ${image.isPixelArt ? styles.pixelArt : ''} ${className}`} style={style} onClick={onClick}>
     <NextImage
       src={image.url}
       alt={image.description}

@@ -45,6 +45,7 @@ const GamePage: NextPage<GamePageProps> = ({ site, game }) => {
     <Layout site={site} title={game.title} compact={true}>
       {fullScreenImage &&
         <aside className={styles.fullImageModal} onClick={() => setFullScreenImage(undefined)}>
+          {/*<div></div>*/}
           <Image image={fullScreenImage} />
         </aside>
       }
@@ -71,8 +72,8 @@ const GamePage: NextPage<GamePageProps> = ({ site, game }) => {
           {game.images.length > 0 &&
             <section id="images" className={styles.images}>
               {game.images.map(image =>
-                <div style={{ imageRendering: image.isPixelArt ?'pixelated' : undefined }}>
-                  <Image image={image} onClick={() => setFullScreenImage(image)} />
+                <div key={image.url} style={{ imageRendering: image.isPixelArt ?'pixelated' : undefined }}>
+                  <Image image={image} style={{ cursor: 'pointer' }} onClick={() => setFullScreenImage(image)} />
                 </div>
               )}
             </section>
