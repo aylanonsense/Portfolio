@@ -5,7 +5,7 @@ import ItchIcon from '../icons/itchio.svg'
 import GitHubIcon from '../icons/github.svg'
 
 type ExternalSiteIconProps = {
-  site: ExternalSite,
+  site: ExternalSite
   size: number
 }
 

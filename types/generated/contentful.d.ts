@@ -70,6 +70,31 @@ export interface IGame extends Entry<IGameFields> {
   };
 }
 
+export interface IImageBundleFields {
+  /** Images */
+  images?: Asset[] | undefined;
+
+  /** Rich Images */
+  richImages?: IRichImage | undefined;
+}
+
+export interface IImageBundle extends Entry<IImageBundleFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: "imageBundle";
+        linkType: "ContentType";
+        type: "Link";
+      };
+    };
+  };
+}
+
 export interface IPersonFields {
   /** Name */
   name: string;
@@ -97,6 +122,49 @@ export interface IPerson extends Entry<IPersonFields> {
     contentType: {
       sys: {
         id: "person";
+        linkType: "ContentType";
+        type: "Link";
+      };
+    };
+  };
+}
+
+export interface IRichImageFields {
+  /** Title */
+  title: string;
+
+  /** Image */
+  image?: Asset | undefined;
+
+  /** URL */
+  url?: string | undefined;
+
+  /** Width */
+  width?: number | undefined;
+
+  /** Height */
+  height?: number | undefined;
+
+  /** Alt */
+  alt?: string | undefined;
+
+  /** Caption */
+  caption?: Document | undefined;
+
+  /** Is Pixel Art */
+  isPixelArt?: boolean | undefined;
+}
+
+export interface IRichImage extends Entry<IRichImageFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: "richImage";
         linkType: "ContentType";
         type: "Link";
       };
@@ -178,7 +246,13 @@ export interface ITweet extends Entry<ITweetFields> {
   };
 }
 
-export type CONTENT_TYPE = "game" | "person" | "site" | "tweet";
+export type CONTENT_TYPE =
+  | "game"
+  | "imageBundle"
+  | "person"
+  | "richImage"
+  | "site"
+  | "tweet";
 
 export type LOCALE_CODE = "en-US";
 

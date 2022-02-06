@@ -9,6 +9,13 @@ $imagesWidth: 150px;
   font-family: 'Nanum Myeongjo', serif;
 }
 
+.contentImage {
+  cursor: pointer;
+  //max-width: 300px;
+  width: 50%;
+  margin: 0 auto 0 auto;
+}
+
 .main  > div {
   .mainImage {
     grid-area: image;
@@ -98,14 +105,21 @@ $imagesWidth: 150px;
   height:100%;
   width: 100%;
   z-index: 100;
-  background-color: rgba($black, 0.7);
+  background-color: rgba($black, 0.9);
   cursor: pointer;
 
   > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 80%;
     height: 80%;
-    min-width: 256px;
-    max-width: 512px;
+
+    > div {
+      width: 100%;
+      flex-grow: 1;
+    }
   }
 }
 

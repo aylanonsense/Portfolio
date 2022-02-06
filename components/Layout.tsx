@@ -6,10 +6,10 @@ import ExternalLinks from 'components/ExternalLinks'
 import styles from 'styles/components/Layout.module.scss'
 
 type LayoutProps = {
-  site: SiteData,
-  title?: string,
+  site: SiteData
+  title?: string
   compact: boolean
-  children?: React.ReactNode;
+  children?: React.ReactNode
 }
 
 const Layout = ({ site, title, compact, children }: LayoutProps) => {

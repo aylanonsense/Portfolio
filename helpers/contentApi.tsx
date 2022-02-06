@@ -1,5 +1,5 @@
 import { createClient, ContentfulClientApi, Asset, Entry, TagLink } from 'contentful'
-import { ISiteFields, IGameFields, ITweetFields } from 'types/generated/contentful'
+import { ISiteFields, IGameFields, ITweetFields, IRichImageFields } from 'types/generated/contentful'
 import type { SiteData, GameData, TweetData, ImageAssetData } from 'types/contentData'
 
 let client: ContentfulClientApi
@@ -9,13 +9,25 @@ function getOrCreateClient() {
     if (!process.env.CONTENTFUL_SPACE_ID) {
       throw 'Environment variable CONTENTFUL_SPACE_ID is not defined!'
     }
-    if (!process.env.CONTENTFUL_DELIVERY_API_ACCESS_TOKEN) {
-      throw 'Environment variable CONTENTFUL_DELIVERY_API_ACCESS_TOKEN is not defined!'
+    if (process.env.PREVIEW_UNPUBLISHED_CONTENT == 'true') {
+      if (!process.env.CONTENTFUL_PREVIEW_API_ACCESS_TOKEN) {
+        throw 'Environment variable CONTENTFUL_PREVIEW_API_ACCESS_TOKEN is not defined!'
+      }
+      client = createClient({
+        space: process.env.CONTENTFUL_SPACE_ID,
+        accessToken: process.env.CONTENTFUL_PREVIEW_API_ACCESS_TOKEN,
+        host: 'preview.contentful.com'
+      })
     }
-    client = createClient({
-      space: process.env.CONTENTFUL_SPACE_ID,
-      accessToken: process.env.CONTENTFUL_DELIVERY_API_ACCESS_TOKEN
-    })
+    else {
+      if (!process.env.CONTENTFUL_DELIVERY_API_ACCESS_TOKEN) {
+        throw 'Environment variable CONTENTFUL_DELIVERY_API_ACCESS_TOKEN is not defined!'
+      }
+      client = createClient({
+        space: process.env.CONTENTFUL_SPACE_ID,
+        accessToken: process.env.CONTENTFUL_DELIVERY_API_ACCESS_TOKEN
+      })
+    }
   }
   return client
 }
@@ -35,15 +47,46 @@ export function parseGameData(entry: Entry<IGameFields>): GameData {
   }
 }
 
-export function parseImageData(image: Asset): ImageAssetData {
-  const tags = image.metadata.tags.map(x => parseTag(x))
-  return {
-    ...image.fields,
-    url: `https:${image.fields.file.url}`,
-    width: image.fields.file.details.image?.width,
-    height: image.fields.file.details.image?.height,
-    isPixelArt: tags.includes('pixelArt')
+export function parseImageData(image: Asset | Entry<IRichImageFields>): ImageAssetData {
+  if (isRichImage(image)) {
+    if (image.fields.url) {
+      return {
+        url: image.fields.url,
+        alt: image.fields.alt,
+        caption: image.fields.caption,
+        width: image.fields.width,
+        height: image.fields.height,
+        isPixelArt: image.fields.isPixelArt
+      }
+    }
+    else if (image.fields.image) {
+      const tags = image.fields.image.metadata.tags.map(x => parseTag(x))
+      return {
+        url: `https:${image.fields.image.fields.file.url}`,
+        alt: image.fields.alt ?? image.fields.image.fields.description,
+        caption: image.fields.caption,
+        width: image.fields.width ?? image.fields.image.fields.file.details.image?.width,
+        height: image.fields.height ?? image.fields.image.fields.file.details.image?.height,
+        isPixelArt: image.fields.isPixelArt ?? tags.includes('pixelArt')
+      }
+    }
+    else {
+      throw `RichImage "${image.sys.id}" does not have a URL or an image field`
+    }
   }
+  else {
+    const tags = image.metadata.tags.map(x => parseTag(x))
+    return {
+      url: `https:${image.fields.file.url}`,
+      alt: image.fields.description ?? null,
+      width: image.fields.file.details.image?.width,
+      height: image.fields.file.details.image?.height,
+      isPixelArt: tags.includes('pixelArt')
+    }
+  }
+}
+function isRichImage(image: Asset | Entry<IRichImageFields>): image is Entry<IRichImageFields> {
+  return (image as Entry<IRichImageFields>).sys?.contentType?.sys?.id == 'richImage';
 }
 
 export function parseTweetData(fields: ITweetFields): TweetData {
@@ -102,9 +145,10 @@ export async function getGameData(slug: string): Promise<GameData> {
         url: '/images/placeholder.png',
         width: 128,
         height: 128,
-        description: '[placeholder description]',
-        tags: []
+        alt: '[placeholder description]',
+        isPixelArt: true
       },
+      images: [],
       order: 0,
       role: '[placeholder role]',
       releaseDate: '2020-01-01',

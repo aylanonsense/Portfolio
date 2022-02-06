@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react'
 import type { NextPage, GetStaticPaths, GetStaticProps } from 'next'
 import type { SiteData, GameData, ImageAssetData } from 'types/contentData'
+import { Document } from '@contentful/rich-text-types'
 import { getSiteData, getGameData, getAllGameData } from 'helpers/contentApi'
-import renderRichText from 'helpers/renderRichText'
-import Image from 'components/Image'
+import baseRenderRichText from 'helpers/renderRichText'
+import BetterImage from 'components/BetterImage'
 import Layout from 'components/Layout'
 import styles from 'styles/pages/game.module.scss'
 
@@ -14,7 +15,7 @@ type GamePageParams = {
 }
 
 type GamePageProps = {
-  site: SiteData,
+  site: SiteData
   game: GameData
 }
 
@@ -41,17 +42,30 @@ const GamePage: NextPage<GamePageProps> = ({ site, game }) => {
     details = game.role
   }
 
+  function renderRichText(richText: Document | string) {
+    return baseRenderRichText(richText, {
+      renderImage: image => <BetterImage
+        className={styles.contentImage}
+        image={image}
+        onClick={() => setFullScreenImage(image) } />
+    })
+  }
+
   return (
     <Layout site={site} title={game.title} compact={true}>
       {fullScreenImage &&
         <aside className={styles.fullImageModal} onClick={() => setFullScreenImage(undefined)}>
-          {/*<div></div>*/}
-          <Image image={fullScreenImage} />
+          <div>
+            <div>
+              <BetterImage image={fullScreenImage} fillHeight={true} />
+            </div>
+            {fullScreenImage.caption && <p>{renderRichText(fullScreenImage.caption)}</p>}
+          </div>
         </aside>
       }
       <main className={styles.main}>
         <div>
-          <Image className={styles.mainImage} image={game.image} />
+          <BetterImage className={styles.mainImage} image={game.image} />
           <div className={styles.basicInfo}>
             <h1>{game.title}</h1>
             {details && <p className={styles.details}>{details}</p>}
@@ -73,7 +87,7 @@ const GamePage: NextPage<GamePageProps> = ({ site, game }) => {
             <section id="images" className={styles.images}>
               {game.images.map(image =>
                 <div key={image.url} style={{ imageRendering: image.isPixelArt ?'pixelated' : undefined }}>
-                  <Image image={image} style={{ cursor: 'pointer' }} onClick={() => setFullScreenImage(image)} />
+                  <BetterImage image={image} style={{ cursor: 'pointer' }} onClick={() => setFullScreenImage(image)} />
                 </div>
               )}
             </section>

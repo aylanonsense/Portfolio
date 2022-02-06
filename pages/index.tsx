@@ -8,7 +8,7 @@ import GameGrid from 'components/GameGrid'
 import styles from 'styles/pages/index.module.scss'
 
 type HomePageProps = {
-  site: SiteData,
+  site: SiteData
   games: GameData[]
 }
 
@@ -31,9 +31,11 @@ const HomePage: NextPage<HomePageProps> = ({ site, games }) => (
           <h2>About Me</h2>
           <div>
             {renderRichText(site.shortBio, {
-              renderMark: {
-                [MARKS.ITALIC]: text => <span className={styles.big}>{text}</span>,
-                [MARKS.BOLD]: text => <span className={styles.colorHighlight}>{text}</span>
+              renderOptions: {
+                renderMark: {
+                  [MARKS.ITALIC]: text => <span className={styles.big}>{text}</span>,
+                  [MARKS.BOLD]: text => <span className={styles.colorHighlight}>{text}</span>
+                }
               }
             })}
           </div>
