@@ -1,6 +1,6 @@
 import { createClient, ContentfulClientApi, Asset, Entry, TagLink } from 'contentful'
-import { ISiteFields, IGameFields, ITweetFields, IRichImageFields } from 'types/generated/contentful'
-import type { SiteData, GameData, TweetData, ImageAssetData } from 'types/contentData'
+import { ISiteFields, IGameFields, ITweetFields, ITrackFields, IRichImageFields } from 'types/generated/contentful'
+import type { SiteData, GameData, TweetData, TrackData, ImageAssetData } from 'types/contentData'
 
 let client: ContentfulClientApi
 
@@ -56,7 +56,7 @@ export function parseImageData(image: Asset | Entry<IRichImageFields>): ImageAss
         caption: image.fields.caption,
         width: image.fields.width,
         height: image.fields.height,
-        isPixelArt: image.fields.isPixelArt
+        isPixelArt: image.fields.isPixelArt ?? false
       }
     }
     else if (image.fields.image) {
@@ -89,18 +89,24 @@ function isRichImage(image: Asset | Entry<IRichImageFields>): image is Entry<IRi
   return (image as Entry<IRichImageFields>).sys?.contentType?.sys?.id == 'richImage';
 }
 
-export function parseTweetData(fields: ITweetFields): TweetData {
+export function parseTweetData(tweet: Entry<ITweetFields>): TweetData {
   let id
-  let matches = /.+\/(.+$)$/g.exec(fields.url)
+  let matches = /.+\/(.+$)$/g.exec(tweet.fields.url)
   if (matches != null && matches.length > 1) {
     id = matches[1]
   }
   if (id == undefined) {
-    throw `Could not parse Tweet ID from url \"${fields.url}\"`
+    throw `Could not parse Tweet ID from url \"${tweet.fields.url}\"`
   }
   return {
-    ...fields,
+    ...tweet.fields,
     id
+  }
+}
+
+export function parseTrackData(track: Entry<ITrackFields>): TrackData {
+  return {
+    soundCloudUrl: track.fields.soundCloudUrl
   }
 }
 

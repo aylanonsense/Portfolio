@@ -37,6 +37,10 @@ export type TweetData = {
   url: string
 }
 
+export type TrackData = {
+  soundCloudUrl: string
+}
+
 export type ImageAssetData = {
   url: string
   alt?: string | undefined

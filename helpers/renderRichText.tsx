@@ -1,12 +1,15 @@
 import { ReactNode } from 'react'
 import Link from 'next/link'
+import dynamic from 'next/dynamic'
 import { BLOCKS, INLINES, Document } from '@contentful/rich-text-types'
 import { documentToReactComponents, Options as ContentfulOptions } from '@contentful/rich-text-react-renderer'
 import { TwitterTweetEmbed } from 'react-twitter-embed'
-import { parseGameData, parseTweetData, parseImageData } from 'helpers/contentApi'
+import { ImageAssetData } from 'types/contentData'
+import { parseGameData, parseTweetData, parseTrackData, parseImageData } from 'helpers/contentApi'
 import BetterImage from 'components/BetterImage'
 import styles from 'styles/helpers/renderRichText.module.scss'
-import { ImageAssetData } from 'types/contentData'
+
+const ReactPlayer = dynamic(() => import('react-player'), { ssr: false })
 
 export type Options = {
   imageClassName?: string | undefined
@@ -24,7 +27,7 @@ export default function renderRichText(richText: Document | string, options?: Op
         [BLOCKS.EMBEDDED_ENTRY]: ({ data }, children) => {
           switch (data.target.sys.contentType.sys.id) {
             case "tweet":
-              const tweet = parseTweetData(data.target.fields)
+              const tweet = parseTweetData(data.target)
               return <TwitterTweetEmbed
                 tweetId={tweet.id}
                 placeholder={<div className={styles.tweetPlaceholder}><p>Loading...</p></div>}
@@ -37,6 +40,9 @@ export default function renderRichText(richText: Document | string, options?: Op
               else {
                 return <BetterImage className={options?.imageClassName} image={image} />
               }
+            case "track":
+              const track = parseTrackData(data.target)
+              return <ReactPlayer className={styles.soundCloudPlayer} url={track.soundCloudUrl} height="150px" />
             default:
               return <div>[unsure how to display entry of type "{data.target.sys.contentType.sys.id}"]</div>
           }

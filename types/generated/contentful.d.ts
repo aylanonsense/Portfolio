@@ -221,6 +221,31 @@ export interface ISite extends Entry<ISiteFields> {
   };
 }
 
+export interface ITrackFields {
+  /** Title */
+  title: string;
+
+  /** SoundCloud URL */
+  soundCloudUrl: string;
+}
+
+export interface ITrack extends Entry<ITrackFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: "track";
+        linkType: "ContentType";
+        type: "Link";
+      };
+    };
+  };
+}
+
 export interface ITweetFields {
   /** Title */
   title?: string | undefined;
@@ -252,6 +277,7 @@ export type CONTENT_TYPE =
   | "person"
   | "richImage"
   | "site"
+  | "track"
   | "tweet";
 
 export type LOCALE_CODE = "en-US";
