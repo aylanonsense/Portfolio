@@ -43,6 +43,7 @@ export type TrackData = {
 
 export type ImageAssetData = {
   url: string
+  linkUrl?: string | undefined
   alt?: string | undefined
   caption?: Document | string | undefined
   width?: number | undefined

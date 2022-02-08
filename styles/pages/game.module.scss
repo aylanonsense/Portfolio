@@ -5,14 +5,14 @@ $maxContentWidth: 650px;
 $columnGap: 30px;
 $imagesWidth: 150px;
 
-.main {
-  font-family: 'Nanum Myeongjo', serif;
+.contentImage {
+  width: 80%;
+  margin: 0 auto 0 auto;
+  cursor:pointer;
 }
 
-.contentImage {
-  cursor: pointer;
-  //max-width: 300px;
-  width: 50%;
+.track {
+  width: 80%;
   margin: 0 auto 0 auto;
 }
 
@@ -77,6 +77,10 @@ $imagesWidth: 150px;
 .credits,
 .development,
 .reception {
+  > p, > ol > ul {
+    font-family: 'Nanum Myeongjo', serif;
+  }
+
   h2 {
     font-family: 'Raleway', sans-serif;
     font-weight: 400;
@@ -105,8 +109,7 @@ $imagesWidth: 150px;
   height:100%;
   width: 100%;
   z-index: 100;
-  background-color: rgba($black, 0.9);
-  cursor: pointer;
+  background-color: rgba($black, 0.95);
 
   > div {
     display: flex;
@@ -115,11 +118,6 @@ $imagesWidth: 150px;
     align-items: center;
     width: 80%;
     height: 80%;
-
-    > div {
-      width: 100%;
-      flex-grow: 1;
-    }
   }
 }
 
@@ -140,8 +138,10 @@ $imagesWidth: 150px;
   .credits,
   .development,
   .reception {
-    font-size: 100%;
-    line-height: 145%;
+    > p, > ul, > ol {
+      font-size: 100%;
+      line-height: 145%;
+    }
 
     h2 {
       font-size: 130%;
@@ -170,8 +170,10 @@ $imagesWidth: 150px;
   .credits,
   .development,
   .reception {
-    font-size: 115%;
-    line-height: 145%;
+    > p, > ul, > ol {
+      font-size: 115%;
+      line-height: 145%;
+    }
 
     h2 {
       font-size: 180%;

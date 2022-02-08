@@ -136,8 +136,11 @@ export interface IRichImageFields {
   /** Image */
   image?: Asset | undefined;
 
-  /** URL */
-  url?: string | undefined;
+  /** Image URL */
+  imageUrl?: string | undefined;
+
+  /** Link URL */
+  linkUrl?: string | undefined;
 
   /** Width */
   width?: number | undefined;
@@ -145,14 +148,14 @@ export interface IRichImageFields {
   /** Height */
   height?: number | undefined;
 
-  /** Alt */
-  alt?: string | undefined;
+  /** Is Pixel Art */
+  isPixelArt?: boolean | undefined;
+
+  /** Description */
+  description?: string | undefined;
 
   /** Caption */
   caption?: Document | undefined;
-
-  /** Is Pixel Art */
-  isPixelArt?: boolean | undefined;
 }
 
 export interface IRichImage extends Entry<IRichImageFields> {

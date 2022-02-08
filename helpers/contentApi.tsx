@@ -49,10 +49,11 @@ export function parseGameData(entry: Entry<IGameFields>): GameData {
 
 export function parseImageData(image: Asset | Entry<IRichImageFields>): ImageAssetData {
   if (isRichImage(image)) {
-    if (image.fields.url) {
+    if (image.fields.imageUrl) {
       return {
-        url: image.fields.url,
-        alt: image.fields.alt,
+        url: image.fields.imageUrl,
+        linkUrl: image.fields.linkUrl,
+        alt: image.fields.description,
         caption: image.fields.caption,
         width: image.fields.width,
         height: image.fields.height,
@@ -63,7 +64,8 @@ export function parseImageData(image: Asset | Entry<IRichImageFields>): ImageAss
       const tags = image.fields.image.metadata.tags.map(x => parseTag(x))
       return {
         url: `https:${image.fields.image.fields.file.url}`,
-        alt: image.fields.alt ?? image.fields.image.fields.description,
+        linkUrl: image.fields.linkUrl,
+        alt: image.fields.description ?? image.fields.image.fields.description,
         caption: image.fields.caption,
         width: image.fields.width ?? image.fields.image.fields.file.details.image?.width,
         height: image.fields.height ?? image.fields.image.fields.file.details.image?.height,

@@ -4,7 +4,7 @@ import type { SiteData, GameData, ImageAssetData } from 'types/contentData'
 import { Document } from '@contentful/rich-text-types'
 import { getSiteData, getGameData, getAllGameData } from 'helpers/contentApi'
 import baseRenderRichText from 'helpers/renderRichText'
-import BetterImage from 'components/BetterImage'
+import RichImage from 'components/RichImage'
 import Layout from 'components/Layout'
 import styles from 'styles/pages/game.module.scss'
 
@@ -44,10 +44,16 @@ const GamePage: NextPage<GamePageProps> = ({ site, game }) => {
 
   function renderRichText(richText: Document | string) {
     return baseRenderRichText(richText, {
-      renderImage: image => <BetterImage
-        className={styles.contentImage}
-        image={image}
-        onClick={() => setFullScreenImage(image) } />
+      renderImage: (image, baseRenderImage) => 
+        <div className={styles.contentImage}>
+          <RichImage
+            image={image}
+            onClick={() => setFullScreenImage(image)} />
+        </div>,
+      renderTrack: (track, baseRenderTrack) =>
+        <div className={styles.track}>
+          {baseRenderTrack(track)}
+        </div>
     })
   }
 
@@ -56,16 +62,13 @@ const GamePage: NextPage<GamePageProps> = ({ site, game }) => {
       {fullScreenImage &&
         <aside className={styles.fullImageModal} onClick={() => setFullScreenImage(undefined)}>
           <div>
-            <div>
-              <BetterImage image={fullScreenImage} fillHeight={true} />
-            </div>
-            {fullScreenImage.caption && <p>{renderRichText(fullScreenImage.caption)}</p>}
+            <RichImage image={fullScreenImage} enforceMaxDimensions={false} />
           </div>
         </aside>
       }
       <main className={styles.main}>
         <div>
-          <BetterImage className={styles.mainImage} image={game.image} />
+          <RichImage className={styles.mainImage} image={game.image} enforceMaxDimensions={false} />
           <div className={styles.basicInfo}>
             <h1>{game.title}</h1>
             {details && <p className={styles.details}>{details}</p>}
@@ -87,7 +90,7 @@ const GamePage: NextPage<GamePageProps> = ({ site, game }) => {
             <section id="images" className={styles.images}>
               {game.images.map(image =>
                 <div key={image.url} style={{ imageRendering: image.isPixelArt ?'pixelated' : undefined }}>
-                  <BetterImage image={image} style={{ cursor: 'pointer' }} onClick={() => setFullScreenImage(image)} />
+                  <RichImage image={image} style={{ cursor: 'pointer' }} onClick={() => setFullScreenImage(image)} />
                 </div>
               )}
             </section>
