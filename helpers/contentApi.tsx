@@ -1,6 +1,6 @@
 import { createClient, ContentfulClientApi, Asset, Entry, TagLink } from 'contentful'
-import { ISiteFields, IGameFields, ITweetFields, ITrackFields, IRichImageFields } from 'types/generated/contentful'
-import type { SiteData, GameData, TweetData, TrackData, ImageAssetData } from 'types/contentData'
+import { ISiteFields, IGameFields, ITweetFields, ITrackFields, IRichImageFields, IMediaBundleFields } from 'types/generated/contentful'
+import type { SiteData, GameData, TweetData, TrackData, ImageAssetData, MediaBundleData } from 'types/contentData'
 
 let client: ContentfulClientApi
 
@@ -112,6 +112,28 @@ export function parseTrackData(track: Entry<ITrackFields>): TrackData {
   }
 }
 
+export function parseMediaBundle(bundle: Entry<IMediaBundleFields>): MediaBundleData {
+  const media: ImageAssetData[] = []
+  if (bundle.fields.assets) {
+    for (let asset of bundle.fields.assets) {
+      media.push(parseImageData(asset))
+    }
+  }
+  if (bundle.fields.entries) {
+    for (let entry of bundle.fields.entries) {
+      if (isEntryARichImage(entry)) {
+        media.push(parseImageData(entry))
+      }
+    }
+  }
+  return {
+    media
+  }
+}
+function isEntryARichImage(image: Entry<any>): image is Entry<IRichImageFields> {
+  return (image as Entry<IRichImageFields>).sys?.contentType?.sys?.id == 'richImage';
+}
+
 export function parseTag(tag: TagLink): string {
   return tag.sys.id
 }
@@ -174,7 +196,8 @@ export async function getGameData(slug: string): Promise<GameData> {
   else {
     const entries = await getOrCreateClient().getEntries<IGameFields>({
       content_type: 'game',
-      'fields.slug': slug
+      'fields.slug': slug,
+      include: 3
     })
     return parseGameData(entries.items[0])
   }

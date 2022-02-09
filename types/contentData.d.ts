@@ -51,6 +51,10 @@ export type ImageAssetData = {
   isPixelArt: boolean
 }
 
+export type MediaBundleData = {
+  media: ImageAssetData[]
+}
+
 export type PersonData = {
   name: string
   twitterUrl?: string | undefined

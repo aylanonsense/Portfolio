@@ -70,15 +70,18 @@ export interface IGame extends Entry<IGameFields> {
   };
 }
 
-export interface IImageBundleFields {
-  /** Images */
-  images?: Asset[] | undefined;
+export interface IMediaBundleFields {
+  /** Title */
+  title: string;
 
-  /** Rich Images */
-  richImages?: IRichImage | undefined;
+  /** Assets */
+  assets?: Asset[] | undefined;
+
+  /** Entries */
+  entries?: Entry<{ [fieldId: string]: unknown }>[] | undefined;
 }
 
-export interface IImageBundle extends Entry<IImageBundleFields> {
+export interface IMediaBundle extends Entry<IMediaBundleFields> {
   sys: {
     id: string;
     type: string;
@@ -87,7 +90,7 @@ export interface IImageBundle extends Entry<IImageBundleFields> {
     locale: string;
     contentType: {
       sys: {
-        id: "imageBundle";
+        id: "mediaBundle";
         linkType: "ContentType";
         type: "Link";
       };
@@ -276,7 +279,7 @@ export interface ITweet extends Entry<ITweetFields> {
 
 export type CONTENT_TYPE =
   | "game"
-  | "imageBundle"
+  | "mediaBundle"
   | "person"
   | "richImage"
   | "site"

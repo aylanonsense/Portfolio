@@ -5,7 +5,7 @@ import { BLOCKS, INLINES, Document } from '@contentful/rich-text-types'
 import { documentToReactComponents, Options as ContentfulOptions } from '@contentful/rich-text-react-renderer'
 import { TwitterTweetEmbed } from 'react-twitter-embed'
 import { ImageAssetData, TrackData } from 'types/contentData'
-import { parseGameData, parseTweetData, parseTrackData, parseImageData } from 'helpers/contentApi'
+import { parseGameData, parseTweetData, parseTrackData, parseImageData, parseMediaBundle } from 'helpers/contentApi'
 import RichImage from 'components/RichImage'
 import styles from 'styles/helpers/renderRichText.module.scss'
 
@@ -45,6 +45,16 @@ export default function renderRichText(richText: Document | string, options?: Op
             case "track":
               const track = parseTrackData(data.target)
               return options?.renderTrack ? options.renderTrack(track, baseRenderTrack) : baseRenderTrack(track)
+            case "mediaBundle":
+              const bundle = parseMediaBundle(data.target)
+              return (
+                <div className={styles.mediaBundle}>
+                  {bundle.media.map(x => {
+                    const image = (x as ImageAssetData)
+                    return options?.renderImage ? options.renderImage(image, baseRenderImage) : baseRenderImage(image)
+                  })}
+                </div>
+              )
             default:
               return <div>[unsure how to display entry of type "{data.target.sys.contentType.sys.id}"]</div>
           }
