@@ -51,7 +51,9 @@ export default function renderRichText(richText: Document | string, options?: Op
                 <div className={styles.mediaBundle}>
                   {bundle.media.map(x => {
                     const image = (x as ImageAssetData)
-                    return options?.renderImage ? options.renderImage(image, baseRenderImage) : baseRenderImage(image)
+                    return <div key={image.url}>
+                      {options?.renderImage ? options.renderImage(image, baseRenderImage) : baseRenderImage(image)}
+                    </div>
                   })}
                 </div>
               )

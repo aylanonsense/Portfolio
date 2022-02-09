@@ -4,6 +4,8 @@ import type { SiteData } from 'types/contentData'
 import renderRichText from 'helpers/renderRichText'
 import ExternalLinks from 'components/ExternalLinks'
 import styles from 'styles/components/Layout.module.scss'
+import parseExternalSite from 'helpers/parseExternalSite'
+import { ExternalSite } from 'helpers/enums'
 
 type LayoutProps = {
   site: SiteData
@@ -14,10 +16,12 @@ type LayoutProps = {
 
 const Layout = ({ site, title, compact, children }: LayoutProps) => {
   let twitterHandle
-  if (site.author.twitterUrl) {
-    let matches = /.+\/(.+$)$/g.exec(site.author.twitterUrl)
-    if (matches != null && matches.length > 1) {
-      twitterHandle = matches[1];
+  for (let url of site.author.links) {
+    if (parseExternalSite(url) == ExternalSite.Twitter) {
+      let matches = /.+\/(.+$)$/g.exec(url)
+      if (matches != null && matches.length > 1) {
+        twitterHandle = matches[1];
+      }
     }
   }
   return (
@@ -36,14 +40,14 @@ const Layout = ({ site, title, compact, children }: LayoutProps) => {
         <div>
           <h1 className={styles.title}><Link href="/">{site.title}</Link></h1>
           {!compact && site.subtitle && <p className={styles.subtitle}>{site.subtitle}</p>}
-          <ExternalLinks className={styles.icons} person={site.author} size={styles.compact ? 22 : 28} />
+          {site.author.links.length > 0 && <ExternalLinks className={styles.icons} urls={site.author.links} size={styles.compact ? 22 : 28} />}
         </div>
       </header>
       {children}
       <footer className={styles.footer}>
         <div>
           {site.disclaimer && renderRichText(site.disclaimer)}
-          <ExternalLinks className={styles.icons} person={site.author} size={22} />
+          {site.author.links.length > 0 && <ExternalLinks className={styles.icons} urls={site.author.links} size={22} />}
         </div>
       </footer>
     </>

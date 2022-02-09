@@ -1,6 +1,9 @@
 export const enum ExternalSite {
-  Twitter = "Twitter",
+  GameJolt = "Game Jolt",
+  GitHub = "GitHub",
   Instagram = "Instagram",
   Itch = "itch.io",
-  GitHub = "GitHub"
+  Lexaloffle = "Lexaloffle",
+  Newgrounds = "Newgrounds",
+  Twitter = "Twitter"
 }

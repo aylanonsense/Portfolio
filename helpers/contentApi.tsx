@@ -32,16 +32,20 @@ function getOrCreateClient() {
   return client
 }
 
-export function parseSiteData(fields: ISiteFields): SiteData {
+export function parseSiteData(site: Entry<ISiteFields>): SiteData {
   return {
-    ...fields,
-    author: fields.author.fields
+    ...site.fields,
+    author: {
+      ...site.fields.author.fields,
+      links: site.fields.author.fields.links || []
+    }
   }
 }
 
 export function parseGameData(entry: Entry<IGameFields>): GameData {
   return {
     ...entry.fields,
+    links: entry.fields.links || [],
     image: parseImageData(entry.fields.image),
     images: entry.fields.images?.map(x => parseImageData(x)) || []
   }
@@ -162,7 +166,7 @@ export async function getSiteData(): Promise<SiteData> {
     const entries = await getOrCreateClient().getEntries<ISiteFields>({
       content_type: 'site'
     })
-    return parseSiteData(entries.items[0].fields)
+    return parseSiteData(entries.items[0])
   }
 }
 
@@ -182,11 +186,7 @@ export async function getGameData(slug: string): Promise<GameData> {
       order: 0,
       role: '[placeholder role]',
       releaseDate: '2020-01-01',
-      itchUrl: '[placeholder itch.io URL]',
-      lexaloffleUrl: '#',
-      newgroundsUrl: '#',
-      gameJoltUrl: '#',
-      gitHubUrl: '#',
+      links: [],
       overview: '[placeholder overview]',
       development: '[placeholder development]',
       reception: '[placeholder reception]',

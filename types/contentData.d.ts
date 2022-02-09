@@ -21,11 +21,7 @@ export type GameData = {
   order: number
   role?: string | undefined
   releaseDate?: string | undefined
-  itchUrl?: string | undefined
-  lexaloffleUrl?: string | undefined
-  newgroundsUrl?: string | undefined
-  gameJoltUrl?: string | undefined
-  gitHubUrl?: string | undefined
+  links: string[]
   overview?: Document | string | undefined
   development?: Document | string | undefined
   reception?: Document | string | undefined
@@ -57,8 +53,5 @@ export type MediaBundleData = {
 
 export type PersonData = {
   name: string
-  twitterUrl?: string | undefined
-  instagramUrl?: string | undefined
-  itchUrl?: string | undefined
-  gitHubUrl?: string | undefined
+  links: string[]
 }

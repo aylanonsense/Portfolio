@@ -4,6 +4,8 @@ import type { SiteData, GameData, ImageAssetData } from 'types/contentData'
 import { Document } from '@contentful/rich-text-types'
 import { getSiteData, getGameData, getAllGameData } from 'helpers/contentApi'
 import baseRenderRichText from 'helpers/renderRichText'
+import parseExternalSite from 'helpers/parseExternalSite'
+import ExternalLinks from 'components/ExternalLinks'
 import RichImage from 'components/RichImage'
 import Layout from 'components/Layout'
 import styles from 'styles/pages/game.module.scss'
@@ -72,13 +74,12 @@ const GamePage: NextPage<GamePageProps> = ({ site, game }) => {
           <div className={styles.basicInfo}>
             <h1>{game.title}</h1>
             {details && <p className={styles.details}>{details}</p>}
-            <ul className={styles.links}>
-              {game.itchUrl && <li><a href={game.itchUrl} target="_blank" rel="noopener noreferrer">itch.io</a></li>}
-              {game.lexaloffleUrl && <li><a href={game.lexaloffleUrl} target="_blank" rel="noopener noreferrer">Lexaloffle</a></li>}
-              {game.newgroundsUrl && <li><a href={game.newgroundsUrl} target="_blank" rel="noopener noreferrer">Newgrounds</a></li>}
-              {game.gameJoltUrl && <li><a href={game.gameJoltUrl} target="_blank" rel="noopener noreferrer">Game Jolt</a></li>}
-              {game.gitHubUrl && <li><a href={game.gitHubUrl} target="_blank" rel="noopener noreferrer">GitHub</a></li>}
-            </ul>
+            <ExternalLinks className={styles.icons} urls={game.links} size={24} />
+            {game.links.length > 0 && (
+              <p className={styles.playLink}>
+                <a href={game.links[0]} target="_blank" rel="noopener noreferrer">Play on {parseExternalSite(game.links[0])}</a>
+              </p>
+            )}
           </div>
           {game.overview &&
             <section id="overview" className={styles.overview}>

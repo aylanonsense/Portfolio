@@ -61,15 +61,34 @@ $imagesWidth: 150px;
     margin: 0.25rem 0 0.25rem 0;
   }
 
-  .links {
-    text-transform: lowercase;
+  .icons {
+    margin: 0.75rem auto 0 auto;
 
-    a {
-      color: #bec5ac;
+    svg {
+      fill: $white;
     }
-    a:hover {
-      color: $rose;
+    svg:hover {
+      fill: $rose;
     }
+  }
+}
+
+.playLink {
+  text-align: center;
+
+  a {
+    display: inline-block;
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: 700;
+    color: $white;
+    font-size: 150%;
+    padding: 5px 10px;
+    border-radius: 3px;
+    background-color: $rose;
+    cursor: pointer
+  }
+  a:hover {
+    background-color: $sherbet;
   }
 }
 
@@ -129,9 +148,6 @@ $imagesWidth: 150px;
     .details {
       font-size: 110%;
     }
-    .links {
-      font-size: 100%;
-    }
   }
 
   .overview,
@@ -155,14 +171,6 @@ $imagesWidth: 150px;
     }
     .details {
       font-size: 150%;
-    }
-    .links {
-      display: flex;
-      justify-content: center;
-      gap: 0.5rem;
-      padding: 0;
-      list-style-type: none;
-      font-size: 90%;
     }
   }
 

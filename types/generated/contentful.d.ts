@@ -25,6 +25,9 @@ export interface IGameFields {
   /** Release Date */
   releaseDate?: string | undefined;
 
+  /** Links */
+  links?: string[] | undefined;
+
   /** itch URL */
   itchUrl?: string | undefined;
 
@@ -101,6 +104,9 @@ export interface IMediaBundle extends Entry<IMediaBundleFields> {
 export interface IPersonFields {
   /** Name */
   name: string;
+
+  /** Links */
+  links?: string[] | undefined;
 
   /** Twitter URL */
   twitterUrl?: string | undefined;

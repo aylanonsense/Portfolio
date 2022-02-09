@@ -1,6 +1,6 @@
 import { ExternalSite } from 'helpers/enums'
-import SiteIcon from "components/SiteIcon"
-import type { PersonData } from 'types/contentData'
+import SiteIcon from 'components/SiteIcon'
+import parseExternalSite from 'helpers/parseExternalSite'
 import styles from 'styles/components/ExternalLinks.module.scss'
 
 type ExternalLinkItemProps = {
@@ -18,17 +18,21 @@ const ExternalLinkItem = ({ site, url, size }: ExternalLinkItemProps) => (
 )
 
 type ExternalLinksProps = {
-  className?: string | undefined;
-  person: PersonData;
-  size: number;
+  className?: string | undefined
+  urls: (string | undefined)[]
+  size: number
 }
 
-const ExternalLinks = ({ className, person, size }: ExternalLinksProps) => (
+const ExternalLinks = ({ className, urls, size }: ExternalLinksProps) => (
   <ul className={`${styles.links} ${className ?? ''}`}>
-    {person.twitterUrl && <ExternalLinkItem key="twitter" site={ExternalSite.Twitter} url={person.twitterUrl} size={size} />}
-    {person.instagramUrl && <ExternalLinkItem key="instagram" site={ExternalSite.Instagram} url={person.instagramUrl} size={size} />}
-    {person.itchUrl && <ExternalLinkItem key="itch" site={ExternalSite.Itch} url={person.itchUrl} size={size} />}
-    {person.gitHubUrl && <ExternalLinkItem key="gitHub" site={ExternalSite.GitHub} url={person.gitHubUrl} size={size} />}
+    {urls.map(url => {
+      if (url) {
+        const site = parseExternalSite(url)
+        if (site) {
+          return <ExternalLinkItem key={url} site={site} url={url} size={size} /> 
+        }
+      }
+    })}
   </ul>
 )
 
