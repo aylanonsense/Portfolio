@@ -21,6 +21,7 @@ export type GameData = {
   order: number
   role?: string | undefined
   releaseDate?: string | undefined
+  playUrl?: string | undefined
   links: string[]
   overview?: Document | string | undefined
   development?: Document | string | undefined

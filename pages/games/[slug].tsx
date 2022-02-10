@@ -75,9 +75,9 @@ const GamePage: NextPage<GamePageProps> = ({ site, game }) => {
             <h1>{game.title}</h1>
             {details && <p className={styles.details}>{details}</p>}
             <ExternalLinks className={styles.icons} urls={game.links} size={24} />
-            {game.links.length > 0 && (
+            {game.playUrl && (
               <p className={styles.playLink}>
-                <a href={game.links[0]} target="_blank" rel="noopener noreferrer">Play on {parseExternalSite(game.links[0])}</a>
+                <a href={game.playUrl} target="_blank" rel="noopener noreferrer">Play on {parseExternalSite(game.playUrl)}</a>
               </p>
             )}
           </div>
@@ -96,12 +96,6 @@ const GamePage: NextPage<GamePageProps> = ({ site, game }) => {
               )}
             </section>
           }
-          {game.credits &&
-            <section id="credits" className={styles.credits}>
-              <h2>Credits</h2>
-              {renderRichText(game.credits)}
-            </section>
-          }
           {game.development &&
             <section id="development" className={styles.development}>
               <h2>Development</h2>
@@ -112,6 +106,12 @@ const GamePage: NextPage<GamePageProps> = ({ site, game }) => {
             <section id="reception" className={styles.reception}>
               <h2>Reception</h2>
               {renderRichText(game.reception)}
+            </section>
+          }
+          {game.credits &&
+            <section id="credits" className={styles.credits}>
+              <h2>Credits</h2>
+              {renderRichText(game.credits)}
             </section>
           }
         </div>

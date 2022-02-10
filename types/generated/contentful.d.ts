@@ -25,23 +25,11 @@ export interface IGameFields {
   /** Release Date */
   releaseDate?: string | undefined;
 
+  /** Play URL */
+  playUrl?: string | undefined;
+
   /** Links */
   links?: string[] | undefined;
-
-  /** itch URL */
-  itchUrl?: string | undefined;
-
-  /** Lexaloffle URL */
-  lexaloffleUrl?: string | undefined;
-
-  /** Newgrounds URL */
-  newgroundsUrl?: string | undefined;
-
-  /** Game Jolt URL */
-  gameJoltUrl?: string | undefined;
-
-  /** GitHub URL */
-  gitHubUrl?: string | undefined;
 
   /** Overview */
   overview?: Document | undefined;
