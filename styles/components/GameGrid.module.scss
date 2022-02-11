@@ -8,10 +8,10 @@
   > div {
     flex-basis: 33.333%; // 3 columns
 
-    > span {
+    > div > span {
       display: block !important;
       position: relative !important;
-      margin: 5px !important; // 10px gutters
+      padding: 5px !important; // 10px gutters
       cursor: pointer;
 
       img {
