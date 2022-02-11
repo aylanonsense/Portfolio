@@ -5,7 +5,7 @@ import { BLOCKS, INLINES, Document } from '@contentful/rich-text-types'
 import { documentToReactComponents, Options as ContentfulOptions } from '@contentful/rich-text-react-renderer'
 import { TwitterTweetEmbed } from 'react-twitter-embed'
 import { ImageAssetData, TrackData } from 'types/contentData'
-import { parseGameData, parseTweetData, parseTrackData, parseImageData, parseMediaBundle } from 'helpers/contentApi'
+import { parseGameData, parseTweetData, parseTrackData, parseImageData, parseSoundData, parseMediaBundle } from 'helpers/contentApi'
 import RichImage from 'components/RichImage'
 import styles from 'styles/helpers/renderRichText.module.scss'
 
@@ -66,7 +66,19 @@ export default function renderRichText(richText: Document | string, options?: Op
             const image = parseImageData(data.target)
             return options?.renderImage ? options.renderImage(image, baseRenderImage) : baseRenderImage(image);
           }
+          else if (data.target.fields.file.contentType == 'audio/x-wav') {
+            const sound = parseSoundData(data.target)
+            return (
+              <figure>
+                {sound.description && <figcaption>{sound.description}</figcaption>}
+                <audio controls src={sound.url}>
+                  Your browser does not support the <code>audio</code> element.
+                </audio>
+              </figure>
+            )
+          }
           else {
+            console.log(data.target)
             return <div>[unsure how to display asset "{data.target.fields.title}"]</div>
           }
         },

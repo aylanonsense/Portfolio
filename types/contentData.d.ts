@@ -48,6 +48,11 @@ export type ImageAssetData = {
   isPixelArt: boolean
 }
 
+export type SoundAssetData = {
+  url: string
+  description?: string | undefined
+}
+
 export type MediaBundleData = {
   media: ImageAssetData[]
 }

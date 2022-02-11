@@ -1,6 +1,6 @@
 import { createClient, ContentfulClientApi, Asset, Entry, TagLink } from 'contentful'
 import { ISiteFields, IGameFields, ITweetFields, ITrackFields, IRichImageFields, IMediaBundleFields } from 'types/generated/contentful'
-import type { SiteData, GameData, TweetData, TrackData, ImageAssetData, MediaBundleData } from 'types/contentData'
+import type { SiteData, GameData, TweetData, TrackData, ImageAssetData, SoundAssetData, MediaBundleData } from 'types/contentData'
 
 let client: ContentfulClientApi
 
@@ -48,6 +48,13 @@ export function parseGameData(entry: Entry<IGameFields>): GameData {
     links: entry.fields.links || [],
     image: parseImageData(entry.fields.image),
     images: entry.fields.images?.map(x => parseImageData(x)) || []
+  }
+}
+
+export function parseSoundData(sound: Asset): SoundAssetData {
+  return {
+    url: `https:${sound.fields.file.url}`,
+    description: sound.fields.description
   }
 }
 

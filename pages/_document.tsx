@@ -12,7 +12,7 @@ class MyDocument extends Document {
           <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
-          <link href="https://fonts.googleapis.com/css2?family=Gelasio&family=Montserrat:wght@400&family=Noto+Sans:wght@400;700&family=Raleway:wght@400;700&family=Source+Serif+Pro&family=Nanum+Myeongjo&display=swap" rel="stylesheet" />
+          <link href="https://fonts.googleapis.com/css2?family=Gelasio&family=Montserrat:wght@400&family=Noto+Sans:wght@400;700&family=Raleway:wght@400;700&family=Source+Serif+Pro&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet" />
         </Head>
         <body>
           <Main />

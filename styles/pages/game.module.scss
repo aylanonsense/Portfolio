@@ -38,12 +38,20 @@ $imagesWidth: 150px;
   .credits {
     grid-area: credits;
   }
+
+  figure {
+    text-align: center;
+  }
 }
 
 .mainImage {
   width: 100%;
   max-width: 512px;
   margin: 0 auto 0 auto;
+}
+
+.credits p {
+  margin: 0.5rem 0 0.5rem 0;
 }
 
 .basicInfo {
@@ -98,7 +106,7 @@ $imagesWidth: 150px;
 .credits {
   width: 100%;
 
-  > p, > ol > ul {
+  > p, > ol, > ul {
     font-family: 'Nanum Myeongjo', serif;
   }
 
@@ -258,15 +266,16 @@ $imagesWidth: 150px;
     margin: 0 auto 0 auto;
     display: grid;
     grid-template-columns: 1fr $columnGap $imagesWidth;
-    grid-template-rows: auto;
     grid-template-areas: 
       "image . ."
       "info . ."
       "overview . images"
       "development . images"
       "reception . images"
-      "credits . images";
+      "credits . images"
+      ". . images";
     justify-items: center;
+    grid-template-rows: min-content min-content min-content min-content min-content min-content 1fr;
     align-items: flex-start;
   }
 
