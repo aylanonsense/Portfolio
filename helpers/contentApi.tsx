@@ -156,10 +156,7 @@ export async function getSiteData(): Promise<SiteData> {
       description: '[placeholder description]',
       author: {
         name: '[placeholder name]',
-        twitterUrl: '#',
-        instagramUrl: '#',
-        itchUrl: '#',
-        gitHubUrl: '#'
+        links: []
       },
       shortBio: '[placeholder bio]',
       bigProjects: '[placeholder big projects]',
