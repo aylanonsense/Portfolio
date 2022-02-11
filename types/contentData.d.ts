@@ -46,6 +46,7 @@ export type ImageAssetData = {
   width?: number | undefined
   height?: number | undefined
   isPixelArt: boolean
+  animated: boolean
 }
 
 export type SoundAssetData = {

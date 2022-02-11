@@ -1,6 +1,7 @@
 import { createClient, ContentfulClientApi, Asset, Entry, TagLink } from 'contentful'
 import { ISiteFields, IGameFields, ITweetFields, ITrackFields, IRichImageFields, IMediaBundleFields } from 'types/generated/contentful'
 import type { SiteData, GameData, TweetData, TrackData, ImageAssetData, SoundAssetData, MediaBundleData } from 'types/contentData'
+import { url } from 'inspector'
 
 let client: ContentfulClientApi
 
@@ -68,7 +69,8 @@ export function parseImageData(image: Asset | Entry<IRichImageFields>): ImageAss
         caption: image.fields.caption,
         width: image.fields.width,
         height: image.fields.height,
-        isPixelArt: image.fields.isPixelArt ?? false
+        isPixelArt: image.fields.isPixelArt ?? false,
+        animated: image.fields.imageUrl.includes('.gif')
       }
     }
     else if (image.fields.image) {
@@ -80,7 +82,8 @@ export function parseImageData(image: Asset | Entry<IRichImageFields>): ImageAss
         caption: image.fields.caption,
         width: image.fields.width ?? image.fields.image.fields.file.details.image?.width,
         height: image.fields.height ?? image.fields.image.fields.file.details.image?.height,
-        isPixelArt: image.fields.isPixelArt ?? tags.includes('pixelArt')
+        isPixelArt: image.fields.isPixelArt ?? tags.includes('pixelArt'),
+        animated: image.fields.image.fields.file.url.includes('.gif')
       }
     }
     else {
@@ -94,7 +97,8 @@ export function parseImageData(image: Asset | Entry<IRichImageFields>): ImageAss
       alt: image.fields.description ?? null,
       width: image.fields.file.details.image?.width,
       height: image.fields.file.details.image?.height,
-      isPixelArt: tags.includes('pixelArt')
+      isPixelArt: tags.includes('pixelArt'),
+      animated: image.fields.file.url.includes('.gif')
     }
   }
 }
@@ -184,7 +188,8 @@ export async function getGameData(slug: string): Promise<GameData> {
         width: 128,
         height: 128,
         alt: '[placeholder description]',
-        isPixelArt: true
+        isPixelArt: true,
+        animated: false
       },
       images: [],
       order: 0,

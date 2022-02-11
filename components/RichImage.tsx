@@ -17,7 +17,8 @@ const RichImage = ({ image, enforceMaxDimensions, className, style, onClick }: R
     src={image.url}
     alt={image.alt}
     width={image.width}
-    height={image.height} />
+    height={image.height}
+    unoptimized={image.animated} />
 
   if (image.caption) {
     inner = <figure>
