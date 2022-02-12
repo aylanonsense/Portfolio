@@ -16,7 +16,7 @@
 
 .games {
   > div {
-    max-width: 1000px;
+    max-width: 1100px;
     margin: 0 auto 0 auto;
   }
 }
@@ -86,6 +86,22 @@
 
   &:nth-child(even){
     color: $topaz;
+  }
+}
+
+@media (max-width: 399.9px) {
+  .games > div {
+    padding: 0 0.5rem;
+  }
+}
+@media (min-width: 400px) and (max-width: 699.9px) {
+  .games > div {
+    padding: 0 1rem;
+  }
+}
+@media (min-width: 700px) {
+  .games > div {
+    padding: 0 2rem;
   }
 }
 

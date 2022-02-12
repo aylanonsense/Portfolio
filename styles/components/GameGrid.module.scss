@@ -6,8 +6,6 @@
   width: 100%;
 
   > div {
-    flex-basis: 33.333%; // 3 columns
-
     > div > span {
       display: block !important;
       position: relative !important;
@@ -18,5 +16,22 @@
         width: 100% !important;
       }
     }
+  }
+}
+
+// Columns
+@media (max-width: 399.9px) {
+  .gameGrid > div {
+    flex-basis: 100%; // 1 column
+  }
+}
+@media (min-width: 400px) and (max-width: 699.9px) {
+  .gameGrid > div {
+    flex-basis: 50%; // 2 columns
+  }
+}
+@media (min-width: 700px) {
+  .gameGrid > div {
+    flex-basis: 33.333%; // 3 columns
   }
 }
