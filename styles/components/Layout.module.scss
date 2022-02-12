@@ -8,15 +8,10 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    height: 300px;
+    margin: 30px 0 0 0;
 
     > div {
       max-width: 1000px;
-    }
-
-    .title {
-      margin: 1rem 0 0.2rem 0;
-      font-size: 400%;
     }
 
     .icons {
@@ -67,8 +62,6 @@
 }
 
 .subtitle {
-  margin: 0.2rem 0 0.85rem 0;
-  font-size: 140%;
   color: $rose;
   text-transform: lowercase;
 }
@@ -95,6 +88,83 @@
     }
     a:hover {
       fill: $rose;
+    }
+  }
+}
+
+// Title font sizes
+@media (max-width: 249.9px) {
+  .header.full {
+    min-height: 150px;
+
+    .title {
+      margin: 0 0 0.05rem 0;
+      font-size: 135%;
+    }
+
+    .subtitle {
+      margin: 0.05rem 0 0.3rem 0;
+      font-size: 100%;
+    }
+  }
+}
+@media (min-width: 250px) and (max-width: 349.9px) {
+  .header.full {
+    min-height: 200px;
+
+    .title {
+      margin: 0 0 0.05rem 0;
+      font-size: 165%;
+    }
+
+    .subtitle {
+      margin: 0.05rem 0 0.3rem 0;
+      font-size: 100%;
+    }
+  }
+}
+@media (min-width: 350px) and (max-width: 499.9px) {
+  .header.full {
+    min-height: 225px;
+
+    .title {
+      margin: 0 0 0.05rem 0;
+      font-size: 225%;
+    }
+
+    .subtitle {
+      margin: 0.05rem 0 0.5rem 0;
+      font-size: 100%;
+    }
+  }
+}
+@media (min-width: 500px) and (max-width: 899.9px) {
+  .header.full {
+    min-height: 275px;
+
+    .title {
+      margin: 0 0 0.1rem 0;
+      font-size: 300%;
+    }
+
+    .subtitle {
+      margin: 0.1rem 0 0.65rem 0;
+      font-size: 115%;
+    }
+  }
+}
+@media (min-width: 900px) {
+  .header.full {
+    min-height: 300px;
+
+    .title {
+      margin: 0 0 0.2rem 0;
+      font-size: 350%;
+    }
+
+    .subtitle {
+      margin: 0.2rem 0 0.85rem 0;
+      font-size: 120%;
     }
   }
 }
