@@ -163,6 +163,7 @@ export async function getSiteData(): Promise<SiteData> {
         links: []
       },
       shortBio: '[placeholder bio]',
+      lookingForWork: '[placeholder lfw]',
       bigProjects: '[placeholder big projects]',
       smallProjects: '[placeholder small projects]',
       speakingExperience: '[placeholder speaking experience]',

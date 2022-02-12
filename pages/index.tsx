@@ -25,18 +25,26 @@ const HomePage: NextPage<HomePageProps> = ({ site, games }) => (
         </section>
       }
       { site.shortBio &&
-        <section id="bio" className={styles.bio}>
+        <section id="about" className={styles.about}>
           <h2>About Me</h2>
-          <div>
+          <div className={styles.shortBio}>
             {renderRichText(site.shortBio, {
               renderOptions: {
                 renderMark: {
                   [MARKS.ITALIC]: text => <span className={styles.big}>{text}</span>,
-                  [MARKS.BOLD]: text => <span className={styles.colorHighlight}>{text}</span>
+                  [MARKS.BOLD]: text => <span className={styles.highlight}>{text}</span>
                 }
               }
             })}
           </div>
+          { site.lookingForWork &&
+            <div className={styles.lookingForWork}>
+              <div>{renderRichText(site.lookingForWork)}</div>
+              <div>
+                <a href="#contact">Get in touch</a>
+              </div>
+            </div>
+          }
         </section>
       }
       { site.smallProjects &&

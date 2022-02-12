@@ -6,6 +6,7 @@ export type SiteData = {
   description?: string | undefined
   author: PersonData
   shortBio?: Document | string | undefined
+  lookingForWork?: Document | string | undefined
   bigProjects?: Document | string | undefined
   smallProjects?: Document | string | undefined
   speakingExperience?: Document | string | undefined

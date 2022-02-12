@@ -188,6 +188,9 @@ export interface ISiteFields {
   /** Short Bio */
   shortBio?: Document | undefined;
 
+  /** Looking For Work */
+  lookingForWork?: Document | undefined;
+
   /** Big Projects */
   bigProjects?: Document | undefined;
 

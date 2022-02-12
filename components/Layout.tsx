@@ -46,8 +46,10 @@ const Layout = ({ site, title, compact, skipLinks, children }: LayoutProps) => {
         )}
         <div>
           <h1 className={styles.title}><Link href="/">{site.title}</Link></h1>
-          {!compact && site.subtitle && <p className={styles.subtitle}>{site.subtitle}</p>}
-          {site.author.links.length > 0 && <ExternalLinks className={styles.icons} urls={site.author.links} size={styles.compact ? 22 : 28} />}
+          <div>
+            {!compact && site.subtitle && <p className={styles.subtitle}>{site.subtitle}</p>}
+            {site.author.links.length > 0 && <ExternalLinks className={styles.icons} urls={site.author.links} size={styles.compact ? 22 : 28} />}
+          </div>
         </div>
       </header>
       {children}
