@@ -1,3 +1,4 @@
+import { ReactNode } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import type { SiteData } from 'types/contentData'
@@ -11,10 +12,11 @@ type LayoutProps = {
   site: SiteData
   title?: string
   compact: boolean
-  children?: React.ReactNode
+  skipLinks?: ReactNode[]
+  children?: ReactNode
 }
 
-const Layout = ({ site, title, compact, children }: LayoutProps) => {
+const Layout = ({ site, title, compact, skipLinks, children }: LayoutProps) => {
   let twitterHandle
   for (let url of site.author.links) {
     if (parseExternalSite(url) == ExternalSite.Twitter) {
@@ -37,6 +39,11 @@ const Layout = ({ site, title, compact, children }: LayoutProps) => {
         <meta name="twitter:card" content="summary" />
       </Head>
       <header className={`${styles.header} ${compact ? styles.compact : styles.full}`}>
+        {skipLinks && skipLinks.length > 0 && (
+          <nav className={styles.skipLinks}>
+            {skipLinks}
+          </nav>
+        )}
         <div>
           <h1 className={styles.title}><Link href="/">{site.title}</Link></h1>
           {!compact && site.subtitle && <p className={styles.subtitle}>{site.subtitle}</p>}

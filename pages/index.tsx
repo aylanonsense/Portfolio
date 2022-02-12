@@ -1,5 +1,6 @@
+import { ReactNode } from 'react'
 import type { NextPage, GetStaticProps } from 'next'
-import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types'
+import { MARKS } from '@contentful/rich-text-types'
 import type { SiteData, GameData } from 'types/contentData'
 import { getSiteData, getAllGameData } from 'helpers/contentApi'
 import renderRichText from 'helpers/renderRichText'
@@ -13,9 +14,9 @@ type HomePageProps = {
 }
 
 const HomePage: NextPage<HomePageProps> = ({ site, games }) => (
-  <Layout site={site} compact={false}>
-    <main className={styles.main}>
-      {site.bigProjects || games.length > 0 ?
+  <Layout site={site} compact={false} skipLinks={[ <a href="#main">Skip to main content</a> ]}>
+    <main id="main" className={styles.main}>
+      {(site.bigProjects || games.length > 0) &&
         <section id="games" className={styles.games}>
           <h2>Games</h2>
           <div>
@@ -23,8 +24,6 @@ const HomePage: NextPage<HomePageProps> = ({ site, games }) => (
             {games.length > 0 && <GameGrid games={games} />}
           </div>
         </section>
-      :
-        undefined
       }
       { site.shortBio &&
         <section id="bio" className={styles.bio}>

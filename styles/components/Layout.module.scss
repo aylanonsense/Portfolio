@@ -168,3 +168,19 @@
     }
   }
 }
+
+.skipLinks {
+  > a {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: $black;
+    color: $white;
+    padding: 1rem;
+    transform: translateY(-100%);
+  }
+  > a:focus {
+    transform: translateY(0%);
+  }
+}

@@ -3,7 +3,7 @@ import Document, { Html, Head, Main, NextScript } from 'next/document'
 class MyDocument extends Document {
   render() {
     return (
-      <Html>
+      <Html lang="en">
         <Head>
           <meta name="robots" content="index, follow" />
           <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
