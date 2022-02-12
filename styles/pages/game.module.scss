@@ -64,6 +64,7 @@ $imagesWidth: 150px;
   }
 
   .details {
+    color: $white-over-black;
     font-family: 'Raleway', sans-serif;
     text-align: center;
     margin: 0.25rem 0 0.25rem 0;
@@ -73,10 +74,10 @@ $imagesWidth: 150px;
     margin: 0.75rem auto 0 auto;
 
     svg {
-      fill: $white;
+      fill: $white-over-black;
     }
     svg:hover {
-      fill: $rose;
+      fill: $red-over-black-highlight;
     }
   }
 }
@@ -88,15 +89,15 @@ $imagesWidth: 150px;
     display: inline-block;
     font-family: 'Noto Sans', sans-serif;
     font-weight: 700;
-    color: $white;
+    color: $white-over-red;
     font-size: 150%;
     padding: 5px 10px;
     border-radius: 3px;
-    background-color: $rose;
+    background-color: $red-background-under-white;
     cursor: pointer
   }
   a:hover {
-    background-color: $sherbet;
+    background-color: $red-over-white-highlight;
   }
 }
 
@@ -121,10 +122,10 @@ $imagesWidth: 150px;
   }
 
   a {
-    color: $rose;
+    color: $red-over-black;
   }
   a:hover {
-    color: $sherbet;
+    color: $red-over-black-highlight;
   }
 }
 
@@ -138,7 +139,7 @@ $imagesWidth: 150px;
   height:100%;
   width: 100%;
   z-index: 100;
-  background-color: rgba($black, 0.95);
+  background-color: rgba($black-background, 0.95);
 
   > div {
     display: flex;

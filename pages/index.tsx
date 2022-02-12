@@ -60,6 +60,7 @@ const HomePage: NextPage<HomePageProps> = ({ site, games }) => (
           <div>
             <div>
               <h2>Contact</h2>
+              <p className={styles.from}>Please feel free<br /> to reach out!</p>
               <div>
                 {renderRichText(site.contactInformation)}
               </div>

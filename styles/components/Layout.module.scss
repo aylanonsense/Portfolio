@@ -11,15 +11,15 @@
     margin: 30px 0 0 0;
 
     > div {
-      max-width: 1000px;
+      max-width: $maxWidth;
     }
 
     .icons {
       a {
-        fill: $grape
+        fill: $red-over-black-subdued
       }
       a:hover {
-        fill: $rose;
+        fill: $red-over-black-highlight;
       }
     }
   }
@@ -48,10 +48,10 @@
       top: 3px;
 
       a {
-        fill: $violet
+        fill: $red-over-black
       }
       a:hover {
-        fill: $rose;
+        fill: $red-over-black-highlight;
       }
     }
   }
@@ -62,12 +62,12 @@
 }
 
 .subtitle {
-  color: $rose;
+  color: $red-over-black;
   text-transform: lowercase;
 }
 
 .footer {
-  color: $violet;
+  color: $red-over-black;
   text-align: center;
   margin: 1rem 0 0 0;
   padding: 1.5rem 1rem 2rem 1rem;
@@ -84,10 +84,10 @@
   .icons {
     margin: 0.75rem 0 0 0;
     a {
-      fill: $violet;
+      fill: $red-over-black-subdued;
     }
     a:hover {
-      fill: $rose;
+      fill: $red-over-black-highlight;
     }
   }
 }
@@ -110,7 +110,7 @@
 }
 @media (min-width: 250px) and (max-width: 349.9px) {
   .header.full {
-    min-height: 200px;
+    min-height: 150px;
 
     .title {
       margin: 0 0 0.05rem 0;
@@ -125,7 +125,7 @@
 }
 @media (min-width: 350px) and (max-width: 499.9px) {
   .header.full {
-    min-height: 225px;
+    min-height: 175px;
 
     .title {
       margin: 0 0 0.05rem 0;
@@ -140,7 +140,7 @@
 }
 @media (min-width: 500px) and (max-width: 899.9px) {
   .header.full {
-    min-height: 275px;
+    min-height: 225px;
 
     .title {
       margin: 0 0 0.1rem 0;
@@ -155,7 +155,7 @@
 }
 @media (min-width: 900px) {
   .header.full {
-    min-height: 300px;
+    min-height: 250px;
 
     .title {
       margin: 0 0 0.2rem 0;
@@ -175,8 +175,8 @@
     position: absolute;
     top: 0;
     left: 0;
-    background-color: $black;
-    color: $white;
+    color: $white-over-black;
+    background-color: $black-background;
     padding: 1rem;
     transform: translateY(-100%);
   }

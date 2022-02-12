@@ -1,0 +1,123 @@
+@import "styles/variables.scss";
+
+.main {
+  max-width: 800px;
+  margin: 0 auto 0 auto;
+  padding: 2rem;
+}
+
+.cards > div {
+  padding: 5px;
+  margin: 10px 0 10px 0;
+  text-align: center;
+  font-weight: 700;
+  font-family: Raleway, sans-serif;
+  font-size: 130%;
+}
+
+.backLink {
+  a {
+    color: $red-over-black;
+  }
+  a:hover {
+    color: $red-over-black-highlight;
+  }
+}
+
+.blackOnWhite {
+  color: $black-over-white;
+  background-color: $white-background;
+  .highlight { visibility: hidden; }
+  .subdued { color: $black-over-white-subdued; }
+}
+
+.redOnWhite {
+  color: $red-over-white;
+  background-color: $white-background;
+  .highlight { color: $red-over-white-highlight; }
+  .subdued { color: $red-over-white-subdued; }
+}
+
+.greenOnWhite {
+  color: $green-over-white;
+  background-color: $white-background;
+  .highlight { color: $green-over-white-highlight; }
+  .subdued { color: $green-over-white-subdued; }
+}
+
+.blueOnWhite {
+  color: $blue-over-white;
+  background-color: $white-background;
+  .highlight { color: $blue-over-white-highlight; }
+  .subdued { color: $blue-over-white-subdued; }
+}
+
+.whiteOnBlack {
+  color: $white-over-black;
+  background-color: $black-background;
+  .highlight { visibility: hidden; }
+  .subdued { color: $white-over-black-subdued; }
+}
+
+.redOnBlack {
+  color: $red-over-black;
+  background-color: $black-background;
+  .highlight { color: $red-over-black-highlight; }
+  .subdued { color: $red-over-black-subdued; }
+}
+
+.greenOnBlack {
+  color: $green-over-black;
+  background-color: $black-background;
+  .highlight { color: $green-over-black-highlight; }
+  .subdued { color: $green-over-black-subdued; }
+}
+
+.blueOnBlack {
+  color: $blue-over-black;
+  background-color: $black-background;
+  .highlight { color: $blue-over-black-highlight; }
+  .subdued { color: $blue-over-black-subdued; }
+}
+
+.whiteOnRed {
+  color: $white-over-red;
+  background-color: $red-background-under-white;
+  .highlight { visibility: hidden; }
+  .subdued { color: $white-over-red-subdued; }
+}
+
+.whiteOnGreen {
+  color: $white-over-green;
+  background-color: $green-background-under-white;
+  .highlight { visibility: hidden; }
+  .subdued { color: $white-over-green-subdued; }
+}
+
+.whiteOnBlue {
+  color: $white-over-blue;
+  background-color: $blue-background-under-white;
+  .highlight { visibility: hidden; }
+  .subdued { color: $white-over-blue-subdued; }
+}
+
+.blackOnRed {
+  color: $black-over-red;
+  background-color: $red-background-under-black;
+  .highlight { visibility: hidden; }
+  .subdued { color: $black-over-red-subdued; }
+}
+
+.blackOnGreen {
+  color: $black-over-green;
+  background-color: $green-background-under-black;
+  .highlight { visibility: hidden; }
+  .subdued { color: $black-over-green-subdued; }
+}
+
+.blackOnBlue {
+  color: $black-over-blue;
+  background-color: $blue-background-under-black;
+  .highlight { visibility: hidden; }
+  .subdued { color: $black-over-blue-subdued; }
+}

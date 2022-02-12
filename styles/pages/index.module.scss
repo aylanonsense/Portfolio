@@ -16,18 +16,18 @@
 
 .games {
   > div {
-    max-width: 1100px;
+    max-width: $maxWidth;
     margin: 0 auto 0 auto;
   }
 }
 
 .bio {
-  background-color: $rose;
+  background-color: $red-background-under-white;
   margin: 5rem 0 2rem 0;
   font-weight: 600;
 
   > div {
-    max-width: 900px;
+    max-width: calc($maxWidth - 200px);
     margin: 0 auto 0 auto;
   }
 
@@ -36,22 +36,39 @@
   }
 }
 
-.talks {
-  background-color: $green;
-}
-
 .contact {
-  background-image: url('/images/stamp.png'), url('/images/scribbles.png');
-  background-position: top 25px right 25px, top 25px left 25px;
-  background-repeat: no-repeat, no-repeat;
-  max-width: 700px;
+  position: relative;
+  image-rendering: pixelated;
+  background-image: url('/images/stamp.png');
+  background-position: top 25px right 25px;
+  background-repeat: no-repeat;
+  background-size: 96px 96px;
+  max-width: calc($maxWidth - 350px);
   margin: 5rem auto 5rem auto;
-  background-color: $blue;
-  font-size: 110%;
-  line-height: 0.8;
+  background-color: $white-background;
+  color: $black-over-white;
 
+  > div > div > div {
+    font-size: 110%;
+    line-height: 0.8;
+    font-family: 'Nanum Myeongjo', serif;
+  }
+
+  .from {
+    position: absolute;
+    top: 22px;
+    left: 40px;
+    line-height: 1.25;
+    color: $black-over-white;
+    font-size: 95%;
+    font-family: 'Nanum Myeongjo', serif;
+  }
+
+  a {
+    color: $red-over-white;
+  }
   a:hover {
-    color: $cyan;
+    color: $red-over-white-highlight;
   }
 
   > div {
@@ -80,11 +97,11 @@
 
 .colorHighlight {
   &:nth-child(odd){
-    color: $wintergreen;
+    color: $green-over-black;
   }
 
   &:nth-child(even){
-    color: $topaz;
+    color: $blue-over-black;
   }
 }
 

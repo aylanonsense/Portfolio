@@ -1,16 +1,48 @@
 $maxWidth: 1100px;
 
-$black: #121117;
-$white: #f0fde0;
-$sherbet: #f19bb5;
-$rose: #ee398f;
-$violet: #b72080;
-$grape: #6a084b;
-$mint: #a5fac3;
-$wintergreen: #32ef74;
-$green: #32c853;
-$spruce: #176942;
-$cyan: #69f3d8;
-$topaz: #22b4d1;
-$blue: #2b60d3;
-$navy: #2a2e72;
+$black-over-white: #131117;
+$black-over-white-subdued: #6f726d;
+$black-over-red: #131117;
+$black-over-red-subdued: #820948;
+$black-over-green: #131117;
+$black-over-green-subdued: #106035;
+$black-over-blue: #131117;
+$black-over-blue-subdued: #2a3c92;
+$black-background: #131117;
+
+$white-over-black: #f2fae8;
+$white-over-black-subdued: #a2a9a6;
+$white-over-red: #fcfff9;
+$white-over-red-subdued: #ebafd9;
+$white-over-green: #fcfff9;
+$white-over-green-subdued: #a0e0b3;
+$white-over-blue: #fcfff9;
+$white-over-blue-subdued: #b1d5f1;
+$white-background: #f2fae8;
+
+$red-over-white-highlight: #ff519c;
+$red-over-white: #ce0565;
+$red-over-white-subdued: #7f003c;
+$red-over-black-highlight: #ff8cba;
+$red-over-black: #ff499e;
+$red-over-black-subdued: #ce2a96;
+$red-background-under-white: #da2380;
+$red-background-under-black: #e8378a;
+
+$green-over-white-highlight: #2cbf4d;
+$green-over-white: #147c2b;
+$green-over-white-subdued: #045032;
+$green-over-black-highlight: #6dff7c;
+$green-over-black: #32c853;
+$green-over-black-subdued: #228650;
+$green-background-under-white: #1e874a;
+$green-background-under-black: #1eb965;
+
+$blue-over-white-highlight: #3f90ff;
+$blue-over-white: #2155c7;
+$blue-over-white-subdued: #081a80;
+$blue-over-black-highlight: #acdeff;
+$blue-over-black: #5697ff;
+$blue-over-black-subdued: #3e65c5;
+$blue-background-under-white: #376ee6;
+$blue-background-under-black: #377ee9;
