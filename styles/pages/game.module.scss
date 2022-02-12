@@ -231,6 +231,7 @@ $imagesWidth: 150px;
     justify-content: center;
 
     > div {
+      flex-basis: 0;
       flex-grow: 1;
     }
   }
@@ -252,6 +253,7 @@ $imagesWidth: 150px;
     justify-content: center;
 
     > div {
+      flex-basis: 0;
       flex-grow: 1;
     }
   }

@@ -60,7 +60,7 @@ const GamePage: NextPage<GamePageProps> = ({ site, game }) => {
   }
 
   return (
-    <Layout site={site} title={game.title} compact={true} skipLinks={[ <a href="#main">Skip to main content</a> ]}>
+    <Layout site={site} title={game.title} compact={true} skipLinks={<a href="#main">Skip to main content</a>}>
       {fullScreenImage &&
         <aside className={styles.fullImageModal} onClick={() => setFullScreenImage(undefined)}>
           <div>

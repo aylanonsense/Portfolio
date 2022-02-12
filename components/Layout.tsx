@@ -12,7 +12,7 @@ type LayoutProps = {
   site: SiteData
   title?: string
   compact: boolean
-  skipLinks?: ReactNode[]
+  skipLinks?: ReactNode
   children?: ReactNode
 }
 
@@ -39,7 +39,7 @@ const Layout = ({ site, title, compact, skipLinks, children }: LayoutProps) => {
         <meta name="twitter:card" content="summary" />
       </Head>
       <header className={`${styles.header} ${compact ? styles.compact : styles.full}`}>
-        {skipLinks && skipLinks.length > 0 && (
+        {skipLinks && (
           <nav className={styles.skipLinks}>
             {skipLinks}
           </nav>

@@ -1,4 +1,3 @@
-import { ReactNode } from 'react'
 import type { NextPage, GetStaticProps } from 'next'
 import { MARKS } from '@contentful/rich-text-types'
 import type { SiteData, GameData } from 'types/contentData'
@@ -14,7 +13,7 @@ type HomePageProps = {
 }
 
 const HomePage: NextPage<HomePageProps> = ({ site, games }) => (
-  <Layout site={site} compact={false} skipLinks={[ <a href="#main">Skip to main content</a> ]}>
+  <Layout site={site} compact={false} skipLinks={<a href="#main">Skip to main content</a>}>
     <main id="main" className={styles.main}>
       {(site.bigProjects || games.length > 0) &&
         <section id="games" className={styles.games}>
