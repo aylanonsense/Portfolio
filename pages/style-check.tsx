@@ -6,7 +6,7 @@ const StyleCheck: NextPage = () => (
   <main className={styles.main}>
     <h1>Style Check</h1>
     <p>This page just exists for me to check styles.</p>
-    <p>You aren't really supposed to be here, but that's okay! Welcome!</p>
+    <p>You aren&apos;t really supposed to be here, but that&apos;s okay! Welcome!</p>
     <p className={styles.backLink}><Link href="/">Back to the actual site</Link></p>
     <div className={styles.cards}>
       <div className={styles.blackOnWhite}><p><span className={styles.highlight}>highlight</span> Black text on white <span className={styles.subdued}>subdued</span></p></div>
