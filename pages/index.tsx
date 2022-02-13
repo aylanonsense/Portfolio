@@ -1,5 +1,7 @@
 import type { NextPage, GetStaticProps } from 'next'
 import { MARKS } from '@contentful/rich-text-types'
+import MailIcon from 'icons/mail.svg'
+import ResumeIcon from 'icons/resume.svg'
 import type { SiteData, GameData } from 'types/contentData'
 import { getSiteData, getAllGameData } from 'helpers/contentApi'
 import renderRichText from 'helpers/renderRichText'
@@ -38,12 +40,19 @@ const HomePage: NextPage<HomePageProps> = ({ site, games }) => (
             })}
           </div>
           { site.lookingForWork &&
-            <div className={styles.lookingForWork}>
-              <div>{renderRichText(site.lookingForWork)}</div>
-              <div>
-                <a href="#contact">Get in touch</a>
+            <>
+              <div className={styles.lookingForWork}>
+                {renderRichText(site.lookingForWork)}
               </div>
-            </div>
+              <div className={styles.contactLinks}>
+                {site.author.resumeUrl &&
+                  <p><a href={site.author.resumeUrl} target="_blank" rel="noopener noreferrer"><ResumeIcon width={28} height={28} alt="" /> <span>Résumé</span></a></p>
+                }
+                {site.contactInformation &&
+                  <p><a href="#contact"><MailIcon width={28} height={28} alt="" /> <span>Contact</span></a></p>
+                }
+              </div>
+            </>
           }
         </section>
       }
@@ -68,7 +77,7 @@ const HomePage: NextPage<HomePageProps> = ({ site, games }) => (
           <div>
             <div>
               <h2>Contact</h2>
-              <p className={styles.from}>Please feel free<br /> to reach out!</p>
+              <p className={styles.from}><span>Please feel free</span> <span>to reach out!</span></p>
               <div>
                 {renderRichText(site.contactInformation)}
               </div>

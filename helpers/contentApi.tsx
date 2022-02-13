@@ -34,13 +34,17 @@ function getOrCreateClient() {
 }
 
 export function parseSiteData(site: Entry<ISiteFields>): SiteData {
-  return {
+  const siteData: SiteData = {
     ...site.fields,
     author: {
       ...site.fields.author.fields,
       links: site.fields.author.fields.links || []
     }
   }
+  if (site.fields.author.fields.resume) {
+    siteData.author.resumeUrl = `https:${site.fields.author.fields.resume.fields.file.url}`
+  }
+  return siteData
 }
 
 export function parseGameData(entry: Entry<IGameFields>): GameData {

@@ -96,17 +96,8 @@ export interface IPersonFields {
   /** Links */
   links?: string[] | undefined;
 
-  /** Twitter URL */
-  twitterUrl?: string | undefined;
-
-  /** Instagram URL */
-  instagramUrl?: string | undefined;
-
-  /** Itch.io URL */
-  itchUrl?: string | undefined;
-
-  /** GitHub URL */
-  gitHubUrl?: string | undefined;
+  /** Resume */
+  resume?: Asset | undefined;
 }
 
 export interface IPerson extends Entry<IPersonFields> {

@@ -62,4 +62,5 @@ export type MediaBundleData = {
 export type PersonData = {
   name: string
   links: string[]
+  resumeUrl?: string | undefined
 }
