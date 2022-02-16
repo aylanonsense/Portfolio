@@ -17,14 +17,14 @@ type RichImageProps = {
 }
 
 const RichImage = ({ image, alt, linkUrl, externalLink, enforceMaxDimensions, className, style, onClick }: RichImageProps) => {
-  alt = alt || image.alt
-  linkUrl = linkUrl || image.linkUrl
+  alt = alt || image.alt || undefined
+  linkUrl = linkUrl || image.linkUrl || undefined
 
   let inner = <Image
     src={image.url}
     alt={alt}
-    width={image.width}
-    height={image.height}
+    width={image.width || undefined}
+    height={image.height || undefined}
     unoptimized={image.animated} />
 
   if (image.caption) {

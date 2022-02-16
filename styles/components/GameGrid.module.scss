@@ -21,17 +21,26 @@
 
 // Columns
 @media (max-width: 399.9px) {
-  .gameGrid > div {
+  .gameGrid.full > div {
     flex-basis: 100%; // 1 column
+  }
+  .gameGrid.mini > div {
+    flex-basis: 25%; // 4 columns
   }
 }
 @media (min-width: 400px) and (max-width: 699.9px) {
-  .gameGrid > div {
+  .gameGrid.full > div {
     flex-basis: 50%; // 2 columns
+  }
+  .gameGrid.mini > div {
+    flex-basis: 20%; // 5 columns
   }
 }
 @media (min-width: 700px) {
-  .gameGrid > div {
+  .gameGrid.full > div {
     flex-basis: 33.333%; // 3 columns
+  }
+  .gameGrid.mini > div {
+    flex-basis: 14.28%; // 7 columns
   }
 }

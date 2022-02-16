@@ -1,7 +1,6 @@
 import { createClient, ContentfulClientApi, Asset, Entry, TagLink } from 'contentful'
 import { ISiteFields, IGameFields, ITweetFields, ITrackFields, IRichImageFields, IMediaBundleFields } from 'types/generated/contentful'
 import type { SiteData, GameData, TweetData, TrackData, ImageAssetData, SoundAssetData, MediaBundleData } from 'types/contentData'
-import { url } from 'inspector'
 
 let client: ContentfulClientApi
 
@@ -35,25 +34,44 @@ function getOrCreateClient() {
 
 export function parseSiteData(site: Entry<ISiteFields>): SiteData {
   const siteData: SiteData = {
-    ...site.fields,
+    title: site.fields.title,
+    subtitle: site.fields.subtitle || null,
+    description: site.fields.description || null,
     author: {
-      ...site.fields.author.fields,
-      links: site.fields.author.fields.links || []
-    }
-  }
-  if (site.fields.author.fields.resume) {
-    siteData.author.resumeUrl = `https:${site.fields.author.fields.resume.fields.file.url}`
+      name: site.fields.author.fields.name,
+      links: site.fields.author.fields.links || [],
+      resumeUrl: site.fields.author.fields.resume ? `https:${site.fields.author.fields.resume.fields.file.url}` : null
+    },
+    shortBio: site.fields.shortBio || null,
+    lookingForWork: site.fields.lookingForWork || null,
+    bigProjects: site.fields.bigProjects || null,
+    smallProjects: site.fields.smallProjects || null,
+    speakingExperience: site.fields.speakingExperience || null,
+    contactInformation: site.fields.contactInformation || null,
+    disclaimer: site.fields.disclaimer || null
   }
   return siteData
 }
 
 export function parseGameData(entry: Entry<IGameFields>): GameData {
-  return {
-    ...entry.fields,
-    links: entry.fields.links || [],
+  const gameData: GameData = {
+    title: entry.fields.title,
+    slug: entry.fields.slug,
+    thumbnail: entry.fields.thumbnail ? parseImageData(entry.fields.thumbnail) : null,
     image: parseImageData(entry.fields.image),
-    images: entry.fields.images?.map(x => parseImageData(x)) || []
+    images: entry.fields.images?.map(x => parseImageData(x)) || [],
+    isBigProject: entry.fields.isBigProject,
+    order: entry.fields.order || -9999,
+    role: entry.fields.role || null,
+    releaseDate: entry.fields.releaseDate || null,
+    playUrl: entry.fields.playUrl || null,
+    links: entry.fields.links || [],
+    overview: entry.fields.overview || null,
+    development: entry.fields.development || null,
+    reception: entry.fields.reception || null,
+    credits: entry.fields.credits || null
   }
+  return gameData
 }
 
 export function parseSoundData(sound: Asset): SoundAssetData {
@@ -68,11 +86,11 @@ export function parseImageData(image: Asset | Entry<IRichImageFields>): ImageAss
     if (image.fields.imageUrl) {
       return {
         url: image.fields.imageUrl,
-        linkUrl: image.fields.linkUrl,
-        alt: image.fields.description,
-        caption: image.fields.caption,
-        width: image.fields.width,
-        height: image.fields.height,
+        linkUrl: image.fields.linkUrl || null,
+        alt: image.fields.description || null,
+        caption: image.fields.caption || null,
+        width: image.fields.width || null,
+        height: image.fields.height || null,
         isPixelArt: image.fields.isPixelArt ?? false,
         animated: image.fields.imageUrl.includes('.gif')
       }
@@ -81,11 +99,11 @@ export function parseImageData(image: Asset | Entry<IRichImageFields>): ImageAss
       const tags = image.fields.image.metadata.tags.map(x => parseTag(x))
       return {
         url: `https:${image.fields.image.fields.file.url}`,
-        linkUrl: image.fields.linkUrl,
+        linkUrl: image.fields.linkUrl || null,
         alt: image.fields.description ?? image.fields.image.fields.description,
-        caption: image.fields.caption,
-        width: image.fields.width ?? image.fields.image.fields.file.details.image?.width,
-        height: image.fields.height ?? image.fields.image.fields.file.details.image?.height,
+        caption: image.fields.caption || null,
+        width: image.fields.width || image.fields.image.fields.file.details.image?.width || null,
+        height: image.fields.height || image.fields.image.fields.file.details.image?.height || null,
         isPixelArt: image.fields.isPixelArt ?? tags.includes('pixelArt'),
         animated: image.fields.image.fields.file.url.includes('.gif')
       }
@@ -98,9 +116,11 @@ export function parseImageData(image: Asset | Entry<IRichImageFields>): ImageAss
     const tags = image.metadata.tags.map(x => parseTag(x))
     return {
       url: `https:${image.fields.file.url}`,
+      linkUrl: null,
       alt: image.fields.description ?? null,
-      width: image.fields.file.details.image?.width,
-      height: image.fields.file.details.image?.height,
+      caption: null,
+      width: image.fields.file.details.image?.width || null,
+      height: image.fields.file.details.image?.height || null,
       isPixelArt: tags.includes('pixelArt'),
       animated: image.fields.file.url.includes('.gif')
     }
@@ -161,10 +181,12 @@ export async function getSiteData(): Promise<SiteData> {
   if (process.env.MOCK_CONTENT == 'true') {
     return {
       title: '[placeholder title]',
+      subtitle: '[placeholder subtitle]',
       description: '[placeholder description]',
       author: {
         name: '[placeholder name]',
-        links: []
+        links: [],
+        resumeUrl: '#'
       },
       shortBio: '[placeholder bio]',
       lookingForWork: '[placeholder lfw]',
@@ -188,18 +210,23 @@ export async function getGameData(slug: string): Promise<GameData> {
     return {
       title: '[placeholder title]',
       slug: slug,
+      thumbnail: null,
       image: {
         url: '/images/placeholder.png',
+        linkUrl: null,
         width: 128,
         height: 128,
         alt: '[placeholder description]',
+        caption: null,
         isPixelArt: true,
         animated: false
       },
       images: [],
+      isBigProject: true,
       order: 0,
       role: '[placeholder role]',
       releaseDate: '2020-01-01',
+      playUrl: null,
       links: [],
       overview: '[placeholder overview]',
       development: '[placeholder development]',

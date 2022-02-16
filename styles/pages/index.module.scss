@@ -3,7 +3,7 @@
 .main {
   font-family: 'Noto Sans', sans-serif;
 
-  section {
+  .games, .about, .talks, .contact {
     h2 {
       position: absolute;
       left: -10000px;
@@ -18,6 +18,26 @@
   > div {
     max-width: $maxWidth;
     margin: 0 auto 0 auto;
+  }
+}
+
+.smallProjects {
+  text-align: center;
+
+  > div {
+    max-width: calc($maxWidth - 250px);
+    margin: 0 auto 0 auto;
+  }
+
+  h2 {
+    color: $white-over-black;
+    font-family: Raleway, sans-serif;
+    font-size: 300%;
+    margin-bottom: -0.75rem;
+  }
+
+  p {
+    color: $green-over-black;
   }
 }
 
@@ -198,17 +218,17 @@
 
 // Game grid padding
 @media (max-width: 399.9px) {
-  .games > div {
+  .games > div, .smallProjects > div {
     padding: 0 0.5rem;
   }
 }
 @media (min-width: 400px) and (max-width: 699.9px) {
-  .games > div {
+  .games > div, .smallProjects > div {
     padding: 0 1rem;
   }
 }
 @media (min-width: 700px) {
-  .games > div {
+  .games > div, .smallProjects > div {
     padding: 0 2rem;
   }
 }

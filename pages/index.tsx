@@ -11,18 +11,19 @@ import styles from 'styles/pages/index.module.scss'
 
 type HomePageProps = {
   site: SiteData
-  games: GameData[]
+  bigGames: GameData[]
+  smallGames: GameData[]
 }
 
-const HomePage: NextPage<HomePageProps> = ({ site, games }) => (
+const HomePage: NextPage<HomePageProps> = ({ site, bigGames, smallGames }) => (
   <Layout site={site} compact={false} skipLinks={<a href="#main">Skip to main content</a>}>
     <main id="main" className={styles.main}>
-      {(site.bigProjects || games.length > 0) &&
+      {(site.bigProjects || bigGames.length > 0) &&
         <section id="games" className={styles.games}>
           <h2>Games</h2>
           <div>
             {site.bigProjects && renderRichText(site.bigProjects)}
-            {games.length > 0 && <GameGrid games={games} />}
+            {bigGames.length > 0 && <GameGrid games={bigGames} />}
           </div>
         </section>
       }
@@ -56,11 +57,12 @@ const HomePage: NextPage<HomePageProps> = ({ site, games }) => (
           }
         </section>
       }
-      { site.smallProjects &&
-        <section id="lil-things">
+      { (site.smallProjects || smallGames.length > 0) &&
+        <section id="lil-things" className={styles.smallProjects}>
           <h2>lil things</h2>
           <div>
-            {renderRichText(site.smallProjects)}
+            {site.smallProjects && renderRichText(site.smallProjects)}
+            {smallGames.length > 0 && <GameGrid games={smallGames} mini={true} />}
           </div>
         </section>
       }
@@ -96,10 +98,13 @@ export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
   const gamesRequest = getAllGameData()
   const site = await siteRequest
   const games = await gamesRequest
+  const bigGames = games.filter(x => x.isBigProject)
+  const smallGames = games.filter(x => !x.isBigProject)
   return {
     props: {
       site,
-      games
+      bigGames,
+      smallGames
     }
   }
 }

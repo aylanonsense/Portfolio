@@ -10,14 +10,20 @@ export interface IGameFields {
   /** Slug */
   slug: string;
 
+  /** Thumbnail */
+  thumbnail?: Asset | undefined;
+
   /** Image */
   image: Asset;
 
   /** Images */
   images?: Asset[] | undefined;
 
+  /** Big Project */
+  isBigProject: boolean;
+
   /** Order */
-  order: number;
+  order?: number | undefined;
 
   /** Role */
   role?: string | undefined;

@@ -2,32 +2,34 @@ import { Document } from '@contentful/rich-text-types'
 
 export type SiteData = {
   title: string
-  subtitle?: string | undefined
-  description?: string | undefined
+  subtitle: string | null
+  description: string | null
   author: PersonData
-  shortBio?: Document | string | undefined
-  lookingForWork?: Document | string | undefined
-  bigProjects?: Document | string | undefined
-  smallProjects?: Document | string | undefined
-  speakingExperience?: Document | string | undefined
-  contactInformation?: Document | string | undefined
-  disclaimer?: Document | string | undefined
+  shortBio: Document | string | null
+  lookingForWork: Document | string | null
+  bigProjects: Document | string | null
+  smallProjects: Document | string | null
+  speakingExperience: Document | string | null
+  contactInformation: Document | string | null
+  disclaimer: Document | string | null
 }
 
 export type GameData = {
   title: string
   slug: string
+  thumbnail: ImageAssetData | null
   image: ImageAssetData
   images: ImageAssetData[]
+  isBigProject: boolean
   order: number
-  role?: string | undefined
-  releaseDate?: string | undefined
-  playUrl?: string | undefined
+  role: string | null
+  releaseDate: string | null
+  playUrl: string | null
   links: string[]
-  overview?: Document | string | undefined
-  development?: Document | string | undefined
-  reception?: Document | string | undefined
-  credits?: Document | string | undefined
+  overview: Document | string | null
+  development: Document | string | null
+  reception: Document | string | null
+  credits: Document | string | null
 }
 
 export type TweetData = {
@@ -41,18 +43,18 @@ export type TrackData = {
 
 export type ImageAssetData = {
   url: string
-  linkUrl?: string | undefined
-  alt?: string | undefined
-  caption?: Document | string | undefined
-  width?: number | undefined
-  height?: number | undefined
+  linkUrl: string | null
+  alt: string | null
+  caption: Document | string | null
+  width: number | null
+  height: number | null
   isPixelArt: boolean
   animated: boolean
 }
 
 export type SoundAssetData = {
   url: string
-  description?: string | undefined
+  description: string | null
 }
 
 export type MediaBundleData = {
@@ -62,5 +64,5 @@ export type MediaBundleData = {
 export type PersonData = {
   name: string
   links: string[]
-  resumeUrl?: string | undefined
+  resumeUrl: string | null
 }
