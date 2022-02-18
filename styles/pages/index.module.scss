@@ -3,7 +3,7 @@
 .main {
   font-family: 'Noto Sans', sans-serif;
 
-  .games, .about, .talks, .contact {
+  .games, .about, .contact {
     h2 {
       position: absolute;
       left: -10000px;
@@ -11,6 +11,27 @@
       height: 1px;
       overflow: hidden;
     }
+  }
+}
+
+.talks {
+  color: $white-over-blue;
+  background-color: $blue-background-under-white;
+  padding: 2em 1em 2em 1em;
+
+  > div {
+    max-width: $maxWidth;
+    margin: 0 auto 0 auto;
+  }
+
+  h2 {
+    text-transform: lowercase;
+    color: $white-over-black;
+    font-family: Raleway, sans-serif;
+    font-size: 300%;
+    margin-top: 0;
+    margin-bottom: -0.75rem;
+    text-align: center;
   }
 }
 
@@ -30,9 +51,11 @@
   }
 
   h2 {
+    text-transform: lowercase;
     color: $white-over-black;
     font-family: Raleway, sans-serif;
     font-size: 300%;
+    margin-top: 0;
     margin-bottom: -0.75rem;
   }
 
@@ -43,7 +66,6 @@
 
 .about {
   background-color: $red-background-under-white;
-  margin: 5rem 0 2rem 0;
 
   .shortBio, .lookingForWork, .contactLinks {
     max-width: calc($maxWidth - 300px);
@@ -76,19 +98,11 @@
       margin-right: 2px;
     }
 
-    p:nth-of-type(2n+1) a:hover {
+    a:hover {
       color: $green-over-black-highlight;
 
       svg {
         fill: $green-over-black-highlight;
-      }
-    }
-
-    p:nth-of-type(2n+2) a:hover {
-      color: $blue-over-black-highlight;
-
-      svg {
-        fill: $blue-over-black-highlight;
       }
     }
   }
@@ -106,8 +120,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 3rem auto 2.5rem auto;
-    padding: 0 1rem 0 1rem;
+    margin: 0 auto 0 auto;
+    padding: 2rem 0 0.5rem 0;
 
     a {
       color: $red-over-black;
@@ -123,11 +137,9 @@
 }
 @media (min-width: 600px) {
   .contact {
-    position: relative;
     image-rendering: pixelated;
-    max-width: calc($maxWidth - 300px);
-    margin: 5rem auto 2rem auto;
     color: $black-over-white;
+    padding: 3rem 0 3rem 0;
   
     .from {
       position: absolute;
@@ -146,26 +158,32 @@
     a:hover {
       color: $red-over-white-highlight;
     }
-  
+
     > div {
-      width: 90%;
+      position: relative;
+      max-width: calc($maxWidth - 300px);
       margin: 0 auto 0 auto;
-      background-size:contain;
-      position:relative;
-      padding-bottom: 40%;
-  
+
       > div {
-        background-color: $white-background;
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        left: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-  
+        width: 90%;
+        margin: 0 auto 0 auto;
+        background-size:contain;
+        position:relative;
+        padding-bottom: 40%;
+
         > div {
-          font-family: 'Nanum Myeongjo', serif;
+          background-color: $white-background;
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          left: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          > div {
+            font-family: 'Nanum Myeongjo', serif;
+          }
         }
       }
     }
@@ -218,17 +236,44 @@
 
 // Game grid padding
 @media (max-width: 399.9px) {
-  .games > div, .smallProjects > div {
+  .games {
+    padding: 1rem 0 1rem 0;
+  }
+
+  .smallProjects {
+    padding: 1rem 0 2rem 0;
+  }
+
+  .games > div,
+  .smallProjects > div {
     padding: 0 0.5rem;
   }
 }
 @media (min-width: 400px) and (max-width: 699.9px) {
-  .games > div, .smallProjects > div {
+  .games {
+    padding: 2rem 0 2rem 0;
+  }
+
+  .smallProjects {
+    padding: 2rem 0 3rem 0;
+  }
+
+  .games > div,
+  .smallProjects > div {
     padding: 0 1rem;
   }
 }
 @media (min-width: 700px) {
-  .games > div, .smallProjects > div {
+  .games {
+    padding: 1.5rem 0 3.5rem 0;
+  }
+
+  .smallProjects {
+    padding: 3rem 0 5rem 0;
+  }
+
+  .games > div,
+  .smallProjects > div {
     padding: 0 2rem;
   }
 }
@@ -236,7 +281,7 @@
 // Bio font sizes
 @media (max-width: 349.9px) {
   .about {
-    padding: 1.5em 0.5em 1.5em 0.5em;
+    padding: 1.5em 0.5em 2em 0.5em;
 
     .shortBio, .lookingForWork {
       font-size: 105%;
@@ -249,7 +294,7 @@
 }
 @media (min-width: 350px) and (max-width: 599.9px) {
   .about {
-    padding: 2em 1em 2em 1em;
+    padding: 2em 1em 2.5em 1em;
 
     .shortBio, .lookingForWork {
       font-size: 115%;
@@ -262,7 +307,7 @@
 }
 @media (min-width: 600px) and (max-width: 849.9px) {
   .about {
-    padding: 2.5em 1.5em 2.5em 1.5em;
+    padding: 2.5em 1.5em 3em 1.5em;
 
     .shortBio, .lookingForWork {
       font-size: 145%;
@@ -275,7 +320,7 @@
 }
 @media (min-width: 850px) {
   .about {
-    padding: 2.5em 1.5em 2.5em 1.5em;
+    padding: 3em 1.5em 3.5em 1.5em;
 
     .shortBio, .lookingForWork {
       font-size: 170%;

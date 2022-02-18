@@ -1,6 +1,6 @@
 import { createClient, ContentfulClientApi, Asset, Entry, TagLink } from 'contentful'
-import { ISiteFields, IGameFields, ITweetFields, ITrackFields, IRichImageFields, IMediaBundleFields } from 'types/generated/contentful'
-import type { SiteData, GameData, TweetData, TrackData, ImageAssetData, SoundAssetData, MediaBundleData } from 'types/contentData'
+import { ISiteFields, IGameFields, ITalkFields, ITweetFields, ITrackFields, IRichImageFields, IMediaBundleFields } from 'types/generated/contentful'
+import type { SiteData, GameData, TalkData, TweetData, TrackData, ImageAssetData, SoundAssetData, MediaBundleData } from 'types/contentData'
 
 let client: ContentfulClientApi
 
@@ -32,28 +32,40 @@ function getOrCreateClient() {
   return client
 }
 
-export function parseSiteData(site: Entry<ISiteFields>): SiteData {
+export function parseSiteData(entry: Entry<ISiteFields>): SiteData {
+  if (!entry) {
+    throw `${entry} entry passed to parseSiteData`
+  }
+  if (!entry.fields) {
+    throw `Entry with ${entry.fields} fields passed to parseSiteData`
+  }
   const siteData: SiteData = {
-    title: site.fields.title,
-    subtitle: site.fields.subtitle || null,
-    description: site.fields.description || null,
+    title: entry.fields.title,
+    subtitle: entry.fields.subtitle || null,
+    description: entry.fields.description || null,
     author: {
-      name: site.fields.author.fields.name,
-      links: site.fields.author.fields.links || [],
-      resumeUrl: site.fields.author.fields.resume ? `https:${site.fields.author.fields.resume.fields.file.url}` : null
+      name: entry.fields.author.fields.name,
+      links: entry.fields.author.fields.links || [],
+      resumeUrl: entry.fields.author.fields.resume ? `https:${entry.fields.author.fields.resume.fields.file.url}` : null
     },
-    shortBio: site.fields.shortBio || null,
-    lookingForWork: site.fields.lookingForWork || null,
-    bigProjects: site.fields.bigProjects || null,
-    smallProjects: site.fields.smallProjects || null,
-    speakingExperience: site.fields.speakingExperience || null,
-    contactInformation: site.fields.contactInformation || null,
-    disclaimer: site.fields.disclaimer || null
+    shortBio: entry.fields.shortBio || null,
+    lookingForWork: entry.fields.lookingForWork || null,
+    bigProjects: entry.fields.bigProjects || null,
+    smallProjects: entry.fields.smallProjects || null,
+    speakingExperience: entry.fields.speakingExperience || null,
+    contactInformation: entry.fields.contactInformation || null,
+    disclaimer: entry.fields.disclaimer || null
   }
   return siteData
 }
 
 export function parseGameData(entry: Entry<IGameFields>): GameData {
+  if (!entry) {
+    throw `${entry} entry passed to parseGameData`
+  }
+  if (!entry.fields) {
+    throw `Entry with ${entry.fields} fields passed to parseGameData`
+  }
   const gameData: GameData = {
     title: entry.fields.title,
     slug: entry.fields.slug,
@@ -70,6 +82,24 @@ export function parseGameData(entry: Entry<IGameFields>): GameData {
     development: entry.fields.development || null,
     reception: entry.fields.reception || null,
     credits: entry.fields.credits || null
+  }
+  return gameData
+}
+
+export function parseTalkData(entry: Entry<ITalkFields>): TalkData {
+  if (!entry) {
+    throw `${entry} entry passed to parseTalkData`
+  }
+  if (!entry.fields) {
+    throw `Entry with ${entry.fields} fields passed to parseTalkData`
+  }
+  const gameData: TalkData = {
+    title: entry.fields.title,
+    thumbnail: parseImageData(entry.fields.thumbnail),
+    order: entry.fields.order || -9999,
+    event: entry.fields.event || null,
+    eventUrl: entry.fields.eventUrl || null,
+    recordingUrl: entry.fields.recordingUrl || null
   }
   return gameData
 }
@@ -130,38 +160,56 @@ function isRichImage(image: Asset | Entry<IRichImageFields>): image is Entry<IRi
   return (image as Entry<IRichImageFields>).sys?.contentType?.sys?.id == 'richImage';
 }
 
-export function parseTweetData(tweet: Entry<ITweetFields>): TweetData {
+export function parseTweetData(entry: Entry<ITweetFields>): TweetData {
+  if (!entry) {
+    throw `${entry} entry passed to parseTweetData`
+  }
+  if (!entry.fields) {
+    throw `Entry with ${entry.fields} fields passed to parseTweetData`
+  }
   let id
-  let matches = /.+\/(.+$)$/g.exec(tweet.fields.url)
+  let matches = /.+\/(.+$)$/g.exec(entry.fields.url)
   if (matches != null && matches.length > 1) {
     id = matches[1]
   }
   if (id == undefined) {
-    throw `Could not parse Tweet ID from url \"${tweet.fields.url}\"`
+    throw `Could not parse Tweet ID from url \"${entry.fields.url}\"`
   }
   return {
-    ...tweet.fields,
+    ...entry.fields,
     id
   }
 }
 
-export function parseTrackData(track: Entry<ITrackFields>): TrackData {
+export function parseTrackData(entry: Entry<ITrackFields>): TrackData {
+  if (!entry) {
+    throw `${entry} entry passed to parseTrackData`
+  }
+  if (!entry.fields) {
+    throw `Entry with ${entry.fields} fields passed to parseTrackData`
+  }
   return {
-    soundCloudUrl: track.fields.soundCloudUrl
+    soundCloudUrl: entry.fields.soundCloudUrl
   }
 }
 
-export function parseMediaBundle(bundle: Entry<IMediaBundleFields>): MediaBundleData {
+export function parseMediaBundle(entry: Entry<IMediaBundleFields>): MediaBundleData {
+  if (!entry) {
+    throw `${entry} entry passed to parseMediaBundle`
+  }
+  if (!entry.fields) {
+    throw `Entry with ${entry.fields} fields passed to parseMediaBundle`
+  }
   const media: ImageAssetData[] = []
-  if (bundle.fields.assets) {
-    for (let asset of bundle.fields.assets) {
+  if (entry.fields.assets) {
+    for (let asset of entry.fields.assets) {
       media.push(parseImageData(asset))
     }
   }
-  if (bundle.fields.entries) {
-    for (let entry of bundle.fields.entries) {
-      if (isEntryARichImage(entry)) {
-        media.push(parseImageData(entry))
+  if (entry.fields.entries) {
+    for (let subEntry of entry.fields.entries) {
+      if (isEntryARichImage(subEntry)) {
+        media.push(parseImageData(subEntry))
       }
     }
   }
@@ -266,5 +314,17 @@ export async function getAllGameData(): Promise<GameData[]> {
       content_type: 'game'
     })
     return entries.items.map(x => parseGameData(x)).sort((a, b) => b.order - a.order)
+  }
+}
+
+export async function getAllTalkData(): Promise<TalkData[]> {
+  if (process.env.MOCK_CONTENT == 'true') {
+    return []
+  }
+  else {
+    const entries = await getOrCreateClient().getEntries<ITalkFields>({
+      content_type: 'talk'
+    })
+    return entries.items.map(x => parseTalkData(x)).sort((a, b) => b.order - a.order)
   }
 }

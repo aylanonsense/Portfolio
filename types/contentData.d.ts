@@ -41,6 +41,15 @@ export type TrackData = {
   soundCloudUrl: string
 }
 
+export type TalkData = {
+  title: string
+  thumbnail: ImageAssetData
+  order: number
+  event: string | null
+  eventUrl: string | null
+  recordingUrl: string | null
+}
+
 export type ImageAssetData = {
   url: string
   linkUrl: string | null

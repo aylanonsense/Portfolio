@@ -2,8 +2,8 @@ import type { NextPage, GetStaticProps } from 'next'
 import { MARKS } from '@contentful/rich-text-types'
 import MailIcon from 'icons/mail.svg'
 import ResumeIcon from 'icons/resume.svg'
-import type { SiteData, GameData } from 'types/contentData'
-import { getSiteData, getAllGameData } from 'helpers/contentApi'
+import type { SiteData, GameData, TalkData } from 'types/contentData'
+import { getSiteData, getAllGameData, getAllTalkData } from 'helpers/contentApi'
 import renderRichText from 'helpers/renderRichText'
 import Layout from 'components/Layout'
 import GameGrid from 'components/GameGrid'
@@ -13,9 +13,10 @@ type HomePageProps = {
   site: SiteData
   bigGames: GameData[]
   smallGames: GameData[]
+  talks: TalkData[]
 }
 
-const HomePage: NextPage<HomePageProps> = ({ site, bigGames, smallGames }) => (
+const HomePage: NextPage<HomePageProps> = ({ site, bigGames, smallGames, talks }) => (
   <Layout site={site} compact={false} skipLinks={<a href="#main">Skip to main content</a>}>
     <main id="main" className={styles.main}>
       {(site.bigProjects || bigGames.length > 0) &&
@@ -59,18 +60,23 @@ const HomePage: NextPage<HomePageProps> = ({ site, bigGames, smallGames }) => (
       }
       { (site.smallProjects || smallGames.length > 0) &&
         <section id="lil-things" className={styles.smallProjects}>
-          <h2>lil things</h2>
+          <h2>Lil Things</h2>
           <div>
             {site.smallProjects && renderRichText(site.smallProjects)}
             {smallGames.length > 0 && <GameGrid games={smallGames} mini={true} />}
           </div>
         </section>
       }
-      { site.speakingExperience &&
+      { (site.speakingExperience || talks.length > 0) &&
         <section id="talks" className={styles.talks}>
           <h2>Talks</h2>
           <div>
-            {renderRichText(site.speakingExperience)}
+            {site.speakingExperience && renderRichText(site.speakingExperience)}
+            {talks.map(talk => (
+              <div key={talk.title}>
+                {talk.title}
+              </div>
+            ))}
           </div>
         </section>
       }
@@ -78,10 +84,12 @@ const HomePage: NextPage<HomePageProps> = ({ site, bigGames, smallGames }) => (
         <section id="contact" className={styles.contact}>
           <div>
             <div>
-              <h2>Contact</h2>
-              <p className={styles.from}><span>Please feel free</span> <span>to reach out!</span></p>
               <div>
-                {renderRichText(site.contactInformation)}
+                <h2>Contact</h2>
+                <p className={styles.from}><span>Please feel free</span> <span>to reach out!</span></p>
+                <div>
+                  {renderRichText(site.contactInformation)}
+                </div>
               </div>
             </div>
           </div>
@@ -96,15 +104,18 @@ export default HomePage
 export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
   const siteRequest = getSiteData()
   const gamesRequest = getAllGameData()
+  const talksRequest = getAllTalkData()
   const site = await siteRequest
   const games = await gamesRequest
+  const talks = await talksRequest
   const bigGames = games.filter(x => x.isBigProject)
   const smallGames = games.filter(x => !x.isBigProject)
   return {
     props: {
       site,
       bigGames,
-      smallGames
+      smallGames,
+      talks
     }
   }
 }

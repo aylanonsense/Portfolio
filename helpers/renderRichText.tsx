@@ -87,7 +87,7 @@ export default function renderRichText(richText: Document | string, options?: Op
         [INLINES.ENTRY_HYPERLINK]: ({ data }, children) => {
           switch (data.target.sys.contentType.sys.id) {
             case "game":
-              const game = parseGameData(data.target.fields)
+              const game = parseGameData(data.target)
               return <Link href={`/games/${game.slug}`}>{(children as any)[0]}</Link>
             default:
               return <span>[unsure how to link to entry of type "{data.target.sys.contentType.sys.id}"]</span>

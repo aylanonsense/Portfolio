@@ -31,6 +31,9 @@ export interface IGameFields {
   /** Release Date */
   releaseDate?: string | undefined;
 
+  /** Release Month Known */
+  isReleaseMonthKnown?: boolean | undefined;
+
   /** Play URL */
   playUrl?: string | undefined;
 
@@ -221,6 +224,43 @@ export interface ISite extends Entry<ISiteFields> {
   };
 }
 
+export interface ITalkFields {
+  /** Title */
+  title: string;
+
+  /** Thumbnail */
+  thumbnail: Asset;
+
+  /** Order */
+  order?: number | undefined;
+
+  /** Event */
+  event?: string | undefined;
+
+  /** Event URL */
+  eventUrl?: string | undefined;
+
+  /** Recording URL */
+  recordingUrl?: string | undefined;
+}
+
+export interface ITalk extends Entry<ITalkFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: "talk";
+        linkType: "ContentType";
+        type: "Link";
+      };
+    };
+  };
+}
+
 export interface ITrackFields {
   /** Title */
   title: string;
@@ -277,6 +317,7 @@ export type CONTENT_TYPE =
   | "person"
   | "richImage"
   | "site"
+  | "talk"
   | "track"
   | "tweet";
 
