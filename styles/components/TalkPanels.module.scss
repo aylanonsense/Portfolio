@@ -1,0 +1,91 @@
+@import "styles/variables.scss";
+
+.talkPanel {
+  display: grid;
+  padding: 5px;
+  justify-items: center;
+  align-items: flex-start;
+  text-align: center;
+  max-width: calc($maxWidth - 350px);
+
+  a:hover {
+    color: $red-over-black-highlight;
+  }
+}
+
+.title {
+  grid-area: title;
+}
+.thumbnail {
+  grid-area: thumbnail;
+}
+.event {
+  grid-area: event;
+}
+.recording {
+  grid-area: recording;
+}
+
+@media (max-width: 399.9px) {
+  .talkPanel {
+    grid-template-areas:
+      "thumbnail"
+      "title"
+      "event";
+    margin: 0.25rem auto 0.75rem auto;
+
+    h3 {
+      font-size: 115%;
+      margin: 0.5rem 0 0.1rem 0;
+    }
+
+    p {
+      margin: 0.1rem 0 0.25rem 0
+    }
+  }
+}
+@media (min-width: 400px) and (max-width: 599.9px) {
+  .talkPanel {
+    grid-template-areas:
+      "thumbnail"
+      "title"
+      "event";
+    margin: 0.5rem auto 1rem auto;
+    max-width: 450px;
+
+    h3 {
+      font-size: 125%;
+      margin: 0.5rem 0 0.25rem 0;
+    }
+
+    p {
+      margin: 0.25rem 0 0.25rem 0
+    }
+
+    .thumbnail {
+      max-width: 400px;
+    }
+  }
+}
+@media (min-width: 600px) {
+  .talkPanel {
+    grid-template-rows: 1fr min-content min-content 1fr;
+    grid-template-columns: 0px 35% 20px 1fr;
+    background-color: $blue-background-under-white-dark;
+    grid-template-areas:
+      ". thumbnail . ."
+      ". thumbnail . title"
+      ". thumbnail . event"
+      ". thumbnail . .";
+    margin: 0.5rem auto 0.5rem auto;
+
+    h3 {
+      font-size: 135%;
+      margin: 0;
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+}

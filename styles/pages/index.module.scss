@@ -17,7 +17,12 @@
 .talks {
   color: $white-over-blue;
   background-color: $blue-background-under-white;
-  padding: 2em 1em 2em 1em;
+  padding: 2em 1em 3em 1em;
+  text-align: center;
+
+  .resumeLink:hover {
+    color: $red-over-black-highlight;
+  }
 
   > div {
     max-width: $maxWidth;
@@ -30,7 +35,7 @@
     font-family: Raleway, sans-serif;
     font-size: 300%;
     margin-top: 0;
-    margin-bottom: -0.75rem;
+    margin-bottom: 0.5rem;
     text-align: center;
   }
 }

@@ -62,6 +62,7 @@
 .title {
   color: $white-over-black;
   font-family: Raleway, sans-serif;
+  filter: url(#chromatic-abberation);
 }
 
 .subtitle {

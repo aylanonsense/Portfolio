@@ -7,6 +7,7 @@ import { getSiteData, getAllGameData, getAllTalkData } from 'helpers/contentApi'
 import renderRichText from 'helpers/renderRichText'
 import Layout from 'components/Layout'
 import GameGrid from 'components/GameGrid'
+import TalkPanels from 'components/TalkPanels'
 import styles from 'styles/pages/index.module.scss'
 
 type HomePageProps = {
@@ -72,11 +73,8 @@ const HomePage: NextPage<HomePageProps> = ({ site, bigGames, smallGames, talks }
           <h2>Talks</h2>
           <div>
             {site.speakingExperience && renderRichText(site.speakingExperience)}
-            {talks.map(talk => (
-              <div key={talk.title}>
-                {talk.title}
-              </div>
-            ))}
+            {talks.length > 0 && <TalkPanels talks={talks} />}
+            <p>... and a {site.author.resumeUrl ? <a className={styles.resumeLink} href={site.author.resumeUrl} target="_blank" rel="noopener noreferrer">bunch more!</a> : "bunch more!"}</p>
           </div>
         </section>
       }
