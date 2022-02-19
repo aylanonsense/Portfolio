@@ -6,7 +6,8 @@
   width: 100%;
 
   > div {
-    > div > span {
+   > div > span,
+   > div > a > span {
       display: block !important;
       position: relative !important;
       padding: 5px !important; // 10px gutters

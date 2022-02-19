@@ -14,7 +14,8 @@ const TalkPanel = ({ talks }: GameGridProps) => (
         <div className={styles.thumbnail}>
           <RichImage
             image={talk.thumbnail}
-            linkUrl={talk.recordingUrl || undefined} />
+            linkUrl={talk.recordingUrl || undefined}
+            tabbable={false} />
         </div>
         {talk.event && (
           <p className={styles.event}>{talk.eventUrl ? <a href={talk.eventUrl} target="_blank" rel="noopener noreferrer">{talk.event}</a> : talk.event}</p>

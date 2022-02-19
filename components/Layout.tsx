@@ -30,26 +30,26 @@ const Layout = ({ site, title, compact, skipLinks, children }: LayoutProps) => {
     <>
       <Head>
         <title>{(title ? `${title} | ${site.title}` : site.title)}</title>
-        <meta name="description" content={site.description} />
+        {site.description && <meta name="description" content={site.description} />}
         <meta name="og:title" content={title} />
-        <meta name="og:description" content={site.description} />
+        {site.description && <meta name="og:description" content={site.description} />}
         {/*<meta name="og:image" content="todo.png" />*/}
         <meta name="og:type" content="website" />
         {twitterHandle && <meta name="twitter:creator" content={`@${twitterHandle}`} />}
         <meta name="twitter:card" content="summary" />
       </Head>
+      {skipLinks && (
+        <nav className={styles.skipLinks}>
+          {skipLinks}
+        </nav>
+      )}
       <header className={`${styles.header} ${compact ? styles.compact : styles.full}`}>
-        {skipLinks && (
-          <nav className={styles.skipLinks}>
-            {skipLinks}
-          </nav>
-        )}
         <div>
-          <h1 className={styles.title}><Link href="/">{site.title}</Link></h1>
-          <div>
+          <h1 className={styles.title}>{compact ? <Link href="/">{site.title}</Link> : site.title }</h1>
+          <nav>
             {!compact && site.subtitle && <p className={styles.subtitle}>{site.subtitle}</p>}
             {site.author.links.length > 0 && <ExternalLinks className={styles.icons} urls={site.author.links} size={styles.compact ? 22 : 28} />}
-          </div>
+          </nav>
         </div>
       </header>
       {children}

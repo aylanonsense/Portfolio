@@ -50,7 +50,13 @@ const GamePage: NextPage<GamePageProps> = ({ site, game }) => {
         <div className={styles.contentImage}>
           <RichImage
             image={image}
-            onClick={() => setFullScreenImage(image)} />
+            onClick={() => setFullScreenImage(image)}
+            tabbable={false}
+            onKeyDown={evt => {
+              if (evt.key == 'Enter') {
+                setFullScreenImage(image)
+              }
+            }} />
         </div>,
       renderTrack: (track, baseRenderTrack) =>
         <div className={styles.track}>
@@ -62,9 +68,19 @@ const GamePage: NextPage<GamePageProps> = ({ site, game }) => {
   return (
     <Layout site={site} title={game.title} compact={true} skipLinks={<a href="#main">Skip to main content</a>}>
       {fullScreenImage &&
-        <aside className={styles.fullImageModal} onClick={() => setFullScreenImage(undefined)}>
+        <aside
+          className={styles.fullImageModal}
+          onClick={() => setFullScreenImage(undefined)}
+          onKeyDown={evt => {
+            if (evt.key == 'Enter') {
+              setFullScreenImage(undefined)
+            }
+          }} >
           <div>
-            <RichImage image={fullScreenImage} enforceMaxDimensions={false} />
+            <RichImage
+              image={fullScreenImage}
+              enforceMaxDimensions={false}
+              />
           </div>
         </aside>
       }
@@ -91,7 +107,16 @@ const GamePage: NextPage<GamePageProps> = ({ site, game }) => {
             <section id="images" className={styles.images}>
               {game.images.map(image =>
                 <div key={image.url} style={{ imageRendering: image.isPixelArt ?'pixelated' : undefined }}>
-                  <RichImage image={image} style={{ cursor: 'pointer' }} onClick={() => setFullScreenImage(image)} />
+                  <RichImage
+                    image={image}
+                    style={{ cursor: 'pointer' }}
+                    tabbable={false}
+                    onClick={() => setFullScreenImage(image)}
+                    onKeyDown={evt => {
+                      if (evt.key == 'Enter') {
+                        setFullScreenImage(image)
+                      }
+                    }} />
                 </div>
               )}
             </section>

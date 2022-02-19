@@ -159,7 +159,7 @@
       font-size: 120%;
     }
 
-    > div > div {
+    > div > nav {
       display: flex;
       flex-direction: row;
       justify-content: center;
@@ -183,7 +183,7 @@
       font-size: 130%;
     }
 
-    > div > div {
+    > div > nav {
       display: flex;
       flex-direction: row;
       justify-content: center;
@@ -201,8 +201,9 @@
     left: 0;
     color: $white-over-black;
     background-color: $black-background;
-    padding: 1rem;
+    padding: 1.5rem;
     transform: translateY(-100%);
+    z-index: 999;
   }
   > a:focus {
     transform: translateY(0%);

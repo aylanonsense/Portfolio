@@ -9,6 +9,12 @@
     image-rendering: pixelated;;
   }
 
+  > a {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
   > span,
   > a > span {
     display: block !important;
