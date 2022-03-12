@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import type { NextPage, GetStaticPaths, GetStaticProps } from 'next'
+import Link from 'next/link'
 import type { SiteData, GameData, ImageAssetData } from 'types/contentData'
 import { Document } from '@contentful/rich-text-types'
 import { getSiteData, getGameData, getAllGameData } from 'helpers/contentApi'
@@ -139,6 +140,10 @@ const GamePage: NextPage<GamePageProps> = ({ site, game }) => {
               {renderRichText(game.credits)}
             </section>
           }
+
+          <nav className={styles.backlink}>
+            <Link href="/">Back</Link>
+          </nav>
         </div>
       </main>
     </Layout>

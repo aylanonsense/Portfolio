@@ -38,6 +38,9 @@ $imagesWidth: 150px;
   .credits {
     grid-area: credits;
   }
+  .backlink {
+    grid-area: backlink;
+  }
 
   figure {
     text-align: center;
@@ -126,6 +129,15 @@ $imagesWidth: 150px;
   }
   a:hover {
     color: $red-over-black-highlight;
+  }
+}
+
+.backlink {
+  color: $red-over-black-subdued;
+  margin: 1rem 0 0 0;
+
+  a:hover {
+    color: $red-over-black;
   }
 }
 
@@ -276,7 +288,8 @@ $imagesWidth: 150px;
       "development . images"
       "reception . images"
       "credits . images"
-      ". . images";
+      ". . images"
+      "backlink . .";
     justify-items: center;
     grid-template-rows: min-content min-content min-content min-content min-content min-content 1fr;
     align-items: flex-start;

@@ -40,7 +40,7 @@
       align-items: center;
     }
 
-    .title {
+    .title h1 {
       margin: 0;
       font-size: 150%;
     }
@@ -60,9 +60,16 @@
 }
 
 .title {
-  color: $white-over-black;
-  font-family: Raleway, sans-serif;
-  filter: url(#chromatic-abberation);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.25rem;
+
+  h1 {
+    color: $white-over-black;
+    font-family: Raleway, sans-serif;
+    filter: url(#chromatic-abberation);
+  }
 }
 
 .subtitle {
@@ -102,8 +109,14 @@
     padding-top: 20px;
 
     .title {
-      margin: 0 0 0.05rem 0;
-      font-size: 135%;
+      h1 {
+        margin: 0 0 0.05rem 0;
+        font-size: 135%;
+      }
+
+      .crystal {
+        display: none;
+      }
     }
 
     .subtitle {
@@ -118,8 +131,14 @@
     padding-top: 20px;
 
     .title {
-      margin: 0 0 0.05rem 0;
-      font-size: 165%;
+      h1 {
+        margin: 0 0 0.05rem 0;
+        font-size: 165%;
+      }
+
+      .crystal {
+        display: none;
+      }
     }
 
     .subtitle {
@@ -134,8 +153,15 @@
     padding-top: 30px;
 
     .title {
-      margin: 0 0 0.05rem 0;
-      font-size: 225%;
+      h1 {
+        margin: 0 0 0.05rem 0;
+        font-size: 225%;
+      }
+
+      .crystal {
+        width: 20px;
+        height: 27px;
+      }
     }
 
     .subtitle {
@@ -150,8 +176,15 @@
     padding-top: 30px;
 
     .title {
-      margin: 0 0 0.1rem 0;
-      font-size: 300%;
+      h1 {
+        margin: 0 0 0.1rem 0;
+        font-size: 300%;
+      }
+
+      .crystal {
+        width: 30px;
+        height: 40px;
+      }
     }
 
     .subtitle {
@@ -174,8 +207,15 @@
     padding-top: 30px;
 
     .title {
-      margin: 0 0 0.2rem 0;
-      font-size: 350%;
+      h1 {
+        margin: 0 0 0.2rem 0;
+        font-size: 350%;
+      }
+
+      .crystal {
+        width: 30px;
+        height: 40px;
+      }
     }
 
     .subtitle {

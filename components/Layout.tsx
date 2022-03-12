@@ -45,7 +45,19 @@ const Layout = ({ site, title, compact, skipLinks, children }: LayoutProps) => {
       )}
       <header className={`${styles.header} ${compact ? styles.compact : styles.full}`}>
         <div>
-          <h1 className={styles.title}>{compact ? <Link href="/">{site.title}</Link> : site.title }</h1>
+          <div className={styles.title}>
+            {!compact && 
+              <video className={styles.crystal} autoPlay={true} muted={true} controls={false} loop={true}>
+                <source src="/images/crystal.webm" type="video/webm" />
+              </video>
+            }
+            <h1>{compact ? <Link href="/">{site.title}</Link> : site.title }</h1>
+            {!compact && 
+              <video className={styles.crystal} autoPlay={true} muted={true} controls={false} loop={true}>
+                <source src="/images/crystal.webm" type="video/webm" />
+              </video>
+            }
+          </div>
           <nav>
             {!compact && site.subtitle && <p className={styles.subtitle}>{site.subtitle}</p>}
             {site.author.links.length > 0 && <ExternalLinks className={styles.icons} urls={site.author.links} size={styles.compact ? 22 : 28} />}

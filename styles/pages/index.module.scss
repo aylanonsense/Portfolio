@@ -120,12 +120,12 @@
 }
 
 // Mail lewks
-@media (max-width: 599.9px) {
+//@media (max-width: 599.9px) {
   .contact {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0 auto 0 auto;
+    margin: 6rem auto 5rem auto;
     padding: 2rem 0 0.5rem 0;
 
     a {
@@ -139,61 +139,65 @@
       line-height: 0.9;
     }
   }
-}
-@media (min-width: 600px) {
-  .contact {
-    image-rendering: pixelated;
-    color: $black-over-white;
-    padding: 3rem 0 3rem 0;
+//}
+//@media (min-width: 600px) {
+//  .contact {
+//    image-rendering: pixelated;
+//    color: $black-over-white;
+//    padding: 3rem 0 3rem 0;
   
-    .from {
-      position: absolute;
-      line-height: 1.25;
-      color: $black-over-white;
-      font-family: 'Nanum Myeongjo', serif;
+//    .from {
+//      position: absolute;
+//      line-height: 1.25;
+//      color: $black-over-white;
+//      font-family: 'Nanum Myeongjo', serif;
 
-      span {
-        display: block;
-      }
-    }
+//      span {
+//        display: block;
+//      }
+//    }
   
-    a {
-      color: $red-over-white;
-    }
-    a:hover {
-      color: $red-over-white-highlight;
-    }
+//    a {
+//      color: $red-over-white;
+//    }
+//    a:hover {
+//      color: $red-over-white-highlight;
+//    }
 
-    > div {
-      position: relative;
-      max-width: calc($maxWidth - 300px);
-      margin: 0 auto 0 auto;
+//    > div {
+//      position: relative;
+//      max-width: calc($maxWidth - 300px);
+//      margin: 0 auto 0 auto;
 
-      > div {
-        width: 90%;
-        margin: 0 auto 0 auto;
-        background-size:contain;
-        position:relative;
-        padding-bottom: 40%;
+//      > div {
+//        width: 90%;
+//        margin: 0 auto 0 auto;
+//        background-size:contain;
+//        position:relative;
+//        padding-bottom: 40%;
 
-        > div {
-          background-color: $white-background;
-          width: 100%;
-          height: 100%;
-          position: absolute;
-          left: 0;
-          display: flex;
-          align-items: center;
-          justify-content: center;
+//        > div {
+//          background-color: $white-background;
+//          background-image: url('/images/stamp.gif');
+//          background-position: top 15px right 15px;
+//          background-repeat: no-repeat;
+//          background-size: 89px 86px;
+//          width: 100%;
+//          height: 100%;
+//          position: absolute;
+//          left: 0;
+//          display: flex;
+//          align-items: center;
+//          justify-content: center;
 
-          > div {
-            font-family: 'Nanum Myeongjo', serif;
-          }
-        }
-      }
-    }
-  }
-}
+//          > div {
+//            font-family: 'Nanum Myeongjo', serif;
+//          }
+//        }
+//      }
+//    }
+//  }
+//}
 
 // Mail fonts
 @media (min-width: 600px) and (max-width: 749.9px) {
